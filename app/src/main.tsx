@@ -1,6 +1,6 @@
-import { GameTemplateOptionsSpec } from '@gamepark/game-template/GameTemplateOptions'
-import { GameTemplateRules } from '@gamepark/game-template/GameTemplateRules'
-import { GameTemplateSetup } from '@gamepark/game-template/GameTemplateSetup'
+import { BloodyGroveOptionsSpec } from '@gamepark/bloody-grove/BloodyGroveOptions'
+import { BloodyGroveRules } from '@gamepark/bloody-grove/BloodyGroveRules'
+import { BloodyGroveSetup } from '@gamepark/bloody-grove/BloodyGroveSetup'
 import { GameProvider } from '@gamepark/react-game'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -12,10 +12,10 @@ import { Material } from './material/Material'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <GameProvider
-      game="game-template"
-      Rules={GameTemplateRules}
-      optionsSpec={GameTemplateOptionsSpec}
-      GameSetup={GameTemplateSetup}
+      game="bloody-grove"
+      Rules={BloodyGroveRules}
+      optionsSpec={BloodyGroveOptionsSpec}
+      GameSetup={BloodyGroveSetup}
       material={Material}
       locators={Locators}
       animations={gameAnimations}

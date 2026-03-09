@@ -898,9 +898,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gamepark/game-template-app@workspace:app":
+"@gamepark/bloody-grove-app@workspace:app":
   version: 0.0.0-use.local
-  resolution: "@gamepark/game-template-app@workspace:app"
+  resolution: "@gamepark/bloody-grove-app@workspace:app"
   dependencies:
     "@dnd-kit/core": "npm:~6.3.1"
     "@emotion/react": "npm:^11.14.0"
@@ -933,9 +933,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@gamepark/game-template@workspace:rules":
+"@gamepark/bloody-grove@workspace:rules":
   version: 0.0.0-use.local
-  resolution: "@gamepark/game-template@workspace:rules"
+  resolution: "@gamepark/bloody-grove@workspace:rules"
   dependencies:
     "@gamepark/rules-api": "npm:~7.5.0"
     es-toolkit: "npm:^1.45.1"

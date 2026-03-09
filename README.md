@@ -46,7 +46,7 @@ To deploy the React app, install [rclone](https://rclone.org/) then configure:
 ```
 rclone config
 > n
-name> game-template
+name> bloody-grove
 Storage> s3
 provider> Other
 env_auth> false

@@ -1,3 +1,3 @@
-export { GameTemplateRules } from './GameTemplateRules'
-export { GameTemplateOptionsSpec } from './GameTemplateOptions'
-export { GameTemplateSetup } from './GameTemplateSetup'
+export { BloodyGroveRules } from './BloodyGroveRules'
+export { BloodyGroveOptionsSpec } from './BloodyGroveOptions'
+export { BloodyGroveSetup } from './BloodyGroveSetup'
