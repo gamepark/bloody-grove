@@ -1,1 +1,16 @@
-export enum LocationType {}
+export enum LocationType {
+  PlayerDeck = 1,
+  PlayerDruid,
+  PlayerHand,
+  GrovesRiver,
+  FoxEliteCardsDeck,
+  FoxEliteCard,
+  BearEliteCardsDeck,
+  BearEliteCard,
+  OwlEliteCardsDeck,
+  OwlEliteCard,
+  ArcaneReserve,
+  ElderSpiritCardsDeck,
+  ElderSpiritCardsRiver,
+  RoundCard,
+}

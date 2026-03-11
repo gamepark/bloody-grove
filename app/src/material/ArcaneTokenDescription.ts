@@ -1,0 +1,22 @@
+import { ArcaneToken } from '@gamepark/bloody-grove/material/ArcaneToken.ts'
+import { TokenDescription } from '@gamepark/react-game'
+import arcaneToken2 from '../images/tokens/ArcaneToken2.jpg'
+import arcaneToken3 from '../images/tokens/ArcaneToken3.jpg'
+import arcaneToken4 from '../images/tokens/ArcaneToken4.jpg'
+import arcaneTokenBack from '../images/tokens/ArcaneTokenBack.jpg'
+import arcaneTokenDiscard from '../images/tokens/ArcaneTokenDiscard.jpg'
+
+export class ArcaneTokenDescription extends TokenDescription {
+  width = 1.5
+
+  images = {
+    [ArcaneToken.ArcaneToken2]: arcaneToken2,
+    [ArcaneToken.ArcaneToken3]: arcaneToken3,
+    [ArcaneToken.ArcaneToken4]: arcaneToken4,
+    [ArcaneToken.ArcaneTokenDiscard]: arcaneTokenDiscard
+  }
+
+  backImage = arcaneTokenBack
+}
+
+export const arcaneTokenDescription = new ArcaneTokenDescription()
