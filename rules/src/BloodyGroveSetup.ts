@@ -40,11 +40,20 @@ export class BloodyGroveSetup extends MaterialGameSetup<PlayerColor, MaterialTyp
   setupRoundCard() {
     const rotation = this.players[0] !== PlayerColor.Black
     this.material(MaterialType.RoundCard).createItem({ location: { type:  LocationType.RoundCard, rotation} })
+    this.material(MaterialType.Cube).createItem({ location: { type:  LocationType.RoundPiste, id: 1} })
+  }
+
+  setupGroves() {
+    shuffle(groveCards).forEach((id, index) => {
+      this.material(MaterialType.GroveCard).createItem({ id, location: { type: LocationType.GrovesRiver } })
+      this.material(MaterialType.Cube).createItem({ location: { type:  LocationType.GroveMajority, id: 0, parent: index} })
+    })
+
   }
 
   setupMaterial(_options: BloodyGroveOptions) {
     this.setupPlayers()
-    this.material(MaterialType.GroveCard).createItems(shuffle(groveCards).map(id => ({ id, location: { type: LocationType.GrovesRiver } })))
+    this.setupGroves()
     this.setupSpiritCards(foxEliteCards, SpiritType.Fox, LocationType.FoxEliteCardsDeck, LocationType.FoxEliteCard)
     this.setupSpiritCards(bearEliteCards, SpiritType.Bear, LocationType.BearEliteCardsDeck, LocationType.BearEliteCard)
     this.setupSpiritCards(owlEliteCards, SpiritType.Owl, LocationType.OwlEliteCardsDeck, LocationType.OwlEliteCard)
@@ -55,6 +64,6 @@ export class BloodyGroveSetup extends MaterialGameSetup<PlayerColor, MaterialTyp
 
   start() {
     this.memorize(Memory.firstPlayer, this.players[0])
-    this.startPlayerTurn(RuleId.TheFirstStep, this.players[0])
+    this.startSimultaneousRule(RuleId.ShowArcaneSimultaneous)
   }
 }

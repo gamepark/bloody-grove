@@ -1,7 +1,7 @@
 import {
   FillGapStrategy,
   hideFront, hideFrontToOthers,
-  hideItemId,
+  hideItemId, hideItemIdToOthers,
   MaterialGame,
   MaterialMove,
   PositiveSequenceStrategy,
@@ -11,8 +11,9 @@ import {
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { PlayerColor } from './PlayerColor'
+import { ChooseActionRule } from './rules/ChooseActionRule'
 import { RuleId } from './rules/RuleId'
-import { TheFirstStepRule } from './rules/TheFirstStepRule'
+import { ShowArcaneSimultaneousRule } from './rules/ShowArcaneSimultaneousRule'
 
 /**
  * This class implements the rules of the board game.
@@ -23,7 +24,8 @@ export class BloodyGroveRules
   implements TimeLimit<MaterialGame<PlayerColor, MaterialType, LocationType>, MaterialMove<PlayerColor, MaterialType, LocationType>, PlayerColor>
 {
   rules = {
-    [RuleId.TheFirstStep]: TheFirstStepRule
+    [RuleId.ShowArcaneSimultaneous]: ShowArcaneSimultaneousRule,
+    [RuleId.ChooseAction]: ChooseActionRule,
   }
 
   locationsStrategies = {
@@ -55,7 +57,8 @@ export class BloodyGroveRules
       [LocationType.ElderSpiritCardsDeck]: hideFront
     },
     [MaterialType.ArcaneToken]: {
-      [LocationType.ArcaneReserve]: hideItemId
+      [LocationType.ArcaneReserve]: hideItemId,
+      [LocationType.ArcaneShowLayout]: hideItemIdToOthers,
     }
   }
 

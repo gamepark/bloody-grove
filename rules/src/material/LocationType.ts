@@ -13,4 +13,7 @@ export enum LocationType {
   ElderSpiritCardsDeck,
   ElderSpiritCardsRiver,
   RoundCard,
+  RoundPiste,
+  GroveMajority,
+  ArcaneShowLayout
 }

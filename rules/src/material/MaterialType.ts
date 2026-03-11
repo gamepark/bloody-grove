@@ -4,5 +4,6 @@ export enum MaterialType {
   GroveCard,
   SpiritCard,
   ElderSpiritCard,
-  ArcaneToken
+  ArcaneToken,
+  Cube
 }

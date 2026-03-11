@@ -1,3 +1,4 @@
 export enum RuleId {
-  TheFirstStep = 1
+  ShowArcaneSimultaneous = 1,
+  ChooseAction,
 }

@@ -3,12 +3,14 @@ import { MaterialType } from '@gamepark/bloody-grove/material/MaterialType'
 import { PlayerColor } from '@gamepark/bloody-grove/PlayerColor'
 import { Locator } from '@gamepark/react-game'
 import { arcaneReserveLocator } from './ArcaneReserveLocator'
+import { arcaneShowLayoutLocator } from './ArcaneShowLayoutLocator.ts'
 import { bearEliteCardLocator } from './BearEliteCardLocator'
 import { bearEliteCardsDeckLocator } from './BearEliteCardsDeckLocator'
 import { elderSpiritCardsDeckLocator } from './ElderSpiritCardsDeckLocator'
 import { elderSpiritCardsRiverLocator } from './ElderSpiritCardsRiverLocator'
 import { foxEliteCardLocator } from './FoxEliteCardLocator'
 import { foxEliteCardsDeckLocator } from './FoxEliteCardsDeckLocator'
+import { groveMajorityLocator } from './GroveMajorityLocator.ts'
 import { grovesRiverLocator } from './GrovesRiverLocator'
 import { owlEliteCardLocator } from './OwlEliteCardLocator'
 import { owlEliteCardsDeckLocator } from './OwlEliteCardsDeckLocator'
@@ -16,6 +18,7 @@ import { playerDeckLocator } from './PlayerDeckLocator'
 import { playerDruidLocator } from './PlayerDruidLocator'
 import { playerHandLocator } from './PlayerHandLocator'
 import { roundCardLocator } from './RoundCardLocator'
+import { roundPisteLocator } from './RoundTrackLocator.ts'
 
 export const Locators: Partial<Record<LocationType, Locator<PlayerColor, MaterialType, LocationType>>> = {
   [LocationType.PlayerDeck]: playerDeckLocator,
@@ -32,4 +35,7 @@ export const Locators: Partial<Record<LocationType, Locator<PlayerColor, Materia
   [LocationType.ElderSpiritCardsDeck]: elderSpiritCardsDeckLocator,
   [LocationType.ElderSpiritCardsRiver]: elderSpiritCardsRiverLocator,
   [LocationType.RoundCard]: roundCardLocator,
+  [LocationType.RoundPiste]: roundPisteLocator,
+  [LocationType.GroveMajority]: groveMajorityLocator,
+  [LocationType.ArcaneShowLayout]: arcaneShowLayoutLocator,
 }
