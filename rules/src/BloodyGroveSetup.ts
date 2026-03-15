@@ -3,11 +3,19 @@ import { shuffle } from 'es-toolkit'
 import { BloodyGroveOptions } from './BloodyGroveOptions'
 import { BloodyGroveRules } from './BloodyGroveRules'
 import { arcaneTokens } from './material/ArcaneToken'
-import { elderSpiritCards, elderSpiritRedCards, ElderSpiritType } from './material/ElderSpiritCard'
 import { groveCards } from './material/GroveCard'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
-import { baseSpiritCards, bearEliteCards, foxEliteCards, owlEliteCards, SpiritCard, SpiritType } from './material/SpiritCard'
+import {
+  baseSpiritCards,
+  bearEliteCards,
+  elderSpiritCards,
+  elderSpiritRedCards,
+  foxEliteCards,
+  owlEliteCards,
+  SpiritCard,
+  SpiritType
+} from './material/SpiritCard'
 import { PlayerColor } from './PlayerColor'
 import { Memory } from './rules/Memory'
 import { RuleId } from './rules/RuleId'
@@ -20,7 +28,8 @@ export class BloodyGroveSetup extends MaterialGameSetup<PlayerColor, MaterialTyp
 
   setupPlayers() {
     this.players.forEach(player => {
-      this.material(MaterialType.DruidCard).createItem({ id: player, location: { type: LocationType.PlayerDruid, player }})
+      const druidId = player === PlayerColor.Black ? SpiritCard.DruidBlack : SpiritCard.DruidGreen
+      this.material(MaterialType.SpiritCard).createItem({ id: {front: druidId}, location: { type: LocationType.PlayerDruid, player }})
       this.material(MaterialType.SpiritCard).createItems(shuffle(baseSpiritCards).map(id => ({ id: {front: id, back: player * 100 + SpiritType.Base}, location: { type: LocationType.PlayerDeck, player } })))
       this.material(MaterialType.SpiritCard).location(LocationType.PlayerDeck).player(player).limit(4).moveItems({ type: LocationType.PlayerHand, player })
     })
@@ -32,9 +41,11 @@ export class BloodyGroveSetup extends MaterialGameSetup<PlayerColor, MaterialTyp
   }
 
   setupElderSpiritCards() {
-    this.material(MaterialType.ElderSpiritCard).createItems(shuffle(elderSpiritRedCards).map(id => ({ id: {front: id, back: ElderSpiritType.ElderSpiritRed}, location: { type:  LocationType.ElderSpiritCardsDeck} })))
-    this.material(MaterialType.ElderSpiritCard).createItems(shuffle(elderSpiritCards).map(id => ({ id: {front: id, back: ElderSpiritType.ElderSpirit}, location: { type:  LocationType.ElderSpiritCardsDeck} })))
-    this.material(MaterialType.ElderSpiritCard).location(LocationType.ElderSpiritCardsDeck).limit(3).moveItems({ type: LocationType.ElderSpiritCardsRiver })
+    this.material(MaterialType.SpiritCard).createItems(shuffle(elderSpiritRedCards).map(id => ({ id: {front: id, back: SpiritType.ElderRed}, location: { type:  LocationType.ElderSpiritCardsDeck} })))
+    this.material(MaterialType.SpiritCard).createItems(shuffle(elderSpiritCards).map(id => ({ id: {front: id, back: SpiritType.Elder}, location: { type:  LocationType.ElderSpiritCardsDeck} })))
+    this.material(MaterialType.SpiritCard).location(LocationType.ElderSpiritCardsDeck).maxBy(item => item.location.x ?? 0).moveItems({ type: LocationType.ElderSpiritCardsRiver })
+    this.material(MaterialType.SpiritCard).location(LocationType.ElderSpiritCardsDeck).maxBy(item => item.location.x ?? 0).moveItems({ type: LocationType.ElderSpiritCardsRiver })
+    this.material(MaterialType.SpiritCard).location(LocationType.ElderSpiritCardsDeck).maxBy(item => item.location.x ?? 0).moveItems({ type: LocationType.ElderSpiritCardsRiver })
   }
 
   setupRoundCard() {
@@ -63,7 +74,10 @@ export class BloodyGroveSetup extends MaterialGameSetup<PlayerColor, MaterialTyp
   }
 
   start() {
-    this.memorize(Memory.firstPlayer, this.players[0])
+    this.memorize(Memory.FirstPlayer, this.players[0])
+    this.memorize(Memory.ActualTurn, 0)
+    this.memorize(Memory.ActualRound, 1)
+    //this.startPlayerTurn(RuleId.ChooseAction, this.players[0])
     this.startSimultaneousRule(RuleId.ShowArcaneSimultaneous)
   }
 }

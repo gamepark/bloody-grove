@@ -8,7 +8,6 @@ class GroveMajorityLocator extends Locator {
   coordinates = { z: 1 }
 
   getParentItem(location: Location, context: MaterialContext): MaterialItem | undefined {
-    console.log("parent", location.parent)
     return context.rules.material(this.parentItemType).index(location.parent).getItem()
   }
 

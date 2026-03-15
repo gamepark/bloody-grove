@@ -1,7 +1,7 @@
-import { getRelativePlayerIndex, Locator, MaterialContext } from '@gamepark/react-game'
+import { getRelativePlayerIndex, DeckLocator, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 
-export class PlayerDruidLocator extends Locator {
+export class PlayerDruidLocator extends DeckLocator {
   getCoordinates(location: Location, context: MaterialContext) {
     const index = getRelativePlayerIndex(context, location.player)
     return {

@@ -1,6 +1,13 @@
+import { faArrowDown, faArrowUp, faHand } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { LocationType } from '@gamepark/bloody-grove/material/LocationType.ts'
+import { MaterialType } from '@gamepark/bloody-grove/material/MaterialType.ts'
 import { SpiritCard, SpiritType } from '@gamepark/bloody-grove/material/SpiritCard.ts'
 import { PlayerColor } from '@gamepark/bloody-grove/PlayerColor.ts'
-import { CardDescription } from '@gamepark/react-game'
+import { CardDescription, ItemContext, ItemMenuButton, pointerCursorCss } from '@gamepark/react-game'
+import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
+import druidBlack from '../images/cards/druids/DruidBlack.jpg'
+import druidGreen from '../images/cards/druids/DruidGreen.jpg'
 import baseSpiritBackBlack from '../images/cards/druids/BaseSpiritBackBlack.jpg'
 import baseSpiritBackGreen from '../images/cards/druids/BaseSpiritBackGreen.jpg'
 import bearBase1 from '../images/cards/spirits/base/BearBase1.jpg'
@@ -12,6 +19,20 @@ import foxBase3 from '../images/cards/spirits/base/FoxBase3.jpg'
 import owlBase1 from '../images/cards/spirits/base/OwlBase1.jpg'
 import owlBase2 from '../images/cards/spirits/base/OwlBase2.jpg'
 import owlBase3 from '../images/cards/spirits/base/OwlBase3.jpg'
+import elderSpirit1 from '../images/cards/spirits/elder/ElderSpirit1.jpg'
+import elderSpirit2 from '../images/cards/spirits/elder/ElderSpirit2.jpg'
+import elderSpirit3 from '../images/cards/spirits/elder/ElderSpirit3.jpg'
+import elderSpirit4 from '../images/cards/spirits/elder/ElderSpirit4.jpg'
+import elderSpirit5 from '../images/cards/spirits/elder/ElderSpirit5.jpg'
+import elderSpirit6 from '../images/cards/spirits/elder/ElderSpirit6.jpg'
+import elderSpirit7 from '../images/cards/spirits/elder/ElderSpirit7.jpg'
+import elderSpirit8 from '../images/cards/spirits/elder/ElderSpirit8.jpg'
+import elderSpirit9 from '../images/cards/spirits/elder/ElderSpirit9.jpg'
+import elderSpiritBack from '../images/cards/spirits/elder/ElderSpiritBack.jpg'
+import elderSpiritBackRed from '../images/cards/spirits/elder/ElderSpiritBackRed.jpg'
+import elderSpiritRed1 from '../images/cards/spirits/elder/ElderSpiritRed1.jpg'
+import elderSpiritRed2 from '../images/cards/spirits/elder/ElderSpiritRed2.jpg'
+import elderSpiritRed3 from '../images/cards/spirits/elder/ElderSpiritRed3.jpg'
 import bearElite1 from '../images/cards/spirits/elite/bear/BearElite1.jpg'
 import bearElite2 from '../images/cards/spirits/elite/bear/BearElite2.jpg'
 import bearElite3 from '../images/cards/spirits/elite/bear/BearElite3.jpg'
@@ -51,7 +72,11 @@ export class SpiritCardDescription extends CardDescription {
   height = 8.8
   borderRadius = 0.1
 
+  menuAlwaysVisible = true
+
   images = {
+    [SpiritCard.DruidBlack]: druidBlack,
+    [SpiritCard.DruidGreen]: druidGreen,
     [SpiritCard.BearBase1]: bearBase1,
     [SpiritCard.BearBase2]: bearBase2,
     [SpiritCard.BearBase3]: bearBase3,
@@ -90,7 +115,19 @@ export class SpiritCardDescription extends CardDescription {
     [SpiritCard.OwlElite7]: owlElite7,
     [SpiritCard.OwlElite8]: owlElite8,
     [SpiritCard.OwlElite9]: owlElite9,
-    [SpiritCard.OwlElite10]: owlElite10
+    [SpiritCard.OwlElite10]: owlElite10,
+    [SpiritCard.ElderSpirit1]: elderSpirit1,
+    [SpiritCard.ElderSpirit2]: elderSpirit2,
+    [SpiritCard.ElderSpirit3]: elderSpirit3,
+    [SpiritCard.ElderSpirit4]: elderSpirit4,
+    [SpiritCard.ElderSpirit5]: elderSpirit5,
+    [SpiritCard.ElderSpirit6]: elderSpirit6,
+    [SpiritCard.ElderSpirit7]: elderSpirit7,
+    [SpiritCard.ElderSpirit8]: elderSpirit8,
+    [SpiritCard.ElderSpirit9]: elderSpirit9,
+    [SpiritCard.ElderSpiritRed1]: elderSpiritRed1,
+    [SpiritCard.ElderSpiritRed2]: elderSpiritRed2,
+    [SpiritCard.ElderSpiritRed3]: elderSpiritRed3,
   }
 
   backImages = {
@@ -99,6 +136,54 @@ export class SpiritCardDescription extends CardDescription {
     [SpiritType.Bear]: bearEliteBack,
     [SpiritType.Fox]: foxEliteBack,
     [SpiritType.Owl]: owlEliteBack,
+    [SpiritType.Elder]: elderSpiritBack,
+    [SpiritType.ElderRed]: elderSpiritBackRed,
+  }
+
+  getItemMenu(_item: MaterialItem, context: ItemContext, legalMoves: MaterialMove[]) {
+    const takeOnTopDeck = legalMoves.find(
+      (move) => isMoveItemType(MaterialType.SpiritCard)(move)
+        && move.location.type === LocationType.PlayerDeck
+        && move.location.player === context.player
+        && move.location.x === undefined
+        && move.itemIndex === context.index
+    )
+    const takeOnBottomDeck = legalMoves.find(
+      (move) => isMoveItemType(MaterialType.SpiritCard)(move)
+        && move.location.type === LocationType.PlayerDeck
+        && move.location.player === context.player
+        && move.location.x === 0
+        && move.itemIndex === context.index
+    )
+    const takeOnHand = legalMoves.find(
+      (move) => isMoveItemType(MaterialType.SpiritCard)(move)
+        && move.location.type === LocationType.PlayerHand
+        && move.location.player === context.player
+        && move.itemIndex === context.index
+    )
+
+    if (takeOnTopDeck || takeOnBottomDeck || takeOnHand) {
+      return (
+        <>
+          {takeOnTopDeck && (
+          <ItemMenuButton angle={50} radius={4} x={-2} y={0} move={takeOnTopDeck}>
+            <FontAwesomeIcon icon={faArrowUp} css={pointerCursorCss} />
+      </ItemMenuButton>
+    )}
+          {takeOnBottomDeck && (
+          <ItemMenuButton angle={50} radius={4} x={0} y={0} move={takeOnBottomDeck}>
+            <FontAwesomeIcon icon={faArrowDown} css={pointerCursorCss} />
+      </ItemMenuButton>
+    )}
+          {takeOnHand && (
+          <ItemMenuButton angle={50} radius={4} x={2} y={0} move={takeOnHand}>
+            <FontAwesomeIcon icon={faHand} css={pointerCursorCss} />
+      </ItemMenuButton>
+    )}
+      </>
+    )
+    }
+    return undefined
   }
 }
 

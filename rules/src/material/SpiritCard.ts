@@ -1,5 +1,13 @@
+import { Material } from '@gamepark/rules-api'
+import { PlayerColor } from '../PlayerColor'
+import { RuleId } from '../rules/RuleId'
+import { LocationType } from './LocationType'
+import { MaterialType } from './MaterialType'
+
 export enum SpiritCard {
-  BearBase1 = 1,
+  DruidBlack = 1,
+  DruidGreen,
+  BearBase1,
   BearBase2,
   BearBase3,
   BearElite1,
@@ -37,17 +45,29 @@ export enum SpiritCard {
   OwlElite7,
   OwlElite8,
   OwlElite9,
-  OwlElite10
+  OwlElite10,
+  ElderSpirit1,
+  ElderSpirit2,
+  ElderSpirit3,
+  ElderSpirit4,
+  ElderSpirit5,
+  ElderSpirit6,
+  ElderSpirit7,
+  ElderSpirit8,
+  ElderSpirit9,
+  ElderSpiritRed1,
+  ElderSpiritRed2,
+  ElderSpiritRed3
 }
 
 export enum SpiritType {
   Base = 1,
   Bear,
   Fox,
-  Owl
+  Owl,
+  Elder,
+  ElderRed
 }
-
-
 
 export type SpiritCardId = {
   front?: SpiritCard
@@ -104,3 +124,179 @@ export const owlEliteCards = [
   SpiritCard.OwlElite9,
   SpiritCard.OwlElite10
 ]
+
+export const elderSpiritCards = [
+  SpiritCard.ElderSpirit1,
+  SpiritCard.ElderSpirit2,
+  SpiritCard.ElderSpirit3,
+  SpiritCard.ElderSpirit4,
+  SpiritCard.ElderSpirit5,
+  SpiritCard.ElderSpirit6,
+  SpiritCard.ElderSpirit7,
+  SpiritCard.ElderSpirit8,
+  SpiritCard.ElderSpirit9
+]
+
+export const elderSpiritRedCards = [SpiritCard.ElderSpiritRed1, SpiritCard.ElderSpiritRed2, SpiritCard.ElderSpiritRed3]
+
+interface SpiritCardData {
+  type: string
+  force: (getMaterial: (type: number) => Material, groveIndex: number, player: PlayerColor) => number
+  leftIncantations: string[]
+  rightIncantations: string[]
+  ruses: number
+  arcanes: number
+  dominations: (getMaterial: (type: number) => Material, groveIndex: number, player: PlayerColor) => number
+  effects?: RuleId[]
+}
+
+const incantations = (bear = 0, owl = 0, fox = 0): string[] => [
+  ...Array.from({ length: bear }, () => 'bear'),
+  ...Array.from({ length: owl }, () => 'owl'),
+  ...Array.from({ length: fox }, () => 'fox')
+]
+
+export const spiritCardData: Record<SpiritCard, SpiritCardData> = {
+  [SpiritCard.DruidBlack]: {
+    type: 'druid',
+    force: () => 0,
+    leftIncantations: incantations(1, 1, 1),
+    rightIncantations: incantations(1, 1, 1),
+    ruses: 0,
+    arcanes: 0,
+    dominations: () => 0
+  },
+  [SpiritCard.DruidGreen]: {
+    type: 'druid',
+    force: () => 0,
+    leftIncantations: incantations(1, 1, 1),
+    rightIncantations: incantations(1, 1, 1),
+    ruses: 0,
+    arcanes: 0,
+    dominations: () => 0
+  },
+  [SpiritCard.BearBase1]: { type: 'bear', force: () => 3, leftIncantations: incantations(1, 0, 0), rightIncantations: incantations(1, 0, 0), ruses: 0, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.BearBase2]: { type: 'bear', force: () => 1, leftIncantations: incantations(1, 0, 1), rightIncantations: incantations(1, 1, 0), ruses: 0, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.BearBase3]: { type: 'bear', force: () => 1, leftIncantations: incantations(1, 1, 0), rightIncantations: incantations(1, 0, 1), ruses: 0, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.BearElite1]: { type: 'bear', force: () => 3, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 1, dominations: () => 0 },
+  [SpiritCard.BearElite2]: {
+    type: 'bear',
+    force: () => 3,
+    leftIncantations: incantations(1, 1, 0),
+    rightIncantations: incantations(1, 1, 0),
+    ruses: 0,
+    arcanes: 0,
+    dominations: () => 0
+  },
+  [SpiritCard.BearElite3]: {
+    type: 'bear',
+    force: () => 3,
+    leftIncantations: incantations(1, 1, 0),
+    rightIncantations: incantations(1, 1, 0),
+    ruses: 0,
+    arcanes: 0,
+    dominations: () => 0
+  },
+  [SpiritCard.BearElite4]: {
+    type: 'bear',
+    force: () => 3,
+    leftIncantations: incantations(1, 0, 1),
+    rightIncantations: incantations(1, 0, 1),
+    ruses: 0,
+    arcanes: 0,
+    dominations: () => 0
+  },
+  [SpiritCard.BearElite5]: { type: 'bear', force: () => 4, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.BearElite6]: { type: 'bear', force: () => 3, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 1, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.BearElite7]: {
+    type: 'bear',
+    force: () => 0,
+    leftIncantations: incantations(1, 1, 1),
+    rightIncantations: incantations(1, 1, 1),
+    ruses: 0,
+    arcanes: 0,
+    dominations: () => 1
+  },
+  [SpiritCard.BearElite8]: {
+    type: 'bear',
+    force: () => 3,
+    leftIncantations: incantations(1, 1, 0),
+    rightIncantations: incantations(1, 1, 0),
+    ruses: 0,
+    arcanes: 0,
+    dominations: () => 0
+  },
+  [SpiritCard.BearElite9]: {
+    type: 'bear',
+    force: () => 4,
+    leftIncantations: incantations(1, 0, 0),
+    rightIncantations: incantations(1, 0, 0),
+    ruses: 0,
+    arcanes: 0,
+    dominations: () => 0
+  },
+  [SpiritCard.BearElite10]: {
+    type: 'bear',
+    force: () => 3,
+    leftIncantations: incantations(1, 0, 1),
+    rightIncantations: incantations(1, 0, 1),
+    ruses: 0,
+    arcanes: 0,
+    dominations: () => 0
+  },
+  [SpiritCard.FoxBase1]: { type: 'fox', force: () => 1, leftIncantations: incantations(0, 1, 1), rightIncantations: incantations(1, 0, 1), ruses: 0, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.FoxBase2]: { type: 'fox', force: () => 1, leftIncantations: incantations(1, 0, 1), rightIncantations: incantations(0, 1, 1), ruses: 0, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.FoxBase3]: { type: 'fox', force: () => 1, leftIncantations: incantations(0, 0, 1), rightIncantations: incantations(0, 0, 1), ruses: 1, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.FoxElite1]: { type: 'fox', force: () => 0, leftIncantations: incantations(0, 1, 1), rightIncantations: incantations(0, 1, 1), ruses: 1, arcanes: 1, dominations: () => 0 },
+  [SpiritCard.FoxElite2]: { type: 'fox', force: () => 0, leftIncantations: incantations(1, 0, 1), rightIncantations: incantations(1, 0, 1), ruses: 1, arcanes: 1, dominations: () => 0 },
+  [SpiritCard.FoxElite3]: { type: 'fox', force: () => 1, leftIncantations: incantations(1, 0, 1), rightIncantations: incantations(0, 1, 1), ruses: 1, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.FoxElite4]: { type: 'fox', force: () => 0, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 2, arcanes: 2, dominations: () => 0 },
+  [SpiritCard.FoxElite5]: { type: 'fox', force: () => 0, leftIncantations: incantations(1, 1, 1), rightIncantations: incantations(1, 1, 1), ruses: 0, arcanes: 0, dominations: () => 1 },
+  [SpiritCard.FoxElite6]: { type: 'fox', force: () => 1, leftIncantations: incantations(1, 0, 1), rightIncantations: incantations(1, 0, 1), ruses: 1, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.FoxElite7]: { type: 'fox', force: () => 1, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 3, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.FoxElite8]: { type: 'fox', force: () => 1, leftIncantations: incantations(0, 0, 1), rightIncantations: incantations(0, 0, 1), ruses: 2, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.FoxElite9]: { type: 'fox', force: () => 3, leftIncantations: incantations(1, 0, 1), rightIncantations: incantations(1, 0, 1), ruses: 0, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.FoxElite10]: { type: 'fox', force: () => 2, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 2, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.OwlBase1]: { type: 'owl', force: () => 1, leftIncantations: incantations(0, 1, 0), rightIncantations: incantations(0, 1, 0), ruses: 0, arcanes: 1, dominations: () => 0 },
+  [SpiritCard.OwlBase2]: { type: 'owl', force: () => 1, leftIncantations: incantations(0, 1, 1), rightIncantations: incantations(1, 1, 0), ruses: 0, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.OwlBase3]: { type: 'owl', force: () => 1, leftIncantations: incantations(1, 1, 0), rightIncantations: incantations(0, 1, 1), ruses: 0, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.OwlElite1]: { type: 'owl', force: () => 1, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 3, dominations: () => 0 },
+  [SpiritCard.OwlElite2]: { type: 'owl', force: () => 0, leftIncantations: incantations(1, 1, 1), rightIncantations: incantations(1, 1, 1), ruses: 0, arcanes: 0, dominations: () => 1 },
+  [SpiritCard.OwlElite3]: { type: 'owl', force: () => 2, leftIncantations: incantations(0, 1, 0), rightIncantations: incantations(0, 1, 0), ruses: 0, arcanes: 1, dominations: () => 0 },
+  [SpiritCard.OwlElite4]: { type: 'owl', force: () => 1, leftIncantations: incantations(1, 1, 0), rightIncantations: incantations(1, 1, 0), ruses: 0, arcanes: 1, dominations: () => 0 },
+  [SpiritCard.OwlElite5]: { type: 'owl', force: () => 0, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 1, arcanes: 2, dominations: () => 0 },
+  [SpiritCard.OwlElite6]: { type: 'owl', force: () => 0, leftIncantations: incantations(0, 1, 1), rightIncantations: incantations(0, 1, 1), ruses: 1, arcanes: 1, dominations: () => 0 },
+  [SpiritCard.OwlElite7]: { type: 'owl', force: () => 3, leftIncantations: incantations(1, 1, 0), rightIncantations: incantations(1, 1, 0), ruses: 0, arcanes: 0, dominations: () => 0 },
+  [SpiritCard.OwlElite8]: { type: 'owl', force: () => 1, leftIncantations: incantations(0, 1, 0), rightIncantations: incantations(0, 1, 0), ruses: 0, arcanes: 2, dominations: () => 0 },
+  [SpiritCard.OwlElite9]: { type: 'owl', force: () => 0, leftIncantations: incantations(0, 1, 1), rightIncantations: incantations(1, 1, 0), ruses: 1, arcanes: 1, dominations: () => 0 },
+  [SpiritCard.OwlElite10]: { type: 'owl', force: () => 2, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 2, dominations: () => 0 },
+  [SpiritCard.ElderSpirit1]: { type: 'elder', force: () => 0, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: () => 2, effects: [RuleId.ElderEffectPlaceCardUnderDeckInGrove] },
+  [SpiritCard.ElderSpirit2]: { type: 'elder', force: () => 0, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: () => 1, effects: [RuleId.ElderEffectShowArcane, RuleId.ElderEffectTakeSpirit] },
+  [SpiritCard.ElderSpirit3]: { type: 'elder', force: calculateByElderCardsInGrove, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: () => 1 },
+  [SpiritCard.ElderSpirit4]: { type: 'elder', force: () => 1, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: () => 1, effects: [RuleId.ElderEffectShowArcane, RuleId.ElderEffectTakeSpirit] },
+  [SpiritCard.ElderSpirit5]: { type: 'elder', force: () => 1, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: () => 1, effects: [RuleId.ElderEffectShowArcane] },
+  [SpiritCard.ElderSpirit6]: { type: 'elder', force: () => 0, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: () => 1, effects: [RuleId.ElderEffectShowArcane, RuleId.ElderEffectPlaceCardUnderDeckInGrove] },
+  [SpiritCard.ElderSpirit7]: { type: 'elder', force: () => 0, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: () => 2, effects: [RuleId.ElderEffectTakeSpirit] },
+  [SpiritCard.ElderSpirit8]: { type: 'elder', force: () => 1, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: () => 1, effects: [RuleId.ElderEffectShowArcane, RuleId.ElderEffectShowArcane] },
+  [SpiritCard.ElderSpirit9]: { type: 'elder', force: () => 2, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: () => 1 },
+  [SpiritCard.ElderSpiritRed1]: { type: 'elder', force: () => 0, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: calculateByUniqueCardsTypeInGrove },
+  [SpiritCard.ElderSpiritRed2]: { type: 'elder', force: () => 0, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: calculateByElderCardsInGrove },
+  [SpiritCard.ElderSpiritRed3]: { type: 'elder', force: () => 0, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: () => 2 }
+}
+
+function calculateByElderCardsInGrove(getMaterial: (type: number) => Material, groveIndex: number, player: PlayerColor):  number {
+  const elderCards = getMaterial(MaterialType.SpiritCard).location(loc => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === groveIndex).player(player).getItems()
+  let result = 0
+  elderCards.forEach(card => {
+    if(spiritCardData[card.id.front as SpiritCard].type === 'elder') {
+      result++
+    }
+  })
+  return result
+}
+
+function calculateByUniqueCardsTypeInGrove(getMaterial: (type: number) => Material, groveIndex: number, player: PlayerColor):  number {
+  const spiritCards = getMaterial(MaterialType.SpiritCard).location(loc => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === groveIndex).player(player).getItems()
+  const types = spiritCards.map(card => card.id.front as SpiritCard).map(card => spiritCardData[card].type)
+  return new Set(types).size
+}

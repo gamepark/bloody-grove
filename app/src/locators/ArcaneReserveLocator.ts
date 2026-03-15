@@ -1,8 +1,11 @@
-import { PileLocator } from '@gamepark/react-game'
+import { FlexLocator } from '@gamepark/react-game'
 
-export class ArcaneReserveLocator extends PileLocator {
-  coordinates = { x: -36, y: 20 }
-  radius = 5
+export class ArcaneReserveLocator extends FlexLocator {
+  gap = { x: 2 }
+  lineGap = { y: 2 }
+  lineSize = 4
+  maxLines = 4
+  coordinates = { x: -45, y: 20 }
 }
 
 export const arcaneReserveLocator = new ArcaneReserveLocator()

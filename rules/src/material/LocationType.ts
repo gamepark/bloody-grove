@@ -15,5 +15,9 @@ export enum LocationType {
   RoundCard,
   RoundPiste,
   GroveMajority,
-  ArcaneShowLayout
+  ArcaneShowLayout,
+  PlayerSpiritUnderGroveLayout,
+  PlayerSpiritNearDruidLayout,
+  ArcaneOnSpiritCardLayout,
+  ArcaneDiscard
 }

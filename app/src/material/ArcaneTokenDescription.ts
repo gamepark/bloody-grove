@@ -1,5 +1,8 @@
 import { ArcaneToken } from '@gamepark/bloody-grove/material/ArcaneToken.ts'
-import { TokenDescription } from '@gamepark/react-game'
+import { LocationType } from '@gamepark/bloody-grove/material/LocationType.ts'
+import { MaterialType } from '@gamepark/bloody-grove/material/MaterialType.ts'
+import { ItemContext, TokenDescription } from '@gamepark/react-game'
+import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import arcaneToken2 from '../images/tokens/ArcaneToken2.jpg'
 import arcaneToken3 from '../images/tokens/ArcaneToken3.jpg'
 import arcaneToken4 from '../images/tokens/ArcaneToken4.jpg'
@@ -14,6 +17,10 @@ export class ArcaneTokenDescription extends TokenDescription {
     [ArcaneToken.ArcaneToken3]: arcaneToken3,
     [ArcaneToken.ArcaneToken4]: arcaneToken4,
     [ArcaneToken.ArcaneTokenDiscard]: arcaneTokenDiscard
+  }
+
+  canShortClick(move: MaterialMove, context: ItemContext): boolean {
+    return isMoveItemType(MaterialType.ArcaneToken)(move) && move.itemIndex === context.index && move.location.player === context.player && move.location.type === LocationType.ArcaneShowLayout
   }
 
   backImage = arcaneTokenBack
