@@ -1,3 +1,8 @@
 export enum Memory {
-  firstPlayer = 1,
+  FirstPlayer = 1,
+  ActualRound,
+  ActualTurn,
+  NextRules,
+  SpiritCardsToTake,
+  GroveToPlaceSpirit,
 }

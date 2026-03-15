@@ -6,7 +6,7 @@ export class PlayerDeckLocator extends DeckLocator {
     const index = getRelativePlayerIndex(context, location.player)
     return {
       x: -20,
-      y: index === 0 ? 20 : -20,
+      y: index === 0 ? 25 : -25,
       z: 0,
     }
   }

@@ -6,29 +6,28 @@ import { RuleId } from './RuleId'
 
 export class ShowArcaneSimultaneousRule extends SimultaneousRule {
     getActivePlayerLegalMoves(player: PlayerColor): MaterialMove[] {
-      const moves: MaterialMove[] = []
-      moves.push(
-        ...this.arcaneTokens.moveItems(() => ({
+      const arcaneInPlayerShowLayout = this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneShowLayout).player(player)
+      if(arcaneInPlayerShowLayout.length > 0) {
+        return arcaneInPlayerShowLayout.moveItems(({ location }) => ({
+          ...location,
+          type: LocationType.ArcaneReserve,
+          player
+        }))
+      }
+      return this.arcaneTokens.moveItems(({ location }) => ({
+        ...location,
           type: LocationType.ArcaneShowLayout,
           player
         }))
-      )
-      return moves
     }
     afterItemMove(move: ItemMove) {
-      if (isMoveItemType(MaterialType.ArcaneToken)(move) && move.location.type === LocationType.ArcaneShowLayout) {
+      if (isMoveItemType(MaterialType.ArcaneToken)(move) && move.location.type === LocationType.ArcaneReserve) {
         return [this.endPlayerTurn(move.location.player!)]
       }
       return []
     }
     getMovesAfterPlayersDone(): MaterialMove<number, number, number, number>[] {
       const moves: MaterialMove[] = []
-      const showedArcaneTokens = this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneShowLayout)
-      moves.push(
-        ...showedArcaneTokens.moveItems(() => ({
-          type: LocationType.ArcaneReserve,
-        }))
-      )
       moves.push(this.startPlayerTurn(RuleId.ChooseAction, this.game.players[0]))
       return moves
     }

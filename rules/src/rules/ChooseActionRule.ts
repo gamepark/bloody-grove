@@ -1,8 +1,47 @@
-import { MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule, PlayMoveContext, RuleMove, RuleStep } from '@gamepark/rules-api'
+import { LocationType } from '../material/LocationType'
+import { MaterialType } from '../material/MaterialType'
+import { DruidTransformationHelper } from './helper/DruidTransformationHelper'
+import { GroveHelper } from './helper/GroveHelper'
+import { SpiritCardHelper } from './helper/SpiritCardHelper'
+import { Memory } from './Memory'
 
 export class ChooseActionRule extends PlayerTurnRule {
+  groveHelper = new GroveHelper(this.game)
+  spiritCardHelper = new SpiritCardHelper(this.game)
+  druidTransformationHelper = new DruidTransformationHelper(this.game)
+
+  onRuleStart(_move: RuleMove<number, number>, _previousRule?: RuleStep, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+    this.memorize(Memory.ActualTurn, (lastValue) => lastValue + 1)
+    return [this.material(MaterialType.Cube).location(LocationType.RoundPiste).moveItem(({ location }) => ({...location, id: this.remind(Memory.ActualTurn)}))]
+  }
+
   getPlayerMoves(): MaterialMove<number, number, number, number>[] {
-    return super.getPlayerMoves()
+    const moves: MaterialMove[] = []
+    moves.push(
+      ...this.playerHand.moveItems(() => this.groveHelper.getPossiblePlace())
+    )
+    this.druidTransformationHelper.getPossiblePlaces().forEach((place) => {
+      moves.push(...this.playerHand.moveItems(place))
+    })
+    return moves
+  }
+
+  afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+    const moves: MaterialMove[] = []
+    if(isMoveItem(move) && move.location.type === LocationType.PlayerSpiritUnderGroveLayout) {
+      const item = this.material(MaterialType.SpiritCard).getItem(move.itemIndex)
+      moves.push(...this.spiritCardHelper.getSpiritCardUnderGroveAfterItemMove(item.id))
+    }
+    if(isMoveItem(move) && move.location.type === LocationType.PlayerSpiritNearDruidLayout) {
+      const item = this.material(MaterialType.SpiritCard).getItem(move.itemIndex)
+      moves.push(...this.spiritCardHelper.getSpiritCardNearToDruidAfterItemMove(item.id, move.location.id))
+    }
+    return moves
+  }
+
+  get playerHand() {
+    return this.material(MaterialType.SpiritCard).location(LocationType.PlayerHand).player(this.player)
   }
 
 }

@@ -1,8 +1,5 @@
-import { Material } from '@gamepark/rules-api'
-import { PlayerColor } from '../PlayerColor'
+import { MaterialItem } from '@gamepark/rules-api'
 import { RuleId } from '../rules/RuleId'
-import { LocationType } from './LocationType'
-import { MaterialType } from './MaterialType'
 
 export enum SpiritCard {
   DruidBlack = 1,
@@ -141,12 +138,12 @@ export const elderSpiritRedCards = [SpiritCard.ElderSpiritRed1, SpiritCard.Elder
 
 interface SpiritCardData {
   type: string
-  force: (getMaterial: (type: number) => Material, groveIndex: number, player: PlayerColor) => number
+  force: (otherPlayerCardsInGrove: MaterialItem[]) => number
   leftIncantations: string[]
   rightIncantations: string[]
   ruses: number
   arcanes: number
-  dominations: (getMaterial: (type: number) => Material, groveIndex: number, player: PlayerColor) => number
+  dominations: (otherPlayerCardsInGrove: MaterialItem[]) => number
   effects?: RuleId[]
 }
 
@@ -284,10 +281,9 @@ export const spiritCardData: Record<SpiritCard, SpiritCardData> = {
   [SpiritCard.ElderSpiritRed3]: { type: 'elder', force: () => 0, leftIncantations: incantations(), rightIncantations: incantations(), ruses: 0, arcanes: 0, dominations: () => 2 }
 }
 
-function calculateByElderCardsInGrove(getMaterial: (type: number) => Material, groveIndex: number, player: PlayerColor):  number {
-  const elderCards = getMaterial(MaterialType.SpiritCard).location(loc => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === groveIndex).player(player).getItems()
+function calculateByElderCardsInGrove(otherPlayerCardsInGrove: MaterialItem[]):  number {
   let result = 0
-  elderCards.forEach(card => {
+  otherPlayerCardsInGrove.forEach(card => {
     if(spiritCardData[card.id.front as SpiritCard].type === 'elder') {
       result++
     }
@@ -295,8 +291,7 @@ function calculateByElderCardsInGrove(getMaterial: (type: number) => Material, g
   return result
 }
 
-function calculateByUniqueCardsTypeInGrove(getMaterial: (type: number) => Material, groveIndex: number, player: PlayerColor):  number {
-  const spiritCards = getMaterial(MaterialType.SpiritCard).location(loc => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === groveIndex).player(player).getItems()
-  const types = spiritCards.map(card => card.id.front as SpiritCard).map(card => spiritCardData[card].type)
-  return new Set(types).size
+function calculateByUniqueCardsTypeInGrove(otherPlayerCardsInGrove: MaterialItem[]):  number {
+  const types = otherPlayerCardsInGrove.map(card => card.id.front as SpiritCard).map(card => spiritCardData[card].type)
+  return new Set(types.filter(t => t !== 'elder')).size
 }

@@ -21,6 +21,7 @@ export class ArcaneTokenDescription extends TokenDescription {
 
   canShortClick(move: MaterialMove, context: ItemContext): boolean {
     return isMoveItemType(MaterialType.ArcaneToken)(move) && move.itemIndex === context.index && move.location.player === context.player && move.location.type === LocationType.ArcaneShowLayout
+     || isMoveItemType(MaterialType.ArcaneToken)(move) && move.itemIndex === context.index && move.location.type === LocationType.ArcaneReserve
   }
 
   backImage = arcaneTokenBack
