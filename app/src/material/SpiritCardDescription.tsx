@@ -6,6 +6,7 @@ import { SpiritCard, SpiritType } from '@gamepark/bloody-grove/material/SpiritCa
 import { PlayerColor } from '@gamepark/bloody-grove/PlayerColor.ts'
 import { CardDescription, ItemContext, ItemMenuButton, pointerCursorCss } from '@gamepark/react-game'
 import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
+import { SpiritCardHelp } from './help/SpiritCardHelp'
 import druidBlack from '../images/cards/druids/DruidBlack.jpg'
 import druidGreen from '../images/cards/druids/DruidGreen.jpg'
 import baseSpiritBackBlack from '../images/cards/druids/BaseSpiritBackBlack.jpg'
@@ -73,6 +74,8 @@ export class SpiritCardDescription extends CardDescription {
   borderRadius = 0.1
 
   menuAlwaysVisible = true
+
+  help = SpiritCardHelp
 
   images = {
     [SpiritCard.DruidBlack]: druidBlack,

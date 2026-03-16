@@ -136,7 +136,7 @@ export const elderSpiritCards = [
 
 export const elderSpiritRedCards = [SpiritCard.ElderSpiritRed1, SpiritCard.ElderSpiritRed2, SpiritCard.ElderSpiritRed3]
 
-interface SpiritCardData {
+export interface SpiritCardData {
   type: string
   force: (otherPlayerCardsInGrove: MaterialItem[]) => number
   leftIncantations: string[]

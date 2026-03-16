@@ -8,6 +8,7 @@ import arcaneToken3 from '../images/tokens/ArcaneToken3.jpg'
 import arcaneToken4 from '../images/tokens/ArcaneToken4.jpg'
 import arcaneTokenBack from '../images/tokens/ArcaneTokenBack.jpg'
 import arcaneTokenDiscard from '../images/tokens/ArcaneTokenDiscard.jpg'
+import { ArcaneTokenHelp } from './help/ArcaneTokenHelp'
 
 export class ArcaneTokenDescription extends TokenDescription {
   width = 1.5
@@ -25,6 +26,8 @@ export class ArcaneTokenDescription extends TokenDescription {
   }
 
   backImage = arcaneTokenBack
+
+  help = ArcaneTokenHelp
 }
 
 export const arcaneTokenDescription = new ArcaneTokenDescription()
