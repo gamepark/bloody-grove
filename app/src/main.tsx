@@ -7,6 +7,7 @@ import { createRoot } from 'react-dom/client'
 import { gameAnimations } from './animations/GameAnimations'
 import { App } from './App'
 import { Locators } from './locators/Locators'
+import { BloodyGroveLogs } from './history/BloodyGroveLogs.ts'
 import { Material } from './material/Material'
 
 createRoot(document.getElementById('root')!).render(
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')!).render(
       material={Material}
       locators={Locators}
       animations={gameAnimations}
+      logs={new BloodyGroveLogs()}
     >
       <App />
     </GameProvider>
