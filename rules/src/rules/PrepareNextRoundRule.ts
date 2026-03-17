@@ -20,6 +20,7 @@ export class PrepareNextRoundRule extends MaterialRulesPart {
     this.memorize(Memory.ActualTurn, 0)
     this.memorize(Memory.FirstPlayer, (lastValue) => lastValue  === PlayerColor.Black ? PlayerColor.Green : PlayerColor.Black)
     const moves: MaterialMove[] = []
+    moves.push(...this.discardArcaneTokensInSpiritCard())
     moves.push(...this.deleteElderSpiritCardsInRiver())
     moves.push(...this.reveal3ElderSpiritCards())
     moves.push(...this.playersTakes4Cards())
@@ -33,6 +34,15 @@ export class PrepareNextRoundRule extends MaterialRulesPart {
       return [this.startPlayerTurn(RuleId.ChooseAction, this.remind(Memory.FirstPlayer))]
     }
     return []
+  }
+
+  discardArcaneTokensInSpiritCard(): MaterialMove[] {
+    const moves: MaterialMove[] = []
+    const arcaneTokensInSpiritCard = this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneOnSpiritCardLayout)
+    if(arcaneTokensInSpiritCard.length > 0) {
+      moves.push(arcaneTokensInSpiritCard.moveItemsAtOnce({ type: LocationType.ArcaneDiscard}))
+    }
+    return moves
   }
 
   deleteElderSpiritCardsInRiver(): MaterialMove[] {

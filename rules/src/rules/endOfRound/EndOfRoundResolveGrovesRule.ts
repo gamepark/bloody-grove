@@ -35,9 +35,6 @@ export class EndOfRoundResolveGrovesRule extends MaterialRulesPart {
   getPlayerWithMajority(): PlayerColor | undefined {
     const forcePlayerBlack = this.groveHelper.calculatePlayerForceForGrove(PlayerColor.Black, this.actualGroveIndex!)
     const forcePlayerGreen = this.groveHelper.calculatePlayerForceForGrove(PlayerColor.Green, this.actualGroveIndex!)
-    console.log('grove', this.actualGroveIndex)
-    console.log('forcePlayerBlack', forcePlayerBlack)
-    console.log('forcePlayerGreen', forcePlayerGreen)
     if(forcePlayerBlack > forcePlayerGreen) {
       return PlayerColor.Black
     }

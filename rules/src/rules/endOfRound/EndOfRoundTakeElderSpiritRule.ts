@@ -27,7 +27,7 @@ export class EndOfRoundTakeElderSpiritRule extends PlayerTurnRule {
         const cardIdx = cardAlreadyInLocation.getIndex()
         const arcanesInCard = this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneOnSpiritCardLayout).parent(cardIdx)
         if(arcanesInCard.length > 0) {
-          moves.push(...arcanesInCard.moveItems(({location}) => ({...location, parent: move.itemIndex, x: undefined})))
+          moves.push(arcanesInCard.moveItemsAtOnce({ type: LocationType.ArcaneDiscard}))
         }
         moves.push(...cardAlreadyInLocation.deleteItems(1))
       }

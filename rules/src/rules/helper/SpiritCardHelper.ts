@@ -34,9 +34,11 @@ export class SpiritCardHelper extends MaterialRulesPart {
     const spiritCardsToTake = []
     const spiritData = spiritCardData[id.front]
     const druidId: SpiritCardId = this.material(MaterialType.SpiritCard).location(LocationType.PlayerDruid).player(this.player).maxBy(item => item.location.x ?? 0).getItem()?.id
-    console.log(druidId)
     if(!druidId?.front) return []
     const druidData = spiritCardData[druidId.front]
+    console.log(locationId)
+    console.log(spiritData)
+    console.log(druidData)
     if(locationId === 0) {
       const spiritIncantations = spiritData.rightIncantations
       const druidIncantions = druidData.leftIncantations
