@@ -90,7 +90,7 @@ const StandardSpiritHelp = ({ cardData }: { cardData: SpiritCardData }) => {
           <Trans
             i18nKey="spirit-card.incantations.desc"
             components={components}
-            defaults="Ces symboles servent au recrutement : quand vous placez cette carte à côté de votre Druide, pouchaque symbole recrutement <recrutement /> assemblés, vous pouvez recruter des cartes Élite du type correspondant."
+            defaults="Ces symboles servent au recrutement : quand vous placez cette carte à côté de votre Druide, pour chaque symbole recrutement <recrutement /> assemblés, vous pouvez recruter des cartes Élite du type correspondant."
           />
         </p>
       )}
