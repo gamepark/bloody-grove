@@ -9,6 +9,7 @@ import { App } from './App'
 import { Locators } from './locators/Locators'
 import { BloodyGroveLogs } from './history/BloodyGroveLogs.ts'
 import { Material } from './material/Material'
+import { Tutorial } from './tutorial/Tutorial'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')!).render(
       locators={Locators}
       animations={gameAnimations}
       logs={new BloodyGroveLogs()}
+      tutorial={new Tutorial()}
     >
       <App />
     </GameProvider>
