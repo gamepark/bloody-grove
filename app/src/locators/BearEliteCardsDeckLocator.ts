@@ -1,14 +1,8 @@
-import { DeckLocator, MaterialContext } from '@gamepark/react-game'
-import { Coordinates, Location } from '@gamepark/rules-api'
-import { isPlayerBlack } from './utils.ts'
+import { DeckLocator } from '@gamepark/react-game'
 
 export class BearEliteCardsDeckLocator extends DeckLocator {
-  getCoordinates(_location: Location, context: MaterialContext): Partial<Coordinates> {
-    return {x: isPlayerBlack(context.player) ? 45 : -43, y: 0}
-  }
-  getRotateZ(_location: Location, context: MaterialContext): number {
-    return isPlayerBlack(context.player) ? 90 : -90
-  }
+  coordinates = {x: 45, y: 0}
+  rotateZ = 90
 }
 
 export const bearEliteCardsDeckLocator = new BearEliteCardsDeckLocator()

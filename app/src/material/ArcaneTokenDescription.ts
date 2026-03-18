@@ -11,7 +11,7 @@ import arcaneTokenDiscard from '../images/tokens/ArcaneTokenDiscard.jpg'
 import { ArcaneTokenHelp } from './help/ArcaneTokenHelp'
 
 export class ArcaneTokenDescription extends TokenDescription {
-  width = 1.5
+  width = 2
 
   images = {
     [ArcaneToken.ArcaneToken2]: arcaneToken2,

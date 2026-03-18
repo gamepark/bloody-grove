@@ -1,5 +1,5 @@
-import { getRelativePlayerIndex, HandLocator, MaterialContext } from '@gamepark/react-game'
-import { Location } from '@gamepark/rules-api'
+import { getRelativePlayerIndex, HandLocator, ItemContext, MaterialContext } from '@gamepark/react-game'
+import { Location, MaterialItem } from '@gamepark/rules-api'
 
 export class PlayerHandLocator extends HandLocator {
   radius = 80
@@ -12,6 +12,9 @@ export class PlayerHandLocator extends HandLocator {
       y: index === 0 ? 25 : -25,
       z: 0,
     }
+  }
+  getHoverTransform(item: MaterialItem<number, number>, context: ItemContext<number, number, number>,): string[] {
+    return [...super.getHoverTransform(item, context), 'translateY(-2.5em)']
   }
 
   getBaseAngle(location: Location, context: MaterialContext) {

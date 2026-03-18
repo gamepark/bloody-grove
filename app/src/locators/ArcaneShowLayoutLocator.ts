@@ -7,7 +7,7 @@ class ArcaneShowLayoutLocator extends Locator {
     const index = getRelativePlayerIndex(context, location.player)
     return {
       x: 0,
-      y: index === 0 ? 12 : -12,
+      y: index === 0 ? 18 : -18,
       z: 0,
     }
   }
@@ -16,8 +16,8 @@ class ArcaneShowLayoutLocator extends Locator {
 }
 
 export class ArcaneShowLayoutLocatorDescription extends DropAreaDescription {
-  width = 1.5
-  height = 1.5
+  width = 2
+  height = 2
 }
 
 export const arcaneShowLayoutLocator = new ArcaneShowLayoutLocator()
