@@ -5,8 +5,8 @@ export class PlayerDeckLocator extends DeckLocator {
   getCoordinates(location: Location, context: MaterialContext) {
     const index = getRelativePlayerIndex(context, location.player)
     return {
-      x: -20,
-      y: index === 0 ? 25 : -25,
+      x: -40,
+      y: index === 0 ? 15 : -15,
       z: 0,
     }
   }

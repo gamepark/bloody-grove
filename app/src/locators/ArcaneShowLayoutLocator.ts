@@ -6,8 +6,8 @@ class ArcaneShowLayoutLocator extends Locator {
   getCoordinates(location: Location, context: MaterialContext) {
     const index = getRelativePlayerIndex(context, location.player)
     return {
-      x: 0,
-      y: index === 0 ? 18 : -18,
+      x: -22,
+      y: index === 0 ? 8 : -8,
       z: 0,
     }
   }

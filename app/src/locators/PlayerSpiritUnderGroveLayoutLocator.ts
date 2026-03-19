@@ -1,26 +1,27 @@
 /** @jsxImportSource @emotion/react */
 import { GroveHelper } from '@gamepark/bloody-grove/rules/helper/GroveHelper.ts'
 import { RuleId } from '@gamepark/bloody-grove/rules/RuleId.ts'
-import { DeckLocator, DropAreaDescription, MaterialContext } from '@gamepark/react-game'
+import { ListLocator, DropAreaDescription, MaterialContext } from '@gamepark/react-game'
 import { Coordinates, Location } from '@gamepark/rules-api'
-import { isPlayerBlack } from './utils.ts'
+import { getContextPlayer, isPlayerBlack } from './utils.ts'
 
-class PlayerSpiritUnderGroveLayoutLocator extends DeckLocator {
+class PlayerSpiritUnderGroveLayoutLocator extends ListLocator {
+  maxCount = 5
 
-  getGap(_location: Location<number, number>, _context: MaterialContext<number, number, number>): Partial<Coordinates> {
-    return { y: _location.player === _context.player ? 2 : -2 }
+  getGap(location: Location<number, number>, context: MaterialContext<number, number, number>): Partial<Coordinates> {
+    return { y: isPlayerBlack(getContextPlayer(context)) ? isPlayerBlack(location.player) ? 2 : -2 : isPlayerBlack(location.player) ? -2 : 2 }
   }
 
   getCoordinates(location: Location, context: MaterialContext) {
-    const xFromGrove = isPlayerBlack(context.player) ? [-5, 5, 15] : [5, -5, -15]
+    const xFromGrove = isPlayerBlack(getContextPlayer(context)) ? [-5, 5, 15] : [15, 5, -5]
     return {
       x: xFromGrove[location.id ?? 0],
-      y: isPlayerBlack(context.player) ? isPlayerBlack(location.player) ? 8 : -8 : isPlayerBlack(location.player) ? -8 : 8,
+      y: isPlayerBlack(getContextPlayer(context)) ? isPlayerBlack(location.player) ? 8 : -8 : isPlayerBlack(location.player) ? -8 : 8,
       z: 0,
     }
   }
   getRotateZ(location: Location<number, number>, context: MaterialContext<number, number, number>): number {
-    return isPlayerBlack(context.player) ? isPlayerBlack(location.player) ? 0 : 180 : isPlayerBlack(location.player) ? 180 : 0
+    return isPlayerBlack(getContextPlayer(context)) ? isPlayerBlack(location.player) ? 0 : 180 : isPlayerBlack(location.player) ? 180 : 0
   }
 
   getLocations(context: MaterialContext): Partial<Location>[] {

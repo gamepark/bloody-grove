@@ -82,6 +82,7 @@ export class BloodyGroveRules
     },
     [MaterialType.ArcaneToken]: {
       [LocationType.ArcaneReserve]: new FillGapStrategy(),
+      [LocationType.ArcaneDiscard]: new PositiveSequenceStrategy(),
       [LocationType.ArcaneOnSpiritCardLayout]: new PositiveSequenceStrategy()
     }
   }

@@ -1,8 +1,7 @@
 import { Locator } from '@gamepark/react-game'
 
 export class FoxEliteCardLocator extends Locator {
-  coordinates = {x: 35, y: -8}
-  rotateZ = 90
+  coordinates = {x: 25, y: -4}
 }
 
 export const foxEliteCardLocator = new FoxEliteCardLocator()

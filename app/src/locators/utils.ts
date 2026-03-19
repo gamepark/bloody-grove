@@ -1,3 +1,9 @@
 import { PlayerColor } from '@gamepark/bloody-grove/PlayerColor.ts'
+import { MaterialContext } from '@gamepark/react-game'
 
-export const isPlayerBlack = (contextPlayer?: PlayerColor) => contextPlayer === PlayerColor.Black
+export const getContextPlayer = (context: MaterialContext) => context.player ?? context.rules.players[0]
+
+export const isPlayerBlack = (contextPlayer?: PlayerColor) => {
+  console.log(contextPlayer)
+  return contextPlayer === PlayerColor.Black
+}
