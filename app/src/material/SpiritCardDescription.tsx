@@ -143,7 +143,7 @@ export class SpiritCardDescription extends CardDescription {
     [SpiritType.ElderRed]: elderSpiritBackRed,
   }
 
-  getItemMenu(_item: MaterialItem, context: ItemContext, legalMoves: MaterialMove[]) {
+  getItemMenu(item: MaterialItem, context: ItemContext, legalMoves: MaterialMove[]) {
     const takeOnTopDeck = legalMoves.find(
       (move) => isMoveItemType(MaterialType.SpiritCard)(move)
         && move.location.type === LocationType.PlayerDeck
@@ -166,25 +166,37 @@ export class SpiritCardDescription extends CardDescription {
     )
 
     if (takeOnTopDeck || takeOnBottomDeck || takeOnHand) {
+      const locationType = item.location?.type
+      const hasMovesOnOtherAnimal = (types: LocationType[]) =>
+        legalMoves.some((move) => isMoveItemType(MaterialType.SpiritCard)(move)
+          && move.itemIndex !== context.index
+          && context.rules.material(MaterialType.SpiritCard).getItem(move.itemIndex)?.location?.type !== undefined
+          && types.includes(context.rules.material(MaterialType.SpiritCard).getItem(move.itemIndex)!.location!.type)
+        )
+
+      const showLabel = locationType === LocationType.FoxEliteCard
+        || (locationType === LocationType.BearEliteCard && !hasMovesOnOtherAnimal([LocationType.FoxEliteCard]))
+        || (locationType === LocationType.OwlEliteCard && !hasMovesOnOtherAnimal([LocationType.FoxEliteCard, LocationType.BearEliteCard]))
+
       return (
         <>
-          {takeOnTopDeck && (
-          <ItemMenuButton angle={50} radius={4} x={-2} y={0} move={takeOnTopDeck}>
-            <FontAwesomeIcon icon={faArrowUp} css={pointerCursorCss} />
-      </ItemMenuButton>
-    )}
-          {takeOnBottomDeck && (
-          <ItemMenuButton angle={50} radius={4} x={0} y={0} move={takeOnBottomDeck}>
-            <FontAwesomeIcon icon={faArrowDown} css={pointerCursorCss} />
-      </ItemMenuButton>
-    )}
           {takeOnHand && (
-          <ItemMenuButton angle={50} radius={4} x={2} y={0} move={takeOnHand}>
-            <FontAwesomeIcon icon={faHand} css={pointerCursorCss} />
-      </ItemMenuButton>
-    )}
-      </>
-    )
+            <ItemMenuButton angle={50} radius={4} x={0} y={-2} move={takeOnHand} label={showLabel ? 'Prendre en main' : undefined} labelPosition="left">
+              <FontAwesomeIcon icon={faHand} css={pointerCursorCss} />
+            </ItemMenuButton>
+          )}
+          {takeOnBottomDeck && (
+            <ItemMenuButton angle={50} radius={4} x={0} y={0.5} move={takeOnBottomDeck} label={showLabel ? 'Sous votre paquet' : undefined} labelPosition="left">
+              <FontAwesomeIcon icon={faArrowDown} css={pointerCursorCss} />
+            </ItemMenuButton>
+          )}
+          {takeOnTopDeck && (
+            <ItemMenuButton angle={50} radius={4} x={0} y={3} move={takeOnTopDeck} label={showLabel ? 'Sur votre paquet' : undefined} labelPosition="left">
+              <FontAwesomeIcon icon={faArrowUp} css={pointerCursorCss} />
+            </ItemMenuButton>
+          )}
+        </>
+      )
     }
     return undefined
   }
