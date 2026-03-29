@@ -17,9 +17,9 @@ export class PlayerDeckLocator extends DeckLocator {
     const count = this.countItems(location, context)
     if (this.isPlacingOnDeck(context) && location.player === context.player) {
       if (location.x === 0) {
-        return { x: coordinates.x - count * 0.05, y: coordinates.y - 1, z: 5 }
-      } else {
         return { ...coordinates, y: coordinates.y - 6 }
+      } else {
+        return { x: coordinates.x - count * 0.05, y: coordinates.y - 1, z: 5 }
       }
     }
 

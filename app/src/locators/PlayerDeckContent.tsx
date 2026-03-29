@@ -5,9 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 export const PlayerDeckContent = ({ location }: { location: Location }) => {
   const { t } = useTranslation()
-  const label = location.x === 0
-    ? t('drop.deck.top', 'Placer dessus')
-    : t('drop.deck.bottom', 'Placer dessous')
+  const label = location.x === 0 ? t('drop.deck.bottom', 'Placer dessous') : t('drop.deck.top', 'Placer dessus')
   return <span css={textStyle}>{label}</span>
 }
 
