@@ -880,12 +880,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gamepark/api-types@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@gamepark/api-types@npm:1.0.0"
+"@gamepark/api-types@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@gamepark/api-types@npm:1.0.1"
   peerDependencies:
     "@trpc/server": ^11.8.0
-  checksum: 10c0/8d89e4007599d348657df72e2b3caafddb99dd4abbdb3e4c6b2dce07dc65aa98a4adad167877de1db8b454722e8e477bf8dfc3b7e17780ad3fd93a11d3e47135
+  checksum: 10c0/f42f814e48be0ce0f93b1cca0ec6421b972d962af4a9831f2cf80d13ed827d11dedfd35574864ca6d473d40a2555a30eb00e623a707602165f3835692047f006
   languageName: node
   linkType: hard
 
@@ -909,8 +909,8 @@ __metadata:
     "@fortawesome/free-regular-svg-icons": "npm:^7.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@fortawesome/react-fontawesome": "npm:^3.2.0"
-    "@gamepark/react-game": "npm:~7.5.2"
-    "@gamepark/rules-api": "npm:~7.5.0"
+    "@gamepark/react-game": "npm:~7.6.4"
+    "@gamepark/rules-api": "npm:~7.6.0"
     "@types/node": "npm:^25.3.5"
     "@types/react": "npm:^19.2.14"
     "@types/react-dom": "npm:^19.2.3"
@@ -937,7 +937,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@gamepark/bloody-grove@workspace:rules"
   dependencies:
-    "@gamepark/rules-api": "npm:~7.5.0"
+    "@gamepark/rules-api": "npm:~7.6.0"
     es-toolkit: "npm:^1.45.1"
     vitest: "npm:^4.0.18"
   peerDependencies:
@@ -946,9 +946,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@gamepark/react-client@npm:^7.5.0":
-  version: 7.5.0
-  resolution: "@gamepark/react-client@npm:7.5.0"
+"@gamepark/react-client@npm:^7.6.2":
+  version: 7.6.3
+  resolution: "@gamepark/react-client@npm:7.6.3"
   dependencies:
     "@reduxjs/toolkit": "npm:^2.11.2"
     "@tanstack/react-query": "npm:^5.90.21"
@@ -962,26 +962,26 @@ __metadata:
     superjson: "npm:^2.2.6"
   peerDependencies:
     "@gamepark/api-types": ^1.0.0
-    "@gamepark/rules-api": ^7.4.1
+    "@gamepark/rules-api": ^7.6.0
     dayjs: ^1.11.19
     es-toolkit: ^1.44.0
     react: ^19.2.4
     react-dom: ^19.2.4
     react-redux: ^9.2.0
     rxjs: ^7.8.2
-  checksum: 10c0/dc48e9284da8d33b30f840c77a536f9a82798991f9c03dfd174fef3a133d93a23a512eb5e682fc41cba3f57b9e2b25443ffde953b2682b3ea8b2ea2d9d42c13b
+  checksum: 10c0/08ea42b9f0a3a9462a9ad2736faa0359bdd8861710309548bfd34e3394793a901cef4b038b66f55ff8ee5fcb084760ce15e9edc6fc8da6743d0ec57e4781efde
   languageName: node
   linkType: hard
 
-"@gamepark/react-game@npm:~7.5.2":
-  version: 7.5.2
-  resolution: "@gamepark/react-game@npm:7.5.2"
+"@gamepark/react-game@npm:~7.6.4":
+  version: 7.6.4
+  resolution: "@gamepark/react-game@npm:7.6.4"
   dependencies:
     "@datadog/browser-logs": "npm:^6.28.1"
     "@dnd-kit/modifiers": "npm:^9.0.0"
-    "@gamepark/api-types": "npm:^1.0.0"
+    "@gamepark/api-types": "npm:^1.0.1"
     "@gamepark/avataaars": "npm:^3.0.0"
-    "@gamepark/react-client": "npm:^7.5.0"
+    "@gamepark/react-client": "npm:^7.6.2"
     dayjs: "npm:^1.11.19"
     fscreen: "npm:^1.2.0"
     i18next-http-backend: "npm:^3.0.2"
@@ -1009,16 +1009,16 @@ __metadata:
     react-dom: 19.x
     react-i18next: 16.x
     react-redux: 9.x
-  checksum: 10c0/abf6c6384a0bc349ee0de8038f5ce73eb709d0b960dfa42b5f2b80ec3e80cbc9ed26c3d9253399d4e9abf0a838ad0f92f3d5cc0b40eba67d63401602fb0ff424
+  checksum: 10c0/f498e7a1fb3889c56cd3afd9f3caecaeb9c6533aae95fffa6f16c9ae1b72b1d1b994b621cd022bbb0268a3938d222c7f62dbf5a20f31b5665bbdfeab222fb18e
   languageName: node
   linkType: hard
 
-"@gamepark/rules-api@npm:~7.5.0":
-  version: 7.5.0
-  resolution: "@gamepark/rules-api@npm:7.5.0"
+"@gamepark/rules-api@npm:~7.6.0":
+  version: 7.6.0
+  resolution: "@gamepark/rules-api@npm:7.6.0"
   peerDependencies:
     es-toolkit: ^1.39.10
-  checksum: 10c0/1d47c1bd27a8d6b558b5fd50b3dd452e70ec0e0313d401be025b7cd2353660ade184e19a62a546994eee6371dcbb44121080dc43c708e4748a03924269c44834
+  checksum: 10c0/532d28136933aa1512d34bd92d32ec2bbad1aceb1d54798daac53870c55e7a62ef40b6b384801254f063d90e8d99ec953aee2a8c05c7389e150f221ea4c42a70
   languageName: node
   linkType: hard
 
