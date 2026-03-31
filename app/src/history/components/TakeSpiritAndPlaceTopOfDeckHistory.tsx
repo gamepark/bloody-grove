@@ -14,7 +14,6 @@ export const TakeSpiritAndPlaceTopOfDeckHistory = ({ move, context }: MaterialLo
   return (
     <Trans
       i18nKey="log.spirit.take-spirit-top-deck"
-      defaults="{player} récupère un <card>esprit {cardType, select, bear{ours} fox{renard} other{hibou}}</card> et le met sur le dessus de son deck"
       values={{ player, cardType }}
       components={{
         card: <PlayMoveButton move={displayMaterialHelp(MaterialType.SpiritCard, card)} transient />

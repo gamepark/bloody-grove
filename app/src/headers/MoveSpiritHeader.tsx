@@ -15,7 +15,6 @@ export const MoveSpiritHeader = () => {
   if (itsMe) {
     return <Trans
       i18nKey="header.move-spirit.you"
-      defaults="Déplacez un Esprit ou <pass>Passer</pass>"
       components={{
         pass: <PlayMoveButton move={pass}/>
       }}
@@ -24,7 +23,6 @@ export const MoveSpiritHeader = () => {
 
   return <Trans
     i18nKey="header.move-spirit.player"
-    defaults="Le joueur {player} déplace un Esprit"
     values={{ player: name }}
   />
 }

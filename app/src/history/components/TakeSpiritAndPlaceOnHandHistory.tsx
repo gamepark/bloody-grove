@@ -13,8 +13,7 @@ export const TakeSpiritAndPlaceOnHandHistory = ({ move, context }: MaterialLogPr
 
   return (
     <Trans
-      i18nKey="log.spirit.take-spirit-under-deck"
-      defaults="{player} récupère un <card>esprit {cardType, select, bear{ours} fox{renard} other{hibou}}</card> et le prend dans sa main"
+      i18nKey="log.spirit.take-spirit-on-hand"
       values={{ player, cardType }}
       components={{
         card: <PlayMoveButton move={displayMaterialHelp(MaterialType.SpiritCard, card)} transient />

@@ -14,7 +14,6 @@ export const TakeElderSpiritHistory = ({ move, context }: MaterialLogProps<MoveI
   return (
     <Trans
       i18nKey="log.spirit.take-elder"
-      defaults="{player} invoque un <card>esprit vénérable</card> dans le bosquet {groveId}"
       values={{ player, groveId }}
       components={{
         card: <PlayMoveButton move={displayMaterialHelp(MaterialType.SpiritCard, card)} transient />

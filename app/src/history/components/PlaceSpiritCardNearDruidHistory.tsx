@@ -18,7 +18,6 @@ export const PlaceSpiritCardNearDruidHistory = ({ move, context }: MaterialLogPr
   return (
     <Trans
       i18nKey="log.spirit.place-near-druid"
-      defaults="{player} utilise un <card>esprit {cardType, select, bear{ours} fox{renard} other{hibou}}</card> pour transformer son druide"
       values={{ player, cardType }}
       components={{
         card: <PlayMoveButton move={displayMaterialHelp(MaterialType.SpiritCard, card)} transient />

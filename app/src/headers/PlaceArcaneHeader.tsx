@@ -15,7 +15,6 @@ export const PlaceArcaneHeader = () => {
   if (itsMe) {
     return <Trans
       i18nKey="header.place-arcane.you"
-      defaults="Placez un jeton arcane ou <pass>Passer</pass>"
       components={{
         pass: <PlayMoveButton move={pass}/>
       }}
@@ -24,7 +23,6 @@ export const PlaceArcaneHeader = () => {
 
   return <Trans
     i18nKey="header.place-arcane.player"
-    defaults="Le joueur {player} place un jeton arcane"
     values={{ player: name }}
   />
 }

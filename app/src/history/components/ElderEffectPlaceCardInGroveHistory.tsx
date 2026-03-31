@@ -19,7 +19,6 @@ export const ElderEffectPlaceCardInGroveHistory = ({ move, context }: MaterialLo
   return (
     <Trans
       i18nKey="log.elder-effect.place-card-in-grove"
-      defaults="{player} place la carte du dessous de son deck (<card>esprit {cardType, select, bear{ours} fox{renard} elder{vénérable} other{hibou}}</card>) dans le bosquet {groveId}"
       values={{ player, cardType, groveId }}
       components={{
         card: <PlayMoveButton move={displayMaterialHelp(MaterialType.SpiritCard, card)} transient />

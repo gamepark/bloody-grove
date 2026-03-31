@@ -8,7 +8,6 @@ export const PlaceArcaneHistory = ({ context }: MaterialLogProps<MoveItem>) => {
   return (
     <Trans
       i18nKey="log.arcane.place"
-      defaults="{player} place secrètement un jeton Arcane sur une carte Esprit"
       values={{ player }}
     />
   )

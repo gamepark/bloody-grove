@@ -19,7 +19,6 @@ export const PlaceSpiritCardUnderGroveHistory = ({ move, context }: MaterialLogP
   return (
     <Trans
       i18nKey="log.spirit.place-under-grove"
-      defaults="{player} invoque un <card>esprit {cardType, select, bear{ours} fox{renard} other{hibou}}</card> dans le bosquet {groveId}"
       values={{ player, cardType, groveId }}
       components={{
         card: <PlayMoveButton move={displayMaterialHelp(MaterialType.SpiritCard, card)} transient />

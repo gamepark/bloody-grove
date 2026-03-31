@@ -12,22 +12,22 @@ export const GameOverHeader = () => {
   const winWithAllGroves = new EndOfGameHelper(rules.game).onePlayerHaveAllGroves()
 
   if (winWithAllGroves) {
-    return <Trans i18nKey="header.end.grove.player" defaults="{player} gagner en ayant la majorité dans les 3 bosquets" values={{ player: winnerName }} />
+    return <Trans i18nKey="header.end.grove.player" values={{ player: winnerName }} />
   }
 
   const winnerScore = new EndOfGameHelper(rules.game).getScore(firstPlayer.id as number)
   const loserScore = new EndOfGameHelper(rules.game).getScore(rankedPlayers[1].id as number)
 
   if (winnerScore > loserScore) {
-    return <Trans i18nKey="header.end.score.player" defaults="{player} remporte la partie avec {winnerScore} points contre {loserScore} points" values={{ player: winnerName, winnerScore, loserScore }} />
+    return <Trans i18nKey="header.end.score.player" values={{ player: winnerName, winnerScore, loserScore }} />
   }
 
   const winnerTransformations = new EndOfGameHelper(rules.game).getPlayerTransformations(firstPlayer.id as number)
   const loserTransformations = new EndOfGameHelper(rules.game).getPlayerTransformations(rankedPlayers[1].id as number)
 
   if (winnerTransformations > loserTransformations) {
-    return <Trans i18nKey="header.end.transformations.player" defaults="{player} remporte la partie avec {winnerCharacters} transformations contre {loserCharacters} transformations" values={{ player: winnerName, winnerTransformations, loserTransformations }} />
+    return <Trans i18nKey="header.end.transformations.player" values={{ player: winnerName, winnerTransformations, loserTransformations }} />
   }
 
-  return <Trans i18nKey="result.comp.tie.all" defaults="Match null"/>
+  return <Trans i18nKey="result.comp.tie.all" />
 }

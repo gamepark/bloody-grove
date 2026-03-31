@@ -14,7 +14,6 @@ export const MoveSpiritHistory = ({ move, context }: MaterialLogProps<MoveItem>)
   return (
     <Trans
       i18nKey="log.spirit.move-spirit"
-      defaults="{player} déplace un <card>esprit {cardType, select, bear{ours} fox{renard} other{hibou}}</card> vers un autre Bosquet (ruse)"
       values={{ player, cardType }}
       components={{
         card: <PlayMoveButton move={displayMaterialHelp(MaterialType.SpiritCard, card)} transient />
