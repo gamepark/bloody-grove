@@ -8,7 +8,7 @@ class ArcaneShowLayoutLocator extends Locator {
     return {
       x: -22,
       y: index === 0 ? 8 : -8,
-      z: 0,
+      z: 0
     }
   }
 

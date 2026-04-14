@@ -23,9 +23,7 @@ export class ChooseActionRule extends PlayerTurnRule {
 
   getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = []
-    moves.push(
-      ...this.playerHand.moveItems(() => this.groveHelper.getPossiblePlace())
-    )
+    moves.push(...this.playerHand.moveItems(() => this.groveHelper.getPossiblePlace()))
     this.druidTransformationHelper.getPossiblePlaces().forEach((place) => {
       moves.push(...this.playerHand.moveItems(place))
     })
@@ -48,5 +46,4 @@ export class ChooseActionRule extends PlayerTurnRule {
   get playerHand() {
     return this.material(MaterialType.SpiritCard).location(LocationType.PlayerHand).player(this.player)
   }
-
 }

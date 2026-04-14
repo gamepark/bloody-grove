@@ -21,5 +21,5 @@ export const components = {
   recrutement: <Picture src={RecrutementIcone} css={mini} />,
   ruse: <Picture src={RuseIcone} css={mini} />,
   elderPlaceCard: <Picture src={ElderPlaceCardIcone} css={mini} />,
-  elderShowArcane: <Picture src={ElderShowArcaneIcone} css={mini} />,
+  elderShowArcane: <Picture src={ElderShowArcaneIcone} css={mini} />
 }

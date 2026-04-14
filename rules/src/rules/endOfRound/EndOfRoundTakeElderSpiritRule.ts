@@ -14,15 +14,15 @@ export class EndOfRoundTakeElderSpiritRule extends PlayerTurnRule {
     return this.elderSpiritCards.moveItems({
       type: LocationType.PlayerSpiritUnderGroveLayout,
       player: this.player,
-      id: this.groveToPlaceSpirit,
+      id: this.groveToPlaceSpirit
     })
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
-    if(isMoveItem(move) && move.location.type === LocationType.PlayerSpiritUnderGroveLayout) {
+    if (isMoveItem(move) && move.location.type === LocationType.PlayerSpiritUnderGroveLayout) {
       const card = this.material(MaterialType.SpiritCard).getItem(move.itemIndex)
       const effects = spiritCardData[card.id.front as SpiritCard].effects
-      if(effects) {
+      if (effects) {
         this.memorize(Memory.GroveToPlaceSpirit, this.groveToPlaceSpirit)
         this.memorize(Memory.NextRules, [this.nextRule!, ...effects])
         return new NextRuleHelper(this.game).nextRule()
@@ -35,5 +35,4 @@ export class EndOfRoundTakeElderSpiritRule extends PlayerTurnRule {
   get elderSpiritCards() {
     return this.material(MaterialType.SpiritCard).location(LocationType.ElderSpiritCardsRiver)
   }
-
 }

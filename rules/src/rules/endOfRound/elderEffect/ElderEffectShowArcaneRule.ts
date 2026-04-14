@@ -30,5 +30,4 @@ export class ElderEffectShowArcaneRule extends PlayerTurnRule {
     }
     return []
   }
-
 }

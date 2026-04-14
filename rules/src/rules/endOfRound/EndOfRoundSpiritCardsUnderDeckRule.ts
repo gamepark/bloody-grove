@@ -5,13 +5,15 @@ import { PlayerColor } from '../../PlayerColor'
 import { RuleId } from '../RuleId'
 
 export class EndOfRoundSpiritCardsUnderDeckRule extends SimultaneousRule {
-
   getActivePlayerLegalMoves(player: PlayerColor): MaterialMove[] {
-    return this.material(MaterialType.SpiritCard).location(LocationType.PlayerHand).player(player).moveItems(({ location }) => ({
-      type: LocationType.PlayerDeck,
-      player: location.player,
-      x: 0
-    }))
+    return this.material(MaterialType.SpiritCard)
+      .location(LocationType.PlayerHand)
+      .player(player)
+      .moveItems(({ location }) => ({
+        type: LocationType.PlayerDeck,
+        player: location.player,
+        x: 0
+      }))
   }
   afterItemMove(move: ItemMove) {
     if (isMoveItemType(MaterialType.SpiritCard)(move) && move.location.type === LocationType.PlayerDeck) {
@@ -26,5 +28,4 @@ export class EndOfRoundSpiritCardsUnderDeckRule extends SimultaneousRule {
   getMovesAfterPlayersDone(): MaterialMove[] {
     return [this.startSimultaneousRule(RuleId.EndOfRoundRotateArcaneInCards0)]
   }
-
 }

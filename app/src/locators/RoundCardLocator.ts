@@ -3,7 +3,7 @@ import { Location } from '@gamepark/rules-api'
 import { getContextPlayer, isPlayerBlack } from './utils.ts'
 
 export class RoundCardLocator extends Locator {
-  coordinates = {x: -17, y: 0}
+  coordinates = { x: -17, y: 0 }
 
   getRotateZ(_location: Location, context: MaterialContext): number {
     return isPlayerBlack(getContextPlayer(context)) ? -90 : 90

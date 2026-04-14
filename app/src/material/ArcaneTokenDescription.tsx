@@ -27,21 +27,24 @@ export class ArcaneTokenDescription extends TokenDescription {
   menuAlwaysVisible = true
 
   canShortClick(move: MaterialMove, context: ItemContext): boolean {
-    return isMoveItemType(MaterialType.ArcaneToken)(move) && move.itemIndex === context.index && move.location.player === context.player && move.location.type === LocationType.ArcaneShowLayout
-      || isMoveItemType(MaterialType.ArcaneToken)(move) && move.itemIndex === context.index && move.location.type === LocationType.ArcaneReserve
+    return (
+      (isMoveItemType(MaterialType.ArcaneToken)(move) &&
+        move.itemIndex === context.index &&
+        move.location.player === context.player &&
+        move.location.type === LocationType.ArcaneShowLayout) ||
+      (isMoveItemType(MaterialType.ArcaneToken)(move) && move.itemIndex === context.index && move.location.type === LocationType.ArcaneReserve)
+    )
   }
 
   getItemMenu(_item: MaterialItem, context: ItemContext, legalMoves: MaterialMove[]) {
     const replace = legalMoves.find(
-      (move) => isMoveItemType(MaterialType.ArcaneToken)(move)
-        && move.location.type === LocationType.ArcaneReserve
-        && move.itemIndex === context.index
+      (move) => isMoveItemType(MaterialType.ArcaneToken)(move) && move.location.type === LocationType.ArcaneReserve && move.itemIndex === context.index
     )
 
     if (replace) {
       return (
         <ItemMenuButton angle={20} radius={4} x={1.5} y={-1.5} move={replace} label={'Replacer'} labelPosition="right">
-          <FontAwesomeIcon icon={faArrowRight} css={pointerCursorCss}/>
+          <FontAwesomeIcon icon={faArrowRight} css={pointerCursorCss} />
         </ItemMenuButton>
       )
     }

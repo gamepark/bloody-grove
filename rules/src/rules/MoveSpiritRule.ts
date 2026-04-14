@@ -13,8 +13,7 @@ export class MoveSpiritRule extends PlayerTurnRule {
       const spiritCardGroveIndex = this.material(MaterialType.SpiritCard).getItem(index).location.id
       this.groveHelper.getPossiblePlacesForMove(spiritCardGroveIndex).forEach((place) => {
         moves.push(...this.material(MaterialType.SpiritCard).index(index).moveItems(place))
-      }
-      )
+      })
     })
     moves.push(this.customMove(CustomMoveType.Pass))
     return moves
@@ -22,7 +21,7 @@ export class MoveSpiritRule extends PlayerTurnRule {
 
   afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
-    if(isMoveItem(move) && move.location.type === LocationType.PlayerSpiritUnderGroveLayout) {
+    if (isMoveItem(move) && move.location.type === LocationType.PlayerSpiritUnderGroveLayout) {
       moves.push(...new NextRuleHelper(this.game).nextRule())
     }
     return moves
@@ -38,5 +37,4 @@ export class MoveSpiritRule extends PlayerTurnRule {
   get playerSpiritUnderGroves() {
     return this.material(MaterialType.SpiritCard).location(LocationType.PlayerSpiritUnderGroveLayout).player(this.player).getIndexes()
   }
-
 }

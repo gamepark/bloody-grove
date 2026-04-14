@@ -21,15 +21,16 @@ export class EndOfRoundReplaceSpiritRule extends PlayerTurnRule {
 
   onCustomMove(move: CustomMove): MaterialMove[] {
     const moves: MaterialMove[] = []
-    if(isCustomMoveType(CustomMoveType.ReplaceSpirit)(move)) {
-      const arcaneTokensOnCard = this.material(MaterialType.ArcaneToken)
-        .location(loc => loc.type === LocationType.ArcaneOnSpiritCardLayout && loc.parent === move.data.index)
+    if (isCustomMoveType(CustomMoveType.ReplaceSpirit)(move)) {
+      const arcaneTokensOnCard = this.material(MaterialType.ArcaneToken).location(
+        (loc) => loc.type === LocationType.ArcaneOnSpiritCardLayout && loc.parent === move.data.index
+      )
       if (arcaneTokensOnCard.length > 0) {
         moves.push(arcaneTokensOnCard.moveItemsAtOnce({ type: LocationType.ArcaneDiscard }))
       }
       moves.push(this.material(MaterialType.SpiritCard).index(move.data.index).deleteItem(1))
       const nextRules = this.remind<RuleId[]>(Memory.NextRules) ?? []
-      if(nextRules.length > 0) {
+      if (nextRules.length > 0) {
         this.memorize(Memory.NextRules, [...nextRules, this.nextRule!])
         moves.push(...new NextRuleHelper(this.game).nextRule())
       } else {
@@ -41,15 +42,17 @@ export class EndOfRoundReplaceSpiritRule extends PlayerTurnRule {
 
   possibleIndexes(): number[] {
     const indexes: number[] = []
-    const spiritCardsUnderGroveIndexes = this.material(MaterialType.SpiritCard).location(loc => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === this.groveToPlaceSpirit).player(this.player).getIndexes()
+    const spiritCardsUnderGroveIndexes = this.material(MaterialType.SpiritCard)
+      .location((loc) => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === this.groveToPlaceSpirit)
+      .player(this.player)
+      .getIndexes()
     spiritCardsUnderGroveIndexes.forEach((index) => {
       const card = this.material(MaterialType.SpiritCard).getItem(index)
       const type = spiritCardData[card.id.front as SpiritCard].type
-      if(type !== 'elder') {
+      if (type !== 'elder') {
         indexes.push(index)
       }
     })
     return indexes
   }
-
 }

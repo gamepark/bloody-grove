@@ -8,12 +8,12 @@ export class ElderEffectTakeSpiritRule extends PlayerTurnRule {
 
   getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = []
-    moves.push(this.spiritCardHelper.bearSpiritCard.moveItem({type: LocationType.PlayerDeck, player: this.player}))
-    moves.push(this.spiritCardHelper.bearSpiritCard.moveItem({type: LocationType.PlayerDeck, x: 0, player: this.player}))
-    moves.push(this.spiritCardHelper.foxSpiritCard.moveItem({type: LocationType.PlayerDeck, player: this.player}))
-    moves.push(this.spiritCardHelper.foxSpiritCard.moveItem({type: LocationType.PlayerDeck, x: 0, player: this.player}))
-    moves.push(this.spiritCardHelper.owlSpiritCard.moveItem({type: LocationType.PlayerDeck, player: this.player}))
-    moves.push(this.spiritCardHelper.owlSpiritCard.moveItem({type: LocationType.PlayerDeck, x: 0, player: this.player}))
+    moves.push(this.spiritCardHelper.bearSpiritCard.moveItem({ type: LocationType.PlayerDeck, player: this.player }))
+    moves.push(this.spiritCardHelper.bearSpiritCard.moveItem({ type: LocationType.PlayerDeck, x: 0, player: this.player }))
+    moves.push(this.spiritCardHelper.foxSpiritCard.moveItem({ type: LocationType.PlayerDeck, player: this.player }))
+    moves.push(this.spiritCardHelper.foxSpiritCard.moveItem({ type: LocationType.PlayerDeck, x: 0, player: this.player }))
+    moves.push(this.spiritCardHelper.owlSpiritCard.moveItem({ type: LocationType.PlayerDeck, player: this.player }))
+    moves.push(this.spiritCardHelper.owlSpiritCard.moveItem({ type: LocationType.PlayerDeck, x: 0, player: this.player }))
     return moves
   }
 
@@ -22,10 +22,9 @@ export class ElderEffectTakeSpiritRule extends PlayerTurnRule {
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
-    if(isMoveItem(move) && move.location.type === LocationType.PlayerDeck) {
+    if (isMoveItem(move) && move.location.type === LocationType.PlayerDeck) {
       return new NextRuleHelper(this.game).nextRule()
     }
     return []
   }
-
 }

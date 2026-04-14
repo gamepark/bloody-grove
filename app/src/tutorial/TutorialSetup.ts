@@ -1,4 +1,3 @@
-import { BloodyGroveOptions } from '@gamepark/bloody-grove/BloodyGroveOptions'
 import { BloodyGroveSetup } from '@gamepark/bloody-grove/BloodyGroveSetup'
 import { ArcaneToken } from '@gamepark/bloody-grove/material/ArcaneToken'
 import { GroveCard } from '@gamepark/bloody-grove/material/GroveCard'
@@ -16,7 +15,7 @@ import {
 import { PlayerColor } from '@gamepark/bloody-grove/PlayerColor'
 
 export class TutorialSetup extends BloodyGroveSetup {
-  setupMaterial(_options: BloodyGroveOptions) {
+  setupMaterial() {
     this.setupTutorialPlayers()
     this.setupTutorialGroves()
     this.setupSpiritCards(foxEliteCards, SpiritType.Fox, LocationType.FoxEliteCardsDeck, LocationType.FoxEliteCard)
@@ -34,7 +33,7 @@ export class TutorialSetup extends BloodyGroveSetup {
       location: { type: LocationType.PlayerDruid, player: PlayerColor.Black }
     })
     // Hand: BearBase1 (force 3, type ours), OwlBase1 (arcane slot), FoxBase3 (ruse), BearBase2
-    ;[SpiritCard.BearBase1, SpiritCard.OwlBase1, SpiritCard.FoxBase3, SpiritCard.BearBase2].forEach(front => {
+    ;[SpiritCard.BearBase1, SpiritCard.OwlBase1, SpiritCard.FoxBase3, SpiritCard.BearBase2].forEach((front) => {
       this.material(MaterialType.SpiritCard).createItem({
         id: { front, back: PlayerColor.Black * 100 + SpiritType.Base },
         location: { type: LocationType.PlayerHand, player: PlayerColor.Black }
@@ -53,7 +52,7 @@ export class TutorialSetup extends BloodyGroveSetup {
       id: { front: SpiritCard.DruidGreen },
       location: { type: LocationType.PlayerDruid, player: PlayerColor.Green }
     })
-    ;[SpiritCard.FoxBase1, SpiritCard.OwlBase2, SpiritCard.BearBase3, SpiritCard.FoxBase3].forEach(front => {
+    ;[SpiritCard.FoxBase1, SpiritCard.OwlBase2, SpiritCard.BearBase3, SpiritCard.FoxBase3].forEach((front) => {
       this.material(MaterialType.SpiritCard).createItem({
         id: { front, back: PlayerColor.Green * 100 + SpiritType.Base },
         location: { type: LocationType.PlayerHand, player: PlayerColor.Green }
@@ -84,14 +83,20 @@ export class TutorialSetup extends BloodyGroveSetup {
     // ArcaneToken4 first (index 0) — player will reveal this one
     // ArcaneToken2 second (index 1) — AI will reveal this
     const ordered: ArcaneToken[] = [
-      ArcaneToken.ArcaneToken4, ArcaneToken.ArcaneToken2,
-      ArcaneToken.ArcaneToken3, ArcaneToken.ArcaneTokenDiscard,
-      ArcaneToken.ArcaneToken4, ArcaneToken.ArcaneToken2,
-      ArcaneToken.ArcaneToken3, ArcaneToken.ArcaneTokenDiscard,
-      ArcaneToken.ArcaneToken4, ArcaneToken.ArcaneToken2,
-      ArcaneToken.ArcaneToken3, ArcaneToken.ArcaneTokenDiscard,
+      ArcaneToken.ArcaneToken4,
+      ArcaneToken.ArcaneToken2,
+      ArcaneToken.ArcaneToken3,
+      ArcaneToken.ArcaneTokenDiscard,
+      ArcaneToken.ArcaneToken4,
+      ArcaneToken.ArcaneToken2,
+      ArcaneToken.ArcaneToken3,
+      ArcaneToken.ArcaneTokenDiscard,
+      ArcaneToken.ArcaneToken4,
+      ArcaneToken.ArcaneToken2,
+      ArcaneToken.ArcaneToken3,
+      ArcaneToken.ArcaneTokenDiscard
     ]
-    ordered.forEach(id => {
+    ordered.forEach((id) => {
       this.material(MaterialType.ArcaneToken).createItem({
         id,
         location: { type: LocationType.ArcaneReserve }
@@ -105,7 +110,7 @@ export class TutorialSetup extends BloodyGroveSetup {
     // ElderSpirit3: force = nb elders in same grove, domination 1, no effects — grove 1 (Green)
     // ElderSpiritRed1: domination = nb unique card types in grove, no effects — grove 2 (Black)
     const riverElderCards = [SpiritCard.ElderSpirit9, SpiritCard.ElderSpirit3]
-    riverElderCards.forEach(id => {
+    riverElderCards.forEach((id) => {
       this.material(MaterialType.SpiritCard).createItem({
         id: { front: id, back: SpiritType.Elder },
         location: { type: LocationType.ElderSpiritCardsRiver }
@@ -117,14 +122,14 @@ export class TutorialSetup extends BloodyGroveSetup {
     })
     // Deck: remaining elders
     const riverSet = new Set([...riverElderCards, SpiritCard.ElderSpiritRed1 as SpiritCard])
-    const deckElders = elderSpiritCards.filter(id => !riverSet.has(id))
+    const deckElders = elderSpiritCards.filter((id) => !riverSet.has(id))
     deckElders.forEach((id, x) => {
       this.material(MaterialType.SpiritCard).createItem({
         id: { front: id, back: SpiritType.Elder },
         location: { type: LocationType.ElderSpiritCardsDeck, x }
       })
     })
-    const deckRedElders = elderSpiritRedCards.filter(id => !riverSet.has(id))
+    const deckRedElders = elderSpiritRedCards.filter((id) => !riverSet.has(id))
     deckRedElders.forEach((id, x) => {
       this.material(MaterialType.SpiritCard).createItem({
         id: { front: id, back: SpiritType.ElderRed },

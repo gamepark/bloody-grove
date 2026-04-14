@@ -5,35 +5,34 @@ import { PlayerColor } from '../PlayerColor'
 import { RuleId } from './RuleId'
 
 export class ShowArcaneSimultaneousRule extends SimultaneousRule {
-    getActivePlayerLegalMoves(player: PlayerColor): MaterialMove[] {
-      const arcaneInPlayerShowLayout = this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneShowLayout).player(player)
-      if(arcaneInPlayerShowLayout.length > 0) {
-        return arcaneInPlayerShowLayout.moveItems(({ location }) => ({
-          ...location,
-          type: LocationType.ArcaneReserve,
-          player
-        }))
-      }
-      return this.arcaneTokens.moveItems(({ location }) => ({
+  getActivePlayerLegalMoves(player: PlayerColor): MaterialMove[] {
+    const arcaneInPlayerShowLayout = this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneShowLayout).player(player)
+    if (arcaneInPlayerShowLayout.length > 0) {
+      return arcaneInPlayerShowLayout.moveItems(({ location }) => ({
         ...location,
-          type: LocationType.ArcaneShowLayout,
-          player
-        }))
+        type: LocationType.ArcaneReserve,
+        player
+      }))
     }
-    afterItemMove(move: ItemMove) {
-      if (isMoveItemType(MaterialType.ArcaneToken)(move) && move.location.type === LocationType.ArcaneReserve) {
-        return [this.endPlayerTurn(move.location.player!)]
-      }
-      return []
+    return this.arcaneTokens.moveItems(({ location }) => ({
+      ...location,
+      type: LocationType.ArcaneShowLayout,
+      player
+    }))
+  }
+  afterItemMove(move: ItemMove) {
+    if (isMoveItemType(MaterialType.ArcaneToken)(move) && move.location.type === LocationType.ArcaneReserve) {
+      return [this.endPlayerTurn(move.location.player!)]
     }
-    getMovesAfterPlayersDone(): MaterialMove[] {
-      const moves: MaterialMove[] = []
-      moves.push(this.startPlayerTurn(RuleId.ChooseAction, this.game.players[0]))
-      return moves
-    }
+    return []
+  }
+  getMovesAfterPlayersDone(): MaterialMove[] {
+    const moves: MaterialMove[] = []
+    moves.push(this.startPlayerTurn(RuleId.ChooseAction, this.game.players[0]))
+    return moves
+  }
 
-    get arcaneTokens()  {
-      return this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneReserve)
-    }
-
+  get arcaneTokens() {
+    return this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneReserve)
+  }
 }

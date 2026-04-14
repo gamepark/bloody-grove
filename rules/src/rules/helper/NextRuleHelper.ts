@@ -3,7 +3,6 @@ import { PlayerColor } from '../../PlayerColor'
 import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'
 
-
 export class NextRuleHelper extends MaterialRulesPart {
   player?: number
 

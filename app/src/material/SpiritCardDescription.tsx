@@ -131,7 +131,7 @@ export class SpiritCardDescription extends CardDescription {
     [SpiritCard.ElderSpirit9]: elderSpirit9,
     [SpiritCard.ElderSpiritRed1]: elderSpiritRed1,
     [SpiritCard.ElderSpiritRed2]: elderSpiritRed2,
-    [SpiritCard.ElderSpiritRed3]: elderSpiritRed3,
+    [SpiritCard.ElderSpiritRed3]: elderSpiritRed3
   }
 
   backImages = {
@@ -141,18 +141,19 @@ export class SpiritCardDescription extends CardDescription {
     [SpiritType.Fox]: foxEliteBack,
     [SpiritType.Owl]: owlEliteBack,
     [SpiritType.Elder]: elderSpiritBack,
-    [SpiritType.ElderRed]: elderSpiritBackRed,
+    [SpiritType.ElderRed]: elderSpiritBackRed
   }
 
   takeElderMove(context: ItemContext, legalMoves: MaterialMove[]): MaterialMove | undefined {
     const id = context.rules.material(MaterialType.SpiritCard).getItem(context.index)?.id.front as SpiritCard
     const isElder = id !== undefined && spiritCardData[id].type === 'elder'
-    if(isElder) {
+    if (isElder) {
       return legalMoves.find(
-        (move) => isMoveItemType(MaterialType.SpiritCard)(move)
-          && move.location.type === LocationType.PlayerSpiritUnderGroveLayout
-          && move.location.player === context.player
-          && move.itemIndex === context.index
+        (move) =>
+          isMoveItemType(MaterialType.SpiritCard)(move) &&
+          move.location.type === LocationType.PlayerSpiritUnderGroveLayout &&
+          move.location.player === context.player &&
+          move.itemIndex === context.index
       )
     }
     return undefined
@@ -160,44 +161,47 @@ export class SpiritCardDescription extends CardDescription {
 
   getItemMenu(item: MaterialItem, context: ItemContext, legalMoves: MaterialMove[]) {
     const takeOnTopDeck = legalMoves.find(
-      (move) => isMoveItemType(MaterialType.SpiritCard)(move)
-        && move.location.type === LocationType.PlayerDeck
-        && move.location.player === context.player
-        && move.location.x === undefined
-        && move.itemIndex === context.index
+      (move) =>
+        isMoveItemType(MaterialType.SpiritCard)(move) &&
+        move.location.type === LocationType.PlayerDeck &&
+        move.location.player === context.player &&
+        move.location.x === undefined &&
+        move.itemIndex === context.index
     )
     const takeOnBottomDeck = legalMoves.find(
-      (move) => isMoveItemType(MaterialType.SpiritCard)(move)
-        && move.location.type === LocationType.PlayerDeck
-        && move.location.player === context.player
-        && move.location.x === 0
-        && move.itemIndex === context.index
+      (move) =>
+        isMoveItemType(MaterialType.SpiritCard)(move) &&
+        move.location.type === LocationType.PlayerDeck &&
+        move.location.player === context.player &&
+        move.location.x === 0 &&
+        move.itemIndex === context.index
     )
     const takeOnHand = legalMoves.find(
-      (move) => isMoveItemType(MaterialType.SpiritCard)(move)
-        && move.location.type === LocationType.PlayerHand
-        && move.location.player === context.player
-        && move.itemIndex === context.index
+      (move) =>
+        isMoveItemType(MaterialType.SpiritCard)(move) &&
+        move.location.type === LocationType.PlayerHand &&
+        move.location.player === context.player &&
+        move.itemIndex === context.index
     )
-    const replace = legalMoves.find(
-      (move) => isCustomMoveType(CustomMoveType.ReplaceSpirit)(move)
-        && move.data.index === context.index
-    )
+    const replace = legalMoves.find((move) => isCustomMoveType(CustomMoveType.ReplaceSpirit)(move) && move.data.index === context.index)
 
     const takeElder = this.takeElderMove(context, legalMoves)
 
     if (takeOnTopDeck || takeOnBottomDeck || takeOnHand) {
       const locationType = item.location?.type
       const hasMovesOnOtherAnimal = (types: LocationType[]) =>
-        legalMoves.some((move) => isMoveItemType(MaterialType.SpiritCard)(move)
-          && move.itemIndex !== context.index
-          && context.rules.material(MaterialType.SpiritCard).getItem(move.itemIndex)?.location?.type !== undefined
-          && types.includes(context.rules.material(MaterialType.SpiritCard).getItem(move.itemIndex)!.location!.type)
+        legalMoves.some(
+          (move) =>
+            isMoveItemType(MaterialType.SpiritCard)(move) &&
+            move.itemIndex !== context.index &&
+            context.rules.material(MaterialType.SpiritCard).getItem(move.itemIndex)?.location?.type !== undefined &&
+            types.includes(context.rules.material(MaterialType.SpiritCard).getItem(move.itemIndex)!.location!.type)
         )
 
-      const showLabel = locationType === LocationType.FoxEliteCard
-        || (locationType === LocationType.BearEliteCard && !hasMovesOnOtherAnimal([LocationType.FoxEliteCard]))
-        || (locationType === LocationType.OwlEliteCard && !hasMovesOnOtherAnimal([LocationType.FoxEliteCard, LocationType.BearEliteCard]))
+      const showLabel =
+        locationType === LocationType.FoxEliteCard ||
+        (locationType === LocationType.BearEliteCard && !hasMovesOnOtherAnimal([LocationType.FoxEliteCard])) ||
+        (locationType === LocationType.OwlEliteCard && !hasMovesOnOtherAnimal([LocationType.FoxEliteCard, LocationType.BearEliteCard]))
 
       const isInHand = locationType === LocationType.PlayerHand
 
@@ -209,7 +213,15 @@ export class SpiritCardDescription extends CardDescription {
             </ItemMenuButton>
           )}
           {takeOnBottomDeck && (
-            <ItemMenuButton angle={50} radius={4} x={0} y={0.5} move={takeOnBottomDeck} label={showLabel ? 'Sous votre paquet' : isInHand ? "Mettre sous le paquet" : undefined} labelPosition={isInHand ? 'right' : 'left'}>
+            <ItemMenuButton
+              angle={50}
+              radius={4}
+              x={0}
+              y={0.5}
+              move={takeOnBottomDeck}
+              label={showLabel ? 'Sous votre paquet' : isInHand ? 'Mettre sous le paquet' : undefined}
+              labelPosition={isInHand ? 'right' : 'left'}
+            >
               <FontAwesomeIcon icon={faArrowDown} css={pointerCursorCss} />
             </ItemMenuButton>
           )}
@@ -222,7 +234,7 @@ export class SpiritCardDescription extends CardDescription {
       )
     }
 
-    if(replace) {
+    if (replace) {
       return (
         <ItemMenuButton angle={50} radius={4} x={-2} y={-3.5} move={replace} label={'Remplacer'} labelPosition="left">
           <FontAwesomeIcon icon={faTrash} css={pointerCursorCss} />
@@ -230,7 +242,7 @@ export class SpiritCardDescription extends CardDescription {
       )
     }
 
-    if(takeElder) {
+    if (takeElder) {
       return (
         <ItemMenuButton angle={50} radius={4} x={0} y={0} move={takeElder} label={'Choisir'} labelPosition="left">
           <FontAwesomeIcon icon={faHand} css={pointerCursorCss} />

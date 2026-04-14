@@ -13,16 +13,15 @@ export const PlaceArcaneHeader = () => {
   const name = usePlayerName(activePlayer)
 
   if (itsMe) {
-    return <Trans
-      i18nKey="header.place-arcane.you"
-      components={{
-        pass: <PlayMoveButton move={pass}/>
-      }}
-    />
+    return (
+      <Trans
+        i18nKey="header.place-arcane.you"
+        components={{
+          pass: <PlayMoveButton move={pass} />
+        }}
+      />
+    )
   }
 
-  return <Trans
-    i18nKey="header.place-arcane.player"
-    values={{ player: name }}
-  />
+  return <Trans i18nKey="header.place-arcane.player" values={{ player: name }} />
 }

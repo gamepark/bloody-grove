@@ -9,19 +9,19 @@ class PlayerSpiritUnderGroveLayoutLocator extends ListLocator {
   maxCount = 5
 
   getGap(location: Location<number, number>, context: MaterialContext<number, number, number>): Partial<Coordinates> {
-    return { y: isPlayerBlack(getContextPlayer(context)) ? isPlayerBlack(location.player) ? 2 : -2 : isPlayerBlack(location.player) ? -2 : 2 }
+    return { y: isPlayerBlack(getContextPlayer(context)) ? (isPlayerBlack(location.player) ? 2 : -2) : isPlayerBlack(location.player) ? -2 : 2 }
   }
 
   getCoordinates(location: Location, context: MaterialContext) {
     const xFromGrove = isPlayerBlack(getContextPlayer(context)) ? [-5, 5, 15] : [15, 5, -5]
     return {
       x: xFromGrove[location.id ?? 0],
-      y: isPlayerBlack(getContextPlayer(context)) ? isPlayerBlack(location.player) ? 8 : -8 : isPlayerBlack(location.player) ? -8 : 8,
-      z: 0,
+      y: isPlayerBlack(getContextPlayer(context)) ? (isPlayerBlack(location.player) ? 8 : -8) : isPlayerBlack(location.player) ? -8 : 8,
+      z: 0
     }
   }
   getRotateZ(location: Location<number, number>, context: MaterialContext<number, number, number>): number {
-    return isPlayerBlack(getContextPlayer(context)) ? isPlayerBlack(location.player) ? 0 : 180 : isPlayerBlack(location.player) ? 180 : 0
+    return isPlayerBlack(getContextPlayer(context)) ? (isPlayerBlack(location.player) ? 0 : 180) : isPlayerBlack(location.player) ? 180 : 0
   }
 
   getLocations(context: MaterialContext): Partial<Location>[] {

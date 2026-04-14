@@ -10,10 +10,10 @@ export class PlayerHandLocator extends HandLocator {
     return {
       x: -20,
       y: index === 0 ? 15 : -15,
-      z: 0,
+      z: 0
     }
   }
-  getHoverTransform(item: MaterialItem<number, number>, context: ItemContext<number, number, number>,): string[] {
+  getHoverTransform(item: MaterialItem<number, number>, context: ItemContext<number, number, number>): string[] {
     return [...super.getHoverTransform(item, context), 'translateY(-2.5em)']
   }
 

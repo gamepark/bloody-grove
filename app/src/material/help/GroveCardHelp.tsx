@@ -14,47 +14,41 @@ export const GroveCardHelp = ({ item }: MaterialHelpProps) => {
       </h2>
 
       <p>
-        <Trans
-          i18nKey="grove.role"
-        />
+        <Trans i18nKey="grove.role" />
       </p>
 
       {groveType && (
         <p>
-          <strong><Trans i18nKey="grove.type" values={{groveType}} /></strong>
+          <strong>
+            <Trans i18nKey="grove.type" values={{ groveType }} />
+          </strong>
           {' — '}
-          <Trans
-            i18nKey="grove.type.bonus"
-            values={{groveType}}
-            components={components}
-          />
+          <Trans i18nKey="grove.type.bonus" values={{ groveType }} components={components} />
         </p>
       )}
 
       <p>
-        <strong><Trans i18nKey="grove.force-calc" /></strong>
+        <strong>
+          <Trans i18nKey="grove.force-calc" />
+        </strong>
         {' : '}
-        <Trans
-          i18nKey="grove.force-calc.desc"
-          components={components}
-        />
+        <Trans i18nKey="grove.force-calc.desc" components={components} />
       </p>
 
       <p>
-        <strong><Trans i18nKey="grove.tie" /></strong>
+        <strong>
+          <Trans i18nKey="grove.tie" />
+        </strong>
         {' : '}
-        <Trans
-          i18nKey="grove.tie.desc"
-        />
+        <Trans i18nKey="grove.tie.desc" />
       </p>
 
       <p>
-        <strong><Trans i18nKey="grove.victory-cond" /></strong>
+        <strong>
+          <Trans i18nKey="grove.victory-cond" />
+        </strong>
         {' : '}
-        <Trans
-          i18nKey="grove.victory-cond.desc"
-          components={components}
-        />
+        <Trans i18nKey="grove.victory-cond.desc" components={components} />
       </p>
     </>
   )

@@ -13,7 +13,7 @@ class RoundPisteLocator extends Locator {
 
   getCoordinates(location: Location, context: MaterialContext) {
     const parent = this.getParentItem(location, context)
-    if(!parent) return { x: 30, y: 3 }
+    if (!parent) return { x: 30, y: 3 }
     const parentRotated = this.getParentItem(location, context)?.location.rotation ?? false
     const baseX = parent.location.x ?? 0
     const baseY = parent.location.y ?? 0

@@ -6,7 +6,6 @@ import { CustomMoveType } from './CustomMoveType'
 import { NextRuleHelper } from './helper/NextRuleHelper'
 
 export class PlaceArcaneRule extends PlayerTurnRule {
-
   getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = []
     this.possiblePlaces().forEach((place) => {
@@ -18,7 +17,7 @@ export class PlaceArcaneRule extends PlayerTurnRule {
 
   afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
-    if(isMoveItem(move) && move.location.type === LocationType.ArcaneOnSpiritCardLayout) {
+    if (isMoveItem(move) && move.location.type === LocationType.ArcaneOnSpiritCardLayout) {
       moves.push(...new NextRuleHelper(this.game).nextRule())
     }
     return moves
@@ -32,7 +31,7 @@ export class PlaceArcaneRule extends PlayerTurnRule {
   }
 
   possiblePlaces(): Location[] {
-    return this.spiritCardsUnderGrove.map((index) => ({type: LocationType.ArcaneOnSpiritCardLayout, parent: index, rotation: true}))
+    return this.spiritCardsUnderGrove.map((index) => ({ type: LocationType.ArcaneOnSpiritCardLayout, parent: index, rotation: true }))
   }
 
   get arcaneTokens() {
@@ -40,11 +39,13 @@ export class PlaceArcaneRule extends PlayerTurnRule {
   }
 
   get spiritCardsUnderGrove() {
-    return this.material(MaterialType.SpiritCard).location(LocationType.PlayerSpiritUnderGroveLayout).filter(item => {
-      const id: SpiritCardId = item.id as SpiritCardId
-      const type = spiritCardData[id.front as SpiritCard].type
-      return (item.location.player !== this.player && type !== 'elder') || item.location.player === this.player
-    }).getIndexes()
+    return this.material(MaterialType.SpiritCard)
+      .location(LocationType.PlayerSpiritUnderGroveLayout)
+      .filter((item) => {
+        const id: SpiritCardId = item.id as SpiritCardId
+        const type = spiritCardData[id.front as SpiritCard].type
+        return (item.location.player !== this.player && type !== 'elder') || item.location.player === this.player
+      })
+      .getIndexes()
   }
-
 }

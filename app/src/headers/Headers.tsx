@@ -43,5 +43,5 @@ export const Headers: Partial<Record<RuleId, ComponentType>> = {
   [RuleId.EndOfRoundReplaceSpirit2]: EndOfRoundReplaceSpiritHeader,
   [RuleId.ElderEffectPlaceCardUnderDeckInGrove]: ElderEffectPlaceCardUnderDeckInGroveHeader,
   [RuleId.ElderEffectShowArcane]: ElderEffectShowArcaneHeader,
-  [RuleId.ElderEffectTakeSpirit]: ElderEffectTakeSpiritHeader,
+  [RuleId.ElderEffectTakeSpirit]: ElderEffectTakeSpiritHeader
 }

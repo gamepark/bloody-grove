@@ -8,7 +8,7 @@ export class PlayerDruidLocator extends DeckLocator {
     return {
       x: -33,
       y: index === 0 ? 5 : -5,
-      z: 0,
+      z: 0
     }
   }
   getRotateZ(location: Location<number, number>, context: MaterialContext<number, number, number>): number {

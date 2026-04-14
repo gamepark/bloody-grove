@@ -4,5 +4,5 @@ export enum Memory {
   ActualTurn,
   NextRules,
   SpiritCardsToTake,
-  GroveToPlaceSpirit,
+  GroveToPlaceSpirit
 }

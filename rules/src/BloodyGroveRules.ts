@@ -1,9 +1,12 @@
 import {
   CompetitiveRank,
   FillGapStrategy,
-  hideFront, hideFrontToOthers,
-  hideItemId, hideItemIdToOthers,
-  MaterialGame, MaterialItem,
+  hideFront,
+  hideFrontToOthers,
+  hideItemId,
+  hideItemIdToOthers,
+  MaterialGame,
+  MaterialItem,
   MaterialMove,
   PositiveSequenceStrategy,
   SecretMaterialRules,
@@ -68,7 +71,7 @@ export class BloodyGroveRules
     [RuleId.EndOfRoundReplaceSpirit2]: EndOfRoundReplaceSpirit2Rule,
     [RuleId.ElderEffectPlaceCardUnderDeckInGrove]: ElderEffectPlaceCardUnderDeckInGroveRule,
     [RuleId.ElderEffectShowArcane]: ElderEffectShowArcaneRule,
-    [RuleId.ElderEffectTakeSpirit]: ElderEffectTakeSpiritRule,
+    [RuleId.ElderEffectTakeSpirit]: ElderEffectTakeSpiritRule
   }
 
   locationsStrategies = {
@@ -105,7 +108,7 @@ export class BloodyGroveRules
     [MaterialType.ArcaneToken]: {
       [LocationType.ArcaneReserve]: hideItemId,
       [LocationType.ArcaneOnSpiritCardLayout]: hideIdIfRotated,
-      [LocationType.ArcaneShowLayout]: hideItemIdToOthers,
+      [LocationType.ArcaneShowLayout]: hideItemIdToOthers
     }
   }
 

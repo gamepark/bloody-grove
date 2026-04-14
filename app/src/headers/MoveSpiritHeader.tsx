@@ -13,16 +13,15 @@ export const MoveSpiritHeader = () => {
   const name = usePlayerName(activePlayer)
 
   if (itsMe) {
-    return <Trans
-      i18nKey="header.move-spirit.you"
-      components={{
-        pass: <PlayMoveButton move={pass}/>
-      }}
-    />
+    return (
+      <Trans
+        i18nKey="header.move-spirit.you"
+        components={{
+          pass: <PlayMoveButton move={pass} />
+        }}
+      />
+    )
   }
 
-  return <Trans
-    i18nKey="header.move-spirit.player"
-    values={{ player: name }}
-  />
+  return <Trans i18nKey="header.move-spirit.player" values={{ player: name }} />
 }

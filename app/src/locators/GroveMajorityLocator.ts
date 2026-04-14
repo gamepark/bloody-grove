@@ -15,12 +15,12 @@ class GroveMajorityLocator extends Locator {
   getPositionOnParent(location: Location) {
     switch (location.id) {
       case 0:
-        return { x: 50, y: 15}
+        return { x: 50, y: 15 }
       case PlayerColor.Black:
-        return { x: 17, y: 15}
+        return { x: 17, y: 15 }
       case PlayerColor.Green:
       default:
-        return { x: 83, y: 15}
+        return { x: 83, y: 15 }
     }
   }
 

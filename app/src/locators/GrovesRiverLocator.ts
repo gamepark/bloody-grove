@@ -11,7 +11,7 @@ export class GrovesRiverLocator extends ListLocator {
   }
 
   getCoordinates(_location: Location, context: MaterialContext): Partial<Location> {
-    return {x: isPlayerBlack(getContextPlayer(context)) ? -5 : 15, y: 0}
+    return { x: isPlayerBlack(getContextPlayer(context)) ? -5 : 15, y: 0 }
   }
 
   getRotateZ(_location: Location, context: MaterialContext): number {

@@ -18,7 +18,9 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
   players = [
     { id: PlayerColor.Black },
-    { id: PlayerColor.Green, name: 'Sylvara',
+    {
+      id: PlayerColor.Green,
+      name: 'Sylvara',
       avatar: {
         topType: 'LongHairStraightStrand',
         accessoriesType: 'Blank',
@@ -30,32 +32,22 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
         eyebrowType: 'Default',
         mouthType: 'Default',
         skinColor: 'Light'
-      } }
+      }
+    }
   ]
 
-
   steps: TutorialStep[] = [
-
     // ─── INTRODUCTION ───────────────────────────────────────────────────────
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.welcome"
-          />
-        )
+        text: () => <Trans i18nKey="tuto.welcome" />
       }
     },
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.goal"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.goal" components={components} />,
         position: { x: 0, y: 35 }
       },
       focus: (game: MaterialGame) => ({
@@ -65,11 +57,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.hand"
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.hand" />,
         position: { x: 0, y: -25 }
       },
       focus: (game: MaterialGame) => ({
@@ -84,11 +72,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.show-arcane"
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.show-arcane" />,
         position: { x: 0, y: 30 }
       },
       focus: (game: MaterialGame) => ({
@@ -105,12 +89,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.show-arcane-value"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.show-arcane-value" components={components} />,
         position: { x: 0, y: 30 }
       },
       focus: (game: MaterialGame) => ({
@@ -118,9 +97,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       }),
       move: {
         filter: (move: MaterialMove) =>
-          isMoveItemType(MaterialType.ArcaneToken)(move) &&
-          move.location.type === LocationType.ArcaneReserve &&
-          move.location.player === PlayerColor.Black
+          isMoveItemType(MaterialType.ArcaneToken)(move) && move.location.type === LocationType.ArcaneReserve && move.location.player === PlayerColor.Black
       }
     },
 
@@ -128,11 +105,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.ai-show-arcane"
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.ai-show-arcane" />,
         position: { x: 0, y: 30 }
       },
       focus: (game: MaterialGame) => ({
@@ -143,18 +116,14 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       move: {
         player: PlayerColor.Green,
         filter: (move: MaterialMove) =>
-          isMoveItemType(MaterialType.ArcaneToken)(move) &&
-          move.location.type === LocationType.ArcaneShowLayout &&
-          move.location.player === PlayerColor.Green
+          isMoveItemType(MaterialType.ArcaneToken)(move) && move.location.type === LocationType.ArcaneShowLayout && move.location.player === PlayerColor.Green
       }
     },
     {
       move: {
         player: PlayerColor.Green,
         filter: (move: MaterialMove) =>
-          isMoveItemType(MaterialType.ArcaneToken)(move) &&
-          move.location.type === LocationType.ArcaneReserve &&
-          move.location.player === PlayerColor.Green
+          isMoveItemType(MaterialType.ArcaneToken)(move) && move.location.type === LocationType.ArcaneReserve && move.location.player === PlayerColor.Green
       }
     },
 
@@ -162,18 +131,16 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.turn1"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.turn1" components={components} />,
         position: { x: 0, y: -25 }
       },
       focus: (game: MaterialGame) => ({
         materials: [
-          this.material(game, MaterialType.SpiritCard).location(LocationType.PlayerHand).player(PlayerColor.Black).id<SpiritCardId>(id => id.front === SpiritCard.BearBase1),
-          this.material(game, MaterialType.GroveCard).id(id => id === 1)
+          this.material(game, MaterialType.SpiritCard)
+            .location(LocationType.PlayerHand)
+            .player(PlayerColor.Black)
+            .id<SpiritCardId>((id) => id.front === SpiritCard.BearBase1),
+          this.material(game, MaterialType.GroveCard).id((id) => id === 1)
         ]
       }),
       move: {
@@ -189,12 +156,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.turn1-result"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.turn1-result" components={components} />,
         position: { x: 0, y: 35 }
       },
       focus: (game: MaterialGame) => ({
@@ -231,16 +193,15 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.druid-intro"
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.druid-intro" />,
         position: { x: 0, y: -25 }
       },
       focus: (game: MaterialGame) => ({
         materials: [
-          this.material(game, MaterialType.SpiritCard).location(LocationType.PlayerHand).player(PlayerColor.Black).id<SpiritCardId>(id => id.front === SpiritCard.FoxBase3),
+          this.material(game, MaterialType.SpiritCard)
+            .location(LocationType.PlayerHand)
+            .player(PlayerColor.Black)
+            .id<SpiritCardId>((id) => id.front === SpiritCard.FoxBase3),
           this.material(game, MaterialType.SpiritCard).location(LocationType.PlayerDruid).player(PlayerColor.Black)
         ]
       }),
@@ -257,12 +218,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.druid-symbol"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.druid-symbol" components={components} />,
         position: { x: 0, y: -25 }
       },
       focus: (game: MaterialGame) => ({
@@ -275,12 +231,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.druid-incantation-1"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.druid-incantation-1" components={components} />,
         position: { x: 0, y: 25 }
       },
       focus: (game: MaterialGame) => ({
@@ -290,12 +241,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.druid-incantation-2"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.druid-incantation-2" components={components} />,
         position: { x: 0, y: 25 }
       },
       focus: (game: MaterialGame) => ({
@@ -303,20 +249,13 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       }),
       move: {
         filter: (move: MaterialMove) =>
-          isMoveItemType(MaterialType.SpiritCard)(move) &&
-          move.location.type === LocationType.PlayerHand &&
-          move.location.player === PlayerColor.Black
+          isMoveItemType(MaterialType.SpiritCard)(move) && move.location.type === LocationType.PlayerHand && move.location.player === PlayerColor.Black
       }
     },
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.druid-transformation"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.druid-transformation" components={components} />,
         position: { x: 0, y: -30 }
       },
       focus: (game: MaterialGame) => ({
@@ -328,18 +267,16 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.arcane-intro"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.arcane-intro" components={components} />,
         position: { x: 0, y: -25 }
       },
       focus: (game: MaterialGame) => ({
         materials: [
-          this.material(game, MaterialType.SpiritCard).location(LocationType.PlayerHand).player(PlayerColor.Black).id<SpiritCardId>(id => id.front === SpiritCard.OwlBase1),
-          this.material(game, MaterialType.GroveCard).id(id => id === 3)
+          this.material(game, MaterialType.SpiritCard)
+            .location(LocationType.PlayerHand)
+            .player(PlayerColor.Black)
+            .id<SpiritCardId>((id) => id.front === SpiritCard.OwlBase1),
+          this.material(game, MaterialType.GroveCard).id((id) => id === 3)
         ]
       }),
       move: {
@@ -355,17 +292,15 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.arcane-place"
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.arcane-place" />,
         position: { x: 0, y: 30 }
       },
       focus: (game: MaterialGame) => ({
         materials: [
           this.material(game, MaterialType.ArcaneToken).location(LocationType.ArcaneReserve),
-          this.material(game, MaterialType.SpiritCard).location(LocationType.PlayerSpiritUnderGroveLayout).id<SpiritCardId>(id => id.front === SpiritCard.OwlBase1)
+          this.material(game, MaterialType.SpiritCard)
+            .location(LocationType.PlayerSpiritUnderGroveLayout)
+            .id<SpiritCardId>((id) => id.front === SpiritCard.OwlBase1)
         ]
       }),
       move: {
@@ -373,9 +308,10 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           if (!isMoveItemType(MaterialType.ArcaneToken)(move)) return false
           if (move.location.type !== LocationType.ArcaneOnSpiritCardLayout) return false
           if (move.itemIndex !== 0) return false
-          const owlIndex = new BloodyGroveRules(game).material(MaterialType.SpiritCard)
+          const owlIndex = new BloodyGroveRules(game)
+            .material(MaterialType.SpiritCard)
             .location(LocationType.PlayerSpiritUnderGroveLayout)
-            .id<SpiritCardId>(id => id.front === SpiritCard.OwlBase1)
+            .id<SpiritCardId>((id) => id.front === SpiritCard.OwlBase1)
             .getIndex()
           return move.location.parent === owlIndex
         }
@@ -384,12 +320,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.arcane-hidden"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.arcane-hidden" components={components} />,
         position: { x: 0, y: 30 }
       }
     },
@@ -409,19 +340,16 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.ruse-explain"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.ruse-explain" components={components} />,
         position: { x: 0, y: 35 }
       },
       focus: (game: MaterialGame) => ({
         materials: [
-          this.material(game, MaterialType.SpiritCard).location(loc => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === 2).player(PlayerColor.Green),
+          this.material(game, MaterialType.SpiritCard)
+            .location((loc) => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === 2)
+            .player(PlayerColor.Green)
         ]
-      }),
+      })
     },
 
     {
@@ -435,11 +363,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.end-round"
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.end-round" />,
         position: { x: 0, y: -25 }
       },
       focus: (game: MaterialGame) => ({
@@ -447,18 +371,14 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       }),
       move: {
         filter: (move: MaterialMove) =>
-          isMoveItemType(MaterialType.SpiritCard)(move) &&
-          move.location.type === LocationType.PlayerDeck &&
-          move.location.player === PlayerColor.Black
+          isMoveItemType(MaterialType.SpiritCard)(move) && move.location.type === LocationType.PlayerDeck && move.location.player === PlayerColor.Black
       }
     },
 
     {
       move: {
         filter: (move: MaterialMove) =>
-          isMoveItemType(MaterialType.SpiritCard)(move) &&
-          move.location.type === LocationType.PlayerDeck &&
-          move.location.player === PlayerColor.Black
+          isMoveItemType(MaterialType.SpiritCard)(move) && move.location.type === LocationType.PlayerDeck && move.location.player === PlayerColor.Black
       }
     },
 
@@ -466,9 +386,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       move: {
         player: PlayerColor.Green,
         filter: (move: MaterialMove) =>
-          isMoveItemType(MaterialType.SpiritCard)(move) &&
-          move.location.type === LocationType.PlayerDeck &&
-          move.location.player === PlayerColor.Green
+          isMoveItemType(MaterialType.SpiritCard)(move) && move.location.type === LocationType.PlayerDeck && move.location.player === PlayerColor.Green
       }
     },
 
@@ -476,25 +394,17 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.resolve-grove0"
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.resolve-grove0" />,
         position: { x: 0, y: 35 }
       },
       focus: (game: MaterialGame) => ({
-        materials: [this.material(game, MaterialType.GroveCard).id(id => id === 1)]
+        materials: [this.material(game, MaterialType.GroveCard).id((id) => id === 1)]
       })
     },
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.take-elder-0"
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.take-elder-0" />,
         position: { x: 0, y: 30 }
       },
       focus: (game: MaterialGame) => ({
@@ -513,18 +423,13 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.replace-spirit"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.replace-spirit" components={components} />,
         position: { x: 0, y: 30 }
       },
       focus: (game: MaterialGame) => ({
         materials: [
           this.material(game, MaterialType.SpiritCard)
-            .location(loc => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === 0)
+            .location((loc) => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === 0)
             .player(PlayerColor.Black)
         ]
       }),
@@ -539,15 +444,11 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.resolve-grove1"
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.resolve-grove1" />,
         position: { x: 0, y: 35 }
       },
       focus: (game: MaterialGame) => ({
-        materials: [this.material(game, MaterialType.GroveCard).id(id => id === 2)]
+        materials: [this.material(game, MaterialType.GroveCard).id((id) => id === 2)]
       })
     },
 
@@ -573,28 +474,17 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.arcane-reveal"
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.arcane-reveal" />,
         position: { x: 0, y: 35 }
       },
       focus: (game: MaterialGame) => ({
-        materials: [
-          this.material(game, MaterialType.GroveCard).id(id => id === 3),
-          this.material(game, MaterialType.ArcaneToken)
-        ]
+        materials: [this.material(game, MaterialType.GroveCard).id((id) => id === 3), this.material(game, MaterialType.ArcaneToken)]
       })
     },
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.take-elder-2"
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.take-elder-2" />,
         position: { x: 0, y: 30 }
       },
       focus: (game: MaterialGame) => ({
@@ -613,18 +503,13 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.replace-spirit"
-            components={components}
-          />
-        ),
+        text: () => <Trans i18nKey="tuto.replace-spirit" components={components} />,
         position: { x: 0, y: 30 }
       },
       focus: (game: MaterialGame) => ({
         materials: [
           this.material(game, MaterialType.SpiritCard)
-            .location(loc => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === 2)
+            .location((loc) => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === 2)
             .player(PlayerColor.Black)
         ]
       }),
@@ -641,13 +526,9 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => (
-          <Trans
-            i18nKey="tuto.conclusion"
-          />
-        )
+        text: () => <Trans i18nKey="tuto.conclusion" />
       },
       move: {}
-    },
+    }
   ]
 }

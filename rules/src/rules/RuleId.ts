@@ -20,5 +20,5 @@ export enum RuleId {
   EndOfRoundReplaceSpirit2,
   ElderEffectPlaceCardUnderDeckInGrove,
   ElderEffectShowArcane,
-  ElderEffectTakeSpirit,
+  ElderEffectTakeSpirit
 }

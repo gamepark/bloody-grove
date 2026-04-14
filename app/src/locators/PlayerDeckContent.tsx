@@ -18,5 +18,8 @@ const textStyle = css`
   color: white;
   font-size: 1.2em;
   font-weight: bold;
-  text-shadow: 0 0 0.15em black, 0 0 0.3em black, 0 0 0.6em black;
+  text-shadow:
+    0 0 0.15em black,
+    0 0 0.3em black,
+    0 0 0.6em black;
 `

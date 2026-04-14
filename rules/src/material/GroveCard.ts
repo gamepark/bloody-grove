@@ -8,7 +8,6 @@ export enum GroveCard {
 
 export const groveCards = getEnumValues(GroveCard)
 
-
 export const getGroveType = (groveCard: GroveCard): string => {
   switch (groveCard) {
     case GroveCard.GroveBear:

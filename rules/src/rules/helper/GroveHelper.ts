@@ -8,7 +8,6 @@ import { PlayerColor } from '../../PlayerColor'
 import { Memory } from '../Memory'
 import { DruidTransformationHelper } from './DruidTransformationHelper'
 
-
 export class GroveHelper extends MaterialRulesPart {
   player?: number
 
@@ -24,7 +23,7 @@ export class GroveHelper extends MaterialRulesPart {
     return {
       type: LocationType.PlayerSpiritUnderGroveLayout,
       player: this.player,
-      id:actualGroveIndex,
+      id: actualGroveIndex,
       x
     }
   }
@@ -32,11 +31,11 @@ export class GroveHelper extends MaterialRulesPart {
   getPossiblePlacesForMove(indexToSkip: number): Location[] {
     const locations: Location[] = []
     for (let i = 0; i < 3; i++) {
-      if(i !== indexToSkip) {
+      if (i !== indexToSkip) {
         locations.push({
           type: LocationType.PlayerSpiritUnderGroveLayout,
           player: this.player,
-          id:i
+          id: i
         })
       }
     }
@@ -44,15 +43,14 @@ export class GroveHelper extends MaterialRulesPart {
   }
 
   calculatePlayerForceForGrove(player: PlayerColor, groveIndex: number): number {
-    if(groveIndex === undefined) return 0
+    if (groveIndex === undefined) return 0
     let force = 0
-    const grove =  this.material(MaterialType.GroveCard).getItem(groveIndex)
+    const grove = this.material(MaterialType.GroveCard).getItem(groveIndex)
 
     const cardsUnderGrove = this.material(MaterialType.SpiritCard)
-      .location(loc => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === groveIndex)
+      .location((loc) => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === groveIndex)
       .player(player)
       .getIndexes()
-
 
     const druidType = new DruidTransformationHelper(this.game).getDruidTransformation(player)
     const groveType = getGroveType(grove.id)
@@ -63,17 +61,17 @@ export class GroveHelper extends MaterialRulesPart {
       if (cardFront) {
         const cardDataEntry = Object.entries(spiritCardData).find(([key]) => parseInt(key) === cardFront)
         if (cardDataEntry) {
-          const otherPlayerCardsInGrove = this.material(MaterialType.SpiritCard).location(loc => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === groveIndex).player(player).getItems()
+          const otherPlayerCardsInGrove = this.material(MaterialType.SpiritCard)
+            .location((loc) => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === groveIndex)
+            .player(player)
+            .getItems()
           force += cardDataEntry[1].force(otherPlayerCardsInGrove) ?? 0
         }
 
         // Add arcane token bonus
-        const arcaneTokens = this.material(MaterialType.ArcaneToken)
-          .location(LocationType.ArcaneOnSpiritCardLayout)
-          .parent(cardIdx)
-          .getItems()
+        const arcaneTokens = this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneOnSpiritCardLayout).parent(cardIdx).getItems()
 
-        arcaneTokens.forEach(token => {
+        arcaneTokens.forEach((token) => {
           if (typeof token.id === 'number') {
             force += getArcaneTokenValue(token.id as ArcaneToken)
           }

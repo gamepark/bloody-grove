@@ -11,8 +11,8 @@ class PlayerSpiritNearDruidLayoutLocator extends Locator {
     const index = getRelativePlayerIndex(context, location.player)
     return {
       y: base.y,
-      x: index === 0 ? location.id === 0 ? base.x - 6.3 : base.x + 6.3 : location.id === 0 ? base.x + 6.3 : base.x - 6.3 ,
-      z: 0,
+      x: index === 0 ? (location.id === 0 ? base.x - 6.3 : base.x + 6.3) : location.id === 0 ? base.x + 6.3 : base.x - 6.3,
+      z: 0
     }
   }
   getRotateZ(location: Location<number, number>, context: MaterialContext<number, number, number>): number {

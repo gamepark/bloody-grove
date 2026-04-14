@@ -9,9 +9,7 @@ export enum ArcaneToken {
 
 export const arcaneTokens = [...getEnumValues(ArcaneToken), ...getEnumValues(ArcaneToken), ...getEnumValues(ArcaneToken)]
 
-
-
-export const  getArcaneTokenValue = (token: ArcaneToken): number => {
+export const getArcaneTokenValue = (token: ArcaneToken): number => {
   switch (token) {
     case ArcaneToken.ArcaneToken2:
       return 2

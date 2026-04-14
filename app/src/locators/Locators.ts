@@ -45,5 +45,5 @@ export const Locators: Partial<Record<LocationType, Locator<PlayerColor, Materia
   [LocationType.PlayerSpiritUnderGroveLayout]: playerSpiritUnderGroveLayoutLocator,
   [LocationType.PlayerSpiritNearDruidLayout]: playerSpiritNearDruidLayoutLocator,
   [LocationType.ArcaneOnSpiritCardLayout]: arcaneOnSpiritCardLayoutLocator,
-  [LocationType.ArcaneDiscard]: arcaneDiscardLocator,
+  [LocationType.ArcaneDiscard]: arcaneDiscardLocator
 }

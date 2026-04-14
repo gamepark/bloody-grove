@@ -12,21 +12,22 @@ export class EndOfRoundResolveGrovesRule extends MaterialRulesPart {
   groveHelper = new GroveHelper(this.game)
 
   onRuleStart(): MaterialMove[] {
-    if(this.getPlayerWithMajority()) {
+    if (this.getPlayerWithMajority()) {
       return [
-        this.material(MaterialType.Cube).location(LocationType.GroveMajority).parent(this.actualGroveIndex).moveItem(
-          ({ location }) => ({
+        this.material(MaterialType.Cube)
+          .location(LocationType.GroveMajority)
+          .parent(this.actualGroveIndex)
+          .moveItem(({ location }) => ({
             ...location,
             id: this.getPlayerWithMajority()
-          })
-        )
+          }))
       ]
     }
     return [this.startRule(this.nextRuleIfEquality!)]
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
-    if(isMoveItem(move) && move.location.type === LocationType.GroveMajority && this.getPlayerWithMajority() !== undefined) {
+    if (isMoveItem(move) && move.location.type === LocationType.GroveMajority && this.getPlayerWithMajority() !== undefined) {
       return [this.startPlayerTurn(this.nextRuleIfMajority!, this.getPlayerWithMajority()!)]
     }
     return []
@@ -35,13 +36,12 @@ export class EndOfRoundResolveGrovesRule extends MaterialRulesPart {
   getPlayerWithMajority(): PlayerColor | undefined {
     const forcePlayerBlack = this.groveHelper.calculatePlayerForceForGrove(PlayerColor.Black, this.actualGroveIndex!)
     const forcePlayerGreen = this.groveHelper.calculatePlayerForceForGrove(PlayerColor.Green, this.actualGroveIndex!)
-    if(forcePlayerBlack > forcePlayerGreen) {
+    if (forcePlayerBlack > forcePlayerGreen) {
       return PlayerColor.Black
     }
-    if(forcePlayerBlack < forcePlayerGreen) {
+    if (forcePlayerBlack < forcePlayerGreen) {
       return PlayerColor.Green
     }
     return undefined
   }
-
 }

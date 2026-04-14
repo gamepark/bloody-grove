@@ -42,8 +42,7 @@ export class PlayerDeckLocator extends DeckLocator {
 
   private isPlacingOnDeck(context: MaterialContext): boolean {
     const ruleId = context.rules.game.rule?.id
-    return (ruleId === RuleId.TakeSpiritCards || ruleId === RuleId.ElderEffectTakeSpirit)
-      && context.rules.game.rule?.player === context.player
+    return (ruleId === RuleId.TakeSpiritCards || ruleId === RuleId.ElderEffectTakeSpirit) && context.rules.game.rule?.player === context.player
   }
 }
 

@@ -17,36 +17,35 @@ export const ArcaneTokenHelp = ({ item }: MaterialHelpProps) => {
       </h2>
 
       <p>
-        <Trans
-          i18nKey="arcane-token.role"
-        />
+        <Trans i18nKey="arcane-token.role" />
         <Picture src={ArcaneIcone} css={mini} />
-        <Trans
-          i18nKey="arcane-token.role2"
-        />
+        <Trans i18nKey="arcane-token.role2" />
       </p>
       <p>
-        <Trans
-          i18nKey="arcane-token.reveal"
-        />
+        <Trans i18nKey="arcane-token.reveal" />
       </p>
 
       {isDiscard ? (
         <>
           <p>
-            <strong><Trans i18nKey="arcane-token.discard.title" /></strong>
+            <strong>
+              <Trans i18nKey="arcane-token.discard.title" />
+            </strong>
           </p>
           <p>
-            <Trans
-              i18nKey="arcane-token.discard.desc"
-            />
+            <Trans i18nKey="arcane-token.discard.desc" />
           </p>
         </>
       ) : (
         <>
           {value !== undefined && (
             <p>
-              <strong><Trans i18nKey="arcane-token.value" /></strong>{': '}{value}<Picture src={ForceIcone} css={mini} />
+              <strong>
+                <Trans i18nKey="arcane-token.value" />
+              </strong>
+              {': '}
+              {value}
+              <Picture src={ForceIcone} css={mini} />
             </p>
           )}
         </>

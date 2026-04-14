@@ -53,9 +53,7 @@ export class BloodyGroveLogs implements LogDescription<MaterialMove> {
     }
 
     if (
-      (ruleId === RuleId.EndOfRoundTakeElderSpirit0 ||
-        ruleId === RuleId.EndOfRoundTakeElderSpirit1 ||
-        ruleId === RuleId.EndOfRoundTakeElderSpirit2) &&
+      (ruleId === RuleId.EndOfRoundTakeElderSpirit0 || ruleId === RuleId.EndOfRoundTakeElderSpirit1 || ruleId === RuleId.EndOfRoundTakeElderSpirit2) &&
       isMoveItemType(MaterialType.SpiritCard)(move)
     ) {
       if (move.location.type === LocationType.PlayerSpiritUnderGroveLayout) {

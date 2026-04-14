@@ -55,7 +55,6 @@ const panelPosition = (index: number) => {
   `
 }
 
-
 const images: Record<PlayerColor, string> = {
   1: Panel1,
   2: Panel2
