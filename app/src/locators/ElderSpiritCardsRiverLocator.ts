@@ -5,7 +5,7 @@ export class ElderSpiritCardsRiverLocator extends Locator {
 
   getCoordinates(location: Location<number, number>): Partial<Coordinates> {
     switch (location.x) {
-      case 0: return {x: 39, y: 6}
+      case 0: return {x: 32, y: 6}
       case 1: return {x: 32, y: 15}
       default: return {x: 39, y: 15}
     }

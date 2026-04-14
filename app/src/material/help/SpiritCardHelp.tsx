@@ -58,6 +58,8 @@ const StandardSpiritHelp = ({ cardData }: { cardData: SpiritCardData }) => {
 
       <p>
         <strong><Picture src={ForceIcone} css={mini} /> <Trans i18nKey="spirit-card.force" /></strong>{': '}{force}
+        {' — '}
+        <Trans i18nKey="spirit-card.force.desc" />
       </p>
 
       {cardData.arcanes > 0 && (
@@ -92,6 +94,8 @@ const StandardSpiritHelp = ({ cardData }: { cardData: SpiritCardData }) => {
       )}
       <p>
         <strong><Picture src={DominationIcone} css={mini} /> <Trans i18nKey="spirit-card.dominations" /></strong>{': '}{dominations}
+        {' — '}
+        <Trans i18nKey="spirit-card.dominations.desc" />
       </p>
     </>
   )

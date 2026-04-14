@@ -6,8 +6,7 @@ import { SpiritCard, SpiritCardId } from '@gamepark/bloody-grove/material/Spirit
 import { PlayerColor } from '@gamepark/bloody-grove/PlayerColor'
 import { MaterialTutorial, TutorialStep } from '@gamepark/react-game'
 import { CustomMoveType } from '@gamepark/bloody-grove/rules/CustomMoveType'
-import { RuleId } from '@gamepark/bloody-grove/rules/RuleId'
-import { isCustomMoveType, isMoveItemType, isStartRule, MaterialGame, MaterialMove } from '@gamepark/rules-api'
+import { isCustomMoveType, isMoveItemType, MaterialGame, MaterialMove } from '@gamepark/rules-api'
 import { Trans } from 'react-i18next'
 import { TutorialSetup } from './TutorialSetup'
 import { components } from './components.tsx'
@@ -516,6 +515,32 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       popup: {
         text: () => (
           <Trans
+            i18nKey="tuto.replace-spirit"
+            components={components}
+          />
+        ),
+        position: { x: 0, y: 30 }
+      },
+      focus: (game: MaterialGame) => ({
+        materials: [
+          this.material(game, MaterialType.SpiritCard)
+            .location(loc => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === 0)
+            .player(PlayerColor.Black)
+        ]
+      }),
+      move: {
+        filter: (move: MaterialMove, game: MaterialGame) => {
+          if (!isCustomMoveType(CustomMoveType.ReplaceSpirit)(move)) return false
+          const card = new BloodyGroveRules(game).material(MaterialType.SpiritCard).getItem<SpiritCardId>(move.data.index)
+          return card?.id?.front === SpiritCard.BearBase1
+        }
+      }
+    },
+
+    {
+      popup: {
+        text: () => (
+          <Trans
             i18nKey="tuto.resolve-grove1"
           />
         ),
@@ -536,6 +561,13 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           const card = new BloodyGroveRules(game).material(MaterialType.SpiritCard).getItem<SpiritCardId>(move.itemIndex)
           return card?.id?.front === SpiritCard.ElderSpirit3
         }
+      }
+    },
+
+    {
+      move: {
+        player: PlayerColor.Green,
+        filter: (move: MaterialMove) => isCustomMoveType(CustomMoveType.ReplaceSpirit)(move)
       }
     },
 
@@ -575,8 +607,33 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           if (move.location.id !== 2 || move.location.player !== PlayerColor.Black) return false
           const card = new BloodyGroveRules(game).material(MaterialType.SpiritCard).getItem<SpiritCardId>(move.itemIndex)
           return card?.id?.front === SpiritCard.ElderSpiritRed1
-        },
-        interrupt: (move: MaterialMove) => isStartRule(move) && move.id === RuleId.PrepareNextRound
+        }
+      }
+    },
+
+    {
+      popup: {
+        text: () => (
+          <Trans
+            i18nKey="tuto.replace-spirit"
+            components={components}
+          />
+        ),
+        position: { x: 0, y: 30 }
+      },
+      focus: (game: MaterialGame) => ({
+        materials: [
+          this.material(game, MaterialType.SpiritCard)
+            .location(loc => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === 2)
+            .player(PlayerColor.Black)
+        ]
+      }),
+      move: {
+        filter: (move: MaterialMove, game: MaterialGame) => {
+          if (!isCustomMoveType(CustomMoveType.ReplaceSpirit)(move)) return false
+          const card = new BloodyGroveRules(game).material(MaterialType.SpiritCard).getItem<SpiritCardId>(move.data.index)
+          return card?.id?.front === SpiritCard.OwlBase1
+        }
       }
     },
 

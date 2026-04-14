@@ -4,6 +4,5 @@ import { MaterialContext } from '@gamepark/react-game'
 export const getContextPlayer = (context: MaterialContext) => context.player ?? context.rules.players[0]
 
 export const isPlayerBlack = (contextPlayer?: PlayerColor) => {
-  console.log(contextPlayer)
   return contextPlayer === PlayerColor.Black
 }

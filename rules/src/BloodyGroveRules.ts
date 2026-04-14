@@ -26,6 +26,9 @@ import { EndOfRoundRotateArcaneInCards2Rule } from './rules/endOfRound/rotateArc
 import { EndOfRoundTakeElderSpirit0Rule } from './rules/endOfRound/takeElderSpiritRule/EndOfRoundTakeElderSpirit0Rule'
 import { EndOfRoundTakeElderSpirit1Rule } from './rules/endOfRound/takeElderSpiritRule/EndOfRoundTakeElderSpirit1Rule'
 import { EndOfRoundTakeElderSpirit2Rule } from './rules/endOfRound/takeElderSpiritRule/EndOfRoundTakeElderSpirit2Rule'
+import { EndOfRoundReplaceSpirit0Rule } from './rules/endOfRound/replaceSpiritRule/EndOfRoundReplaceSpirit0Rule'
+import { EndOfRoundReplaceSpirit1Rule } from './rules/endOfRound/replaceSpiritRule/EndOfRoundReplaceSpirit1Rule'
+import { EndOfRoundReplaceSpirit2Rule } from './rules/endOfRound/replaceSpiritRule/EndOfRoundReplaceSpirit2Rule'
 import { EndOfGameHelper } from './rules/helper/EndOfGameHelper'
 import { MoveSpiritRule } from './rules/MoveSpiritRule'
 import { PlaceArcaneRule } from './rules/PlaceArcaneRule'
@@ -60,6 +63,9 @@ export class BloodyGroveRules
     [RuleId.EndOfRoundTakeElderSpirit0]: EndOfRoundTakeElderSpirit0Rule,
     [RuleId.EndOfRoundTakeElderSpirit1]: EndOfRoundTakeElderSpirit1Rule,
     [RuleId.EndOfRoundTakeElderSpirit2]: EndOfRoundTakeElderSpirit2Rule,
+    [RuleId.EndOfRoundReplaceSpirit0]: EndOfRoundReplaceSpirit0Rule,
+    [RuleId.EndOfRoundReplaceSpirit1]: EndOfRoundReplaceSpirit1Rule,
+    [RuleId.EndOfRoundReplaceSpirit2]: EndOfRoundReplaceSpirit2Rule,
     [RuleId.ElderEffectPlaceCardUnderDeckInGrove]: ElderEffectPlaceCardUnderDeckInGroveRule,
     [RuleId.ElderEffectShowArcane]: ElderEffectShowArcaneRule,
     [RuleId.ElderEffectTakeSpirit]: ElderEffectTakeSpiritRule,

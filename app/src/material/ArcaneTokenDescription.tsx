@@ -1,8 +1,10 @@
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ArcaneToken } from '@gamepark/bloody-grove/material/ArcaneToken.ts'
 import { LocationType } from '@gamepark/bloody-grove/material/LocationType.ts'
 import { MaterialType } from '@gamepark/bloody-grove/material/MaterialType.ts'
-import { ItemContext, TokenDescription } from '@gamepark/react-game'
-import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
+import { ItemContext, ItemMenuButton, pointerCursorCss, TokenDescription } from '@gamepark/react-game'
+import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
 import arcaneToken2 from '../images/tokens/ArcaneToken2.jpg'
 import arcaneToken3 from '../images/tokens/ArcaneToken3.jpg'
 import arcaneToken4 from '../images/tokens/ArcaneToken4.jpg'
@@ -19,15 +21,32 @@ export class ArcaneTokenDescription extends TokenDescription {
     [ArcaneToken.ArcaneToken4]: arcaneToken4,
     [ArcaneToken.ArcaneTokenDiscard]: arcaneTokenDiscard
   }
+  backImage = arcaneTokenBack
+  help = ArcaneTokenHelp
+
+  menuAlwaysVisible = true
 
   canShortClick(move: MaterialMove, context: ItemContext): boolean {
     return isMoveItemType(MaterialType.ArcaneToken)(move) && move.itemIndex === context.index && move.location.player === context.player && move.location.type === LocationType.ArcaneShowLayout
-     || isMoveItemType(MaterialType.ArcaneToken)(move) && move.itemIndex === context.index && move.location.type === LocationType.ArcaneReserve
+      || isMoveItemType(MaterialType.ArcaneToken)(move) && move.itemIndex === context.index && move.location.type === LocationType.ArcaneReserve
   }
 
-  backImage = arcaneTokenBack
+  getItemMenu(_item: MaterialItem, context: ItemContext, legalMoves: MaterialMove[]) {
+    const replace = legalMoves.find(
+      (move) => isMoveItemType(MaterialType.ArcaneToken)(move)
+        && move.location.type === LocationType.ArcaneReserve
+        && move.itemIndex === context.index
+    )
 
-  help = ArcaneTokenHelp
+    if (replace) {
+      return (
+        <ItemMenuButton angle={20} radius={4} x={1.5} y={-1.5} move={replace} label={'Replacer'} labelPosition="right">
+          <FontAwesomeIcon icon={faArrowRight} css={pointerCursorCss}/>
+        </ItemMenuButton>
+      )
+    }
+    return undefined
+  }
 }
 
 export const arcaneTokenDescription = new ArcaneTokenDescription()

@@ -1,6 +1,6 @@
 import { MaterialType } from '@gamepark/bloody-grove/material/MaterialType'
 import { MaterialDescription } from '@gamepark/react-game'
-import { arcaneTokenDescription } from './ArcaneTokenDescription.ts'
+import { arcaneTokenDescription } from './ArcaneTokenDescription.tsx'
 import { cubeDescription } from './CubeDescription.ts'
 import { groveCardDescription } from './GroveCardDescription.ts'
 import { roundCardDescription } from './RoundCardDescription.ts'

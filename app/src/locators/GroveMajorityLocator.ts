@@ -2,6 +2,7 @@ import { PlayerColor } from '@gamepark/bloody-grove/PlayerColor.ts'
 import { DropAreaDescription, Locator, MaterialContext } from '@gamepark/react-game'
 import { MaterialType } from '@gamepark/bloody-grove/material/MaterialType'
 import { Location, MaterialItem } from '@gamepark/rules-api'
+import { getContextPlayer, isPlayerBlack } from './utils.ts'
 
 class GroveMajorityLocator extends Locator {
   parentItemType = MaterialType.GroveCard
@@ -21,6 +22,10 @@ class GroveMajorityLocator extends Locator {
       default:
         return { x: 83, y: 15}
     }
+  }
+
+  getRotateZ(_location: Location<number, number>, context: MaterialContext<number, number, number, number, number>): number {
+    return isPlayerBlack(getContextPlayer(context)) ? 90 : -90
   }
 
   locationDescription = new GroveMajorityDescription()

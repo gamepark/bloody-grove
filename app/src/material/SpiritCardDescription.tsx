@@ -1,11 +1,12 @@
-import { faArrowDown, faArrowUp, faHand } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faArrowUp, faHand, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LocationType } from '@gamepark/bloody-grove/material/LocationType.ts'
 import { MaterialType } from '@gamepark/bloody-grove/material/MaterialType.ts'
-import { SpiritCard, SpiritType } from '@gamepark/bloody-grove/material/SpiritCard.ts'
+import { SpiritCard, spiritCardData, SpiritType } from '@gamepark/bloody-grove/material/SpiritCard.ts'
 import { PlayerColor } from '@gamepark/bloody-grove/PlayerColor.ts'
+import { CustomMoveType } from '@gamepark/bloody-grove/rules/CustomMoveType.ts'
 import { CardDescription, ItemContext, ItemMenuButton, pointerCursorCss } from '@gamepark/react-game'
-import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
+import { isCustomMoveType, isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
 import { SpiritCardHelp } from './help/SpiritCardHelp'
 import druidBlack from '../images/cards/druids/DruidBlack.jpg'
 import druidGreen from '../images/cards/druids/DruidGreen.jpg'
@@ -143,6 +144,20 @@ export class SpiritCardDescription extends CardDescription {
     [SpiritType.ElderRed]: elderSpiritBackRed,
   }
 
+  takeElderMove(context: ItemContext, legalMoves: MaterialMove[]): MaterialMove | undefined {
+    const id = context.rules.material(MaterialType.SpiritCard).getItem(context.index)?.id.front as SpiritCard
+    const isElder = id !== undefined && spiritCardData[id].type === 'elder'
+    if(isElder) {
+      return legalMoves.find(
+        (move) => isMoveItemType(MaterialType.SpiritCard)(move)
+          && move.location.type === LocationType.PlayerSpiritUnderGroveLayout
+          && move.location.player === context.player
+          && move.itemIndex === context.index
+      )
+    }
+    return undefined
+  }
+
   getItemMenu(item: MaterialItem, context: ItemContext, legalMoves: MaterialMove[]) {
     const takeOnTopDeck = legalMoves.find(
       (move) => isMoveItemType(MaterialType.SpiritCard)(move)
@@ -164,6 +179,12 @@ export class SpiritCardDescription extends CardDescription {
         && move.location.player === context.player
         && move.itemIndex === context.index
     )
+    const replace = legalMoves.find(
+      (move) => isCustomMoveType(CustomMoveType.ReplaceSpirit)(move)
+        && move.data.index === context.index
+    )
+
+    const takeElder = this.takeElderMove(context, legalMoves)
 
     if (takeOnTopDeck || takeOnBottomDeck || takeOnHand) {
       const locationType = item.location?.type
@@ -178,6 +199,8 @@ export class SpiritCardDescription extends CardDescription {
         || (locationType === LocationType.BearEliteCard && !hasMovesOnOtherAnimal([LocationType.FoxEliteCard]))
         || (locationType === LocationType.OwlEliteCard && !hasMovesOnOtherAnimal([LocationType.FoxEliteCard, LocationType.BearEliteCard]))
 
+      const isInHand = locationType === LocationType.PlayerHand
+
       return (
         <>
           {takeOnHand && (
@@ -186,7 +209,7 @@ export class SpiritCardDescription extends CardDescription {
             </ItemMenuButton>
           )}
           {takeOnBottomDeck && (
-            <ItemMenuButton angle={50} radius={4} x={0} y={0.5} move={takeOnBottomDeck} label={showLabel ? 'Sous votre paquet' : undefined} labelPosition="left">
+            <ItemMenuButton angle={50} radius={4} x={0} y={0.5} move={takeOnBottomDeck} label={showLabel ? 'Sous votre paquet' : isInHand ? "Mettre sous le paquet" : undefined} labelPosition={isInHand ? 'right' : 'left'}>
               <FontAwesomeIcon icon={faArrowDown} css={pointerCursorCss} />
             </ItemMenuButton>
           )}
@@ -196,6 +219,22 @@ export class SpiritCardDescription extends CardDescription {
             </ItemMenuButton>
           )}
         </>
+      )
+    }
+
+    if(replace) {
+      return (
+        <ItemMenuButton angle={50} radius={4} x={-2} y={-3.5} move={replace} label={'Remplacer'} labelPosition="left">
+          <FontAwesomeIcon icon={faTrash} css={pointerCursorCss} />
+        </ItemMenuButton>
+      )
+    }
+
+    if(takeElder) {
+      return (
+        <ItemMenuButton angle={50} radius={4} x={0} y={0} move={takeElder} label={'Choisir'} labelPosition="left">
+          <FontAwesomeIcon icon={faHand} css={pointerCursorCss} />
+        </ItemMenuButton>
       )
     }
     return undefined
