@@ -101,12 +101,12 @@ export class SpiritCardHelper extends MaterialRulesPart {
     const druidData = spiritCardData[druidId.front]
     if (locationId === 0) {
       const spiritIncantations = spiritData.rightIncantations
-      const druidIncantions = druidData.leftIncantations
-      spiritCardsToTake.push(...spiritIncantations.filter((x) => druidIncantions.includes(x)))
+      const druidIncantations = druidData.leftIncantations
+      spiritCardsToTake.push(...spiritIncantations.filter((x) => druidIncantations.includes(x)))
     } else {
       const spiritIncantations = spiritData.leftIncantations
-      const druidIncantions = druidData.rightIncantations
-      spiritCardsToTake.push(...spiritIncantations.filter((x) => druidIncantions.includes(x)))
+      const druidIncantations = druidData.rightIncantations
+      spiritCardsToTake.push(...spiritIncantations.filter((x) => druidIncantations.includes(x)))
     }
     this.memorize(Memory.SpiritCardsToTake, spiritCardsToTake)
     return [this.startRule(RuleId.TakeSpiritCards)]

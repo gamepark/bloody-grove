@@ -37,9 +37,9 @@ export class BloodyGroveSetup extends MaterialGameSetup<PlayerColor, MaterialTyp
     })
   }
 
-  setupSpiritCards(cards: SpiritCard[], type: SpiritType, deckLocation: LocationType, reaveledCardLocation: LocationType) {
+  setupSpiritCards(cards: SpiritCard[], type: SpiritType, deckLocation: LocationType, revealedCardLocation: LocationType) {
     this.material(MaterialType.SpiritCard).createItems(shuffle(cards).map((id) => ({ id: { front: id, back: type }, location: { type: deckLocation } })))
-    this.material(MaterialType.SpiritCard).location(deckLocation).limit(1).moveItems({ type: reaveledCardLocation })
+    this.material(MaterialType.SpiritCard).location(deckLocation).limit(1).moveItems({ type: revealedCardLocation })
   }
 
   setupElderSpiritCards() {
