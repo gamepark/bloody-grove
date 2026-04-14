@@ -1,4 +1,4 @@
-import { CustomMove, isCustomMoveType, isMoveItem, ItemMove, MaterialMove, PlayerTurnRule, PlayMoveContext } from '@gamepark/rules-api'
+import { CustomMove, isCustomMoveType, isMoveItem, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { CustomMoveType } from './CustomMoveType'
@@ -7,7 +7,7 @@ import { NextRuleHelper } from './helper/NextRuleHelper'
 
 export class MoveSpiritRule extends PlayerTurnRule {
   groveHelper = new GroveHelper(this.game)
-  getPlayerMoves(): MaterialMove<number, number, number, number>[] {
+  getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = []
     this.playerSpiritUnderGroves.forEach((index) => {
       const spiritCardGroveIndex = this.material(MaterialType.SpiritCard).getItem(index).location.id
@@ -20,7 +20,7 @@ export class MoveSpiritRule extends PlayerTurnRule {
     return moves
   }
 
-  afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     if(isMoveItem(move) && move.location.type === LocationType.PlayerSpiritUnderGroveLayout) {
       moves.push(...new NextRuleHelper(this.game).nextRule())

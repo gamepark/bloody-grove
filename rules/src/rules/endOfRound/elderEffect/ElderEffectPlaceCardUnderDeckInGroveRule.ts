@@ -1,4 +1,4 @@
-import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule, PlayMoveContext } from '@gamepark/rules-api'
+import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../../../material/LocationType'
 import { MaterialType } from '../../../material/MaterialType'
 import { NextRuleHelper } from '../../helper/NextRuleHelper'
@@ -6,7 +6,7 @@ import { Memory } from '../../Memory'
 
 export class ElderEffectPlaceCardUnderDeckInGroveRule extends PlayerTurnRule {
 
-  onRuleStart(): MaterialMove<number, number, number, number>[] {
+  onRuleStart(): MaterialMove[] {
     return [this.cardOnBottomOfDeck.moveItem({
       type: LocationType.PlayerSpiritUnderGroveLayout,
       player: this.player,
@@ -14,7 +14,7 @@ export class ElderEffectPlaceCardUnderDeckInGroveRule extends PlayerTurnRule {
     })]
   }
 
-  afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     if(isMoveItem(move) && move.location.type === LocationType.PlayerSpiritUnderGroveLayout) {
       moves.push(...new NextRuleHelper(this.game).nextRule())

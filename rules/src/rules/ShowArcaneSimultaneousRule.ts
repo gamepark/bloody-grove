@@ -26,7 +26,7 @@ export class ShowArcaneSimultaneousRule extends SimultaneousRule {
       }
       return []
     }
-    getMovesAfterPlayersDone(): MaterialMove<number, number, number, number>[] {
+    getMovesAfterPlayersDone(): MaterialMove[] {
       const moves: MaterialMove[] = []
       moves.push(this.startPlayerTurn(RuleId.ChooseAction, this.game.players[0]))
       return moves

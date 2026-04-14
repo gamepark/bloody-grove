@@ -1,4 +1,4 @@
-import { isMoveItem, ItemMove, MaterialMove, MaterialRulesPart, PlayMoveContext } from '@gamepark/rules-api'
+import { isMoveItem, ItemMove, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
 import { ArcaneToken } from '../../material/ArcaneToken'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
@@ -8,7 +8,7 @@ export class EndOfRoundRotateArcaneInCardsRule extends MaterialRulesPart {
   actualGroveIndex?: number
   nextRule?: RuleId
 
-  onRuleStart(): MaterialMove<number, number, number, number>[] {
+  onRuleStart(): MaterialMove[] {
     const rotateArcanesInSpiritCards = this.rotateArcanesInSpiritCardsForThisGrove()
     if(rotateArcanesInSpiritCards.length > 0) {
       return rotateArcanesInSpiritCards
@@ -16,7 +16,7 @@ export class EndOfRoundRotateArcaneInCardsRule extends MaterialRulesPart {
     return [this.startRule(this.nextRule!)]
   }
 
-  beforeItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  beforeItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     if(isMoveItem(move) && move.location.type === LocationType.ArcaneOnSpiritCardLayout) {
       const arcaneId: ArcaneToken = this.material(MaterialType.ArcaneToken).getItem(move.itemIndex).id
@@ -30,7 +30,7 @@ export class EndOfRoundRotateArcaneInCardsRule extends MaterialRulesPart {
     return moves
   }
 
-  afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  afterItemMove(move: ItemMove): MaterialMove[] {
     if(isMoveItem(move) && move.location.type === LocationType.ArcaneOnSpiritCardLayout) {
       if(this.rotateArcanesInSpiritCardsForThisGrove().length === 0)
       return [this.startRule(this.nextRule!)]

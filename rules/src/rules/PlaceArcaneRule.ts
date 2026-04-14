@@ -1,4 +1,4 @@
-import { CustomMove, isCustomMoveType, isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule, PlayMoveContext } from '@gamepark/rules-api'
+import { CustomMove, isCustomMoveType, isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { SpiritCard, spiritCardData, SpiritCardId } from '../material/SpiritCard'
@@ -7,7 +7,7 @@ import { NextRuleHelper } from './helper/NextRuleHelper'
 
 export class PlaceArcaneRule extends PlayerTurnRule {
 
-  getPlayerMoves(): MaterialMove<number, number, number, number>[] {
+  getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = []
     this.possiblePlaces().forEach((place) => {
       moves.push(...this.arcaneTokens.moveItems(place))
@@ -16,7 +16,7 @@ export class PlaceArcaneRule extends PlayerTurnRule {
     return moves
   }
 
-  afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     if(isMoveItem(move) && move.location.type === LocationType.ArcaneOnSpiritCardLayout) {
       moves.push(...new NextRuleHelper(this.game).nextRule())

@@ -1,4 +1,4 @@
-import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule, PlayMoveContext, RuleMove, RuleStep } from '@gamepark/rules-api'
+import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { DruidTransformationHelper } from './helper/DruidTransformationHelper'
@@ -11,7 +11,7 @@ export class ChooseActionRule extends PlayerTurnRule {
   spiritCardHelper = new SpiritCardHelper(this.game)
   druidTransformationHelper = new DruidTransformationHelper(this.game)
 
-  onRuleStart(_move: RuleMove<number, number>, _previousRule?: RuleStep, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  onRuleStart(): MaterialMove[] {
     const actualTurn = this.memorize(Memory.ActualTurn, (lastValue) => lastValue + 1)
     const cube = this.material(MaterialType.Cube).location(LocationType.RoundPiste)
     if (cube.getItem()!.location.id !== actualTurn) {
@@ -21,7 +21,7 @@ export class ChooseActionRule extends PlayerTurnRule {
     }
   }
 
-  getPlayerMoves(): MaterialMove<number, number, number, number>[] {
+  getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = []
     moves.push(
       ...this.playerHand.moveItems(() => this.groveHelper.getPossiblePlace())
@@ -32,7 +32,7 @@ export class ChooseActionRule extends PlayerTurnRule {
     return moves
   }
 
-  afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     if (isMoveItem(move) && move.location.type === LocationType.PlayerSpiritUnderGroveLayout) {
       const item = this.material(MaterialType.SpiritCard).getItem(move.itemIndex)

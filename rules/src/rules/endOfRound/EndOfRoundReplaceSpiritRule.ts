@@ -1,4 +1,4 @@
-import { CustomMove, isCustomMoveType, MaterialMove, PlayerTurnRule, PlayMoveContext } from '@gamepark/rules-api'
+import { CustomMove, isCustomMoveType, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import { SpiritCard, spiritCardData } from '../../material/SpiritCard'
@@ -11,7 +11,7 @@ export class EndOfRoundReplaceSpiritRule extends PlayerTurnRule {
   groveToPlaceSpirit?: number
   nextRule?: RuleId
 
-  getPlayerMoves(): MaterialMove<number, number, number, number>[] {
+  getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = []
     this.possibleIndexes().forEach((index) => {
       moves.push(this.customMove(CustomMoveType.ReplaceSpirit, { index }))
@@ -19,15 +19,15 @@ export class EndOfRoundReplaceSpiritRule extends PlayerTurnRule {
     return moves
   }
 
-  onCustomMove(_move: CustomMove, _context?: PlayMoveContext): MaterialMove<number, number, number, number, number>[] {
+  onCustomMove(move: CustomMove): MaterialMove[] {
     const moves: MaterialMove[] = []
-    if(isCustomMoveType(CustomMoveType.ReplaceSpirit)(_move)) {
+    if(isCustomMoveType(CustomMoveType.ReplaceSpirit)(move)) {
       const arcaneTokensOnCard = this.material(MaterialType.ArcaneToken)
-        .location(loc => loc.type === LocationType.ArcaneOnSpiritCardLayout && loc.parent === _move.data.index)
+        .location(loc => loc.type === LocationType.ArcaneOnSpiritCardLayout && loc.parent === move.data.index)
       if (arcaneTokensOnCard.length > 0) {
         moves.push(arcaneTokensOnCard.moveItemsAtOnce({ type: LocationType.ArcaneDiscard }))
       }
-      moves.push(this.material(MaterialType.SpiritCard).index(_move.data.index).deleteItem(1))
+      moves.push(this.material(MaterialType.SpiritCard).index(move.data.index).deleteItem(1))
       const nextRules = this.remind<RuleId[]>(Memory.NextRules) ?? []
       if(nextRules.length > 0) {
         this.memorize(Memory.NextRules, [...nextRules, this.nextRule!])

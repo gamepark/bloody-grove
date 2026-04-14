@@ -1,4 +1,4 @@
-import { isMoveItem, ItemMove, MaterialMove, MaterialRulesPart, PlayMoveContext } from '@gamepark/rules-api'
+import { isMoveItem, ItemMove, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { PlayerColor } from '../PlayerColor'
@@ -29,7 +29,7 @@ export class PrepareNextRoundRule extends MaterialRulesPart {
     return moves
   }
 
-  afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  afterItemMove(move: ItemMove): MaterialMove[] {
     if(isMoveItem(move) && move.location.type === LocationType.RoundPiste) {
       return [this.startPlayerTurn(RuleId.ChooseAction, this.remind(Memory.FirstPlayer))]
     }

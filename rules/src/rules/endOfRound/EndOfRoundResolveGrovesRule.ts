@@ -1,4 +1,4 @@
-import { isMoveItem, ItemMove, MaterialMove, MaterialRulesPart, PlayMoveContext } from '@gamepark/rules-api'
+import { isMoveItem, ItemMove, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import { PlayerColor } from '../../PlayerColor'
@@ -11,7 +11,7 @@ export class EndOfRoundResolveGrovesRule extends MaterialRulesPart {
   nextRuleIfMajority?: RuleId
   groveHelper = new GroveHelper(this.game)
 
-  onRuleStart(): MaterialMove<number, number, number, number>[] {
+  onRuleStart(): MaterialMove[] {
     if(this.getPlayerWithMajority()) {
       return [
         this.material(MaterialType.Cube).location(LocationType.GroveMajority).parent(this.actualGroveIndex).moveItem(
@@ -25,7 +25,7 @@ export class EndOfRoundResolveGrovesRule extends MaterialRulesPart {
     return [this.startRule(this.nextRuleIfEquality!)]
   }
 
-  afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  afterItemMove(move: ItemMove): MaterialMove[] {
     if(isMoveItem(move) && move.location.type === LocationType.GroveMajority && this.getPlayerWithMajority() !== undefined) {
       return [this.startPlayerTurn(this.nextRuleIfMajority!, this.getPlayerWithMajority()!)]
     }

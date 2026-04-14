@@ -1,4 +1,4 @@
-import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule, PlayMoveContext } from '@gamepark/rules-api'
+import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../../../material/LocationType'
 import { MaterialType } from '../../../material/MaterialType'
 import { NextRuleHelper } from '../../helper/NextRuleHelper'
@@ -6,7 +6,7 @@ import { Memory } from '../../Memory'
 
 export class ElderEffectTakeSpiritRule extends PlayerTurnRule {
 
-  getPlayerMoves(): MaterialMove<number, number, number, number>[] {
+  getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = []
     moves.push(this.bearSpiritCard.moveItem({type: LocationType.PlayerDeck, player: this.player}))
     moves.push(this.bearSpiritCard.moveItem({type: LocationType.PlayerDeck, x: 0, player: this.player}))
@@ -17,7 +17,7 @@ export class ElderEffectTakeSpiritRule extends PlayerTurnRule {
     return moves
   }
 
-  beforeItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  beforeItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     if(isMoveItem(move)) {
       const previousLocation = this.material(MaterialType.SpiritCard).index(move.itemIndex).getItem()?.location
@@ -38,7 +38,7 @@ export class ElderEffectTakeSpiritRule extends PlayerTurnRule {
     return moves
   }
 
-  afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     if(isMoveItem(move) && move.location.type === LocationType.PlayerDeck) {
       moves.push(...new NextRuleHelper(this.game).nextRule())

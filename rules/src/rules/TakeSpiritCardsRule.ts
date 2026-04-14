@@ -1,4 +1,4 @@
-import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule, PlayMoveContext } from '@gamepark/rules-api'
+import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { NextRuleHelper } from './helper/NextRuleHelper'
@@ -14,7 +14,7 @@ export class TakeSpiritCardsRule extends PlayerTurnRule {
     return []
   }
 
-  getPlayerMoves(): MaterialMove<number, number, number, number>[] {
+  getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = []
     const spiritCardsToTake: string[] = this.remind(Memory.SpiritCardsToTake)
     if(spiritCardsToTake.includes('bear')) {
@@ -35,7 +35,7 @@ export class TakeSpiritCardsRule extends PlayerTurnRule {
     return moves
   }
 
-  beforeItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  beforeItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     if(isMoveItem(move)) {
       const previousLocation = this.material(MaterialType.SpiritCard).index(move.itemIndex).getItem()?.location
@@ -56,7 +56,7 @@ export class TakeSpiritCardsRule extends PlayerTurnRule {
     return moves
   }
 
-  afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     if(isMoveItem(move) && move.location.type !== LocationType.PlayerDruid) {
       if(this.remind(Memory.SpiritCardsToTake).length === 0) {

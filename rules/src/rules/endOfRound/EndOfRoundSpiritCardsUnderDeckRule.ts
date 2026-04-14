@@ -6,7 +6,7 @@ import { RuleId } from '../RuleId'
 
 export class EndOfRoundSpiritCardsUnderDeckRule extends SimultaneousRule {
 
-  getActivePlayerLegalMoves(player: PlayerColor): MaterialMove<number, number, number, number>[] {
+  getActivePlayerLegalMoves(player: PlayerColor): MaterialMove[] {
     return this.material(MaterialType.SpiritCard).location(LocationType.PlayerHand).player(player).moveItems(({ location }) => ({
       type: LocationType.PlayerDeck,
       player: location.player,
@@ -23,7 +23,7 @@ export class EndOfRoundSpiritCardsUnderDeckRule extends SimultaneousRule {
     return []
   }
 
-  getMovesAfterPlayersDone(): MaterialMove<number, number, number, number>[] {
+  getMovesAfterPlayersDone(): MaterialMove[] {
     return [this.startSimultaneousRule(RuleId.EndOfRoundRotateArcaneInCards0)]
   }
 

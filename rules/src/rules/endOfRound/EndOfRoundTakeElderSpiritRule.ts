@@ -1,4 +1,4 @@
-import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule, PlayMoveContext } from '@gamepark/rules-api'
+import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import { SpiritCard, spiritCardData } from '../../material/SpiritCard'
@@ -10,7 +10,7 @@ export class EndOfRoundTakeElderSpiritRule extends PlayerTurnRule {
   groveToPlaceSpirit?: number
   nextRule?: RuleId
 
-  getPlayerMoves(): MaterialMove<number, number, number, number>[] {
+  getPlayerMoves(): MaterialMove[] {
     return this.elderSpiritCards.moveItems({
       type: LocationType.PlayerSpiritUnderGroveLayout,
       player: this.player,
@@ -18,7 +18,7 @@ export class EndOfRoundTakeElderSpiritRule extends PlayerTurnRule {
     })
   }
 
-  afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
+  afterItemMove(move: ItemMove): MaterialMove[] {
     if(isMoveItem(move) && move.location.type === LocationType.PlayerSpiritUnderGroveLayout) {
       const card = this.material(MaterialType.SpiritCard).getItem(move.itemIndex)
       const effects = spiritCardData[card.id.front as SpiritCard].effects
