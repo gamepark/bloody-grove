@@ -12,8 +12,13 @@ export class ChooseActionRule extends PlayerTurnRule {
   druidTransformationHelper = new DruidTransformationHelper(this.game)
 
   onRuleStart(_move: RuleMove<number, number>, _previousRule?: RuleStep, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
-    this.memorize(Memory.ActualTurn, (lastValue) => lastValue + 1)
-    return [this.material(MaterialType.Cube).location(LocationType.RoundPiste).moveItem(({ location }) => ({...location, id: this.remind(Memory.ActualTurn)}))]
+    const actualTurn = this.memorize(Memory.ActualTurn, (lastValue) => lastValue + 1)
+    const cube = this.material(MaterialType.Cube).location(LocationType.RoundPiste)
+    if (cube.getItem()!.location.id !== actualTurn) {
+      return [cube.moveItem(({ location }) => ({ ...location, id: this.remind(Memory.ActualTurn) }))]
+    } else {
+      return []
+    }
   }
 
   getPlayerMoves(): MaterialMove<number, number, number, number>[] {
@@ -29,11 +34,11 @@ export class ChooseActionRule extends PlayerTurnRule {
 
   afterItemMove(move: ItemMove<number, number, number>, _context?: PlayMoveContext): MaterialMove<number, number, number, number>[] {
     const moves: MaterialMove[] = []
-    if(isMoveItem(move) && move.location.type === LocationType.PlayerSpiritUnderGroveLayout) {
+    if (isMoveItem(move) && move.location.type === LocationType.PlayerSpiritUnderGroveLayout) {
       const item = this.material(MaterialType.SpiritCard).getItem(move.itemIndex)
       moves.push(...this.spiritCardHelper.getSpiritCardUnderGroveAfterItemMove(item.id))
     }
-    if(isMoveItem(move) && move.location.type === LocationType.PlayerSpiritNearDruidLayout) {
+    if (isMoveItem(move) && move.location.type === LocationType.PlayerSpiritNearDruidLayout) {
       const item = this.material(MaterialType.SpiritCard).getItem(move.itemIndex)
       moves.push(...this.spiritCardHelper.getSpiritCardNearToDruidAfterItemMove(item.id, move.location.id))
     }
