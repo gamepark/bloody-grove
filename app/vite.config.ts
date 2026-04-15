@@ -4,6 +4,20 @@ import { defineConfig, loadEnv, PluginOption } from 'vite'
 import { imagetools } from 'vite-imagetools'
 import { version } from './package.json'
 
+function translationHmrPlugin(): PluginOption {
+  return {
+    name: 'translation-hmr',
+    configureServer(server) {
+      const translationDir = path.resolve(__dirname, 'public/translation')
+      server.watcher.on('change', (file) => {
+        if (file.startsWith(translationDir) && file.endsWith('.json')) {
+          server.ws.send({ type: 'custom', event: 'translation-update' })
+        }
+      })
+    }
+  }
+}
+
 function localeUrlPlugin(): PluginOption {
   return {
     name: 'locale-url',
@@ -42,6 +56,6 @@ export default defineConfig(({ mode }) => {
       'process.env.PUSHER_KEY': JSON.stringify(env.VITE_PUSHER_KEY),
       'process.env.VERSION': JSON.stringify(version)
     },
-    plugins: [react({ jsxImportSource: '@emotion/react' }), imagetools({ defaultDirectives: () => new URLSearchParams({ format: 'webp' }) }), localeUrlPlugin()]
+    plugins: [react({ jsxImportSource: '@emotion/react' }), imagetools({ defaultDirectives: () => new URLSearchParams({ format: 'webp' }) }), translationHmrPlugin(), localeUrlPlugin()]
   }
 })

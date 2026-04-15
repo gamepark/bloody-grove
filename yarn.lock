@@ -753,27 +753,27 @@ __metadata:
     "@fortawesome/free-regular-svg-icons": "npm:^7.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@fortawesome/react-fontawesome": "npm:^3.3.0"
-    "@gamepark/react-game": "npm:~7.7.11"
+    "@gamepark/react-game": "npm:~7.7.14"
     "@gamepark/rules-api": "npm:~7.6.2"
-    "@types/node": "npm:^25.5.0"
+    "@types/node": "npm:^25.6.0"
     "@types/react": "npm:^19.2.14"
     "@types/react-dom": "npm:^19.2.3"
     "@vitejs/plugin-react-swc": "npm:^4.3.0"
     es-toolkit: "npm:^1.45.1"
-    eslint: "npm:^10.1.0"
+    eslint: "npm:^10.2.0"
     eslint-plugin-react-hooks: "npm:^7.0.1"
     eslint-plugin-react-refresh: "npm:^0.5.2"
-    globals: "npm:^17.4.0"
+    globals: "npm:^17.5.0"
     i18next: "npm:^25.10.10"
-    react: "npm:^19.2.4"
-    react-dom: "npm:^19.2.4"
+    react: "npm:^19.2.5"
+    react-dom: "npm:^19.2.5"
     react-i18next: "npm:^16.6.6"
     react-redux: "npm:^9.2.0"
     typescript: "npm:^5.9.3"
-    typescript-eslint: "npm:^8.58.0"
-    vite: "npm:^8.0.3"
+    typescript-eslint: "npm:^8.58.2"
+    vite: "npm:^8.0.8"
     vite-imagetools: "npm:^10.0.0"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.4"
   languageName: unknown
   linkType: soft
 
@@ -783,10 +783,10 @@ __metadata:
   dependencies:
     "@gamepark/rules-api": "npm:~7.6.2"
     es-toolkit: "npm:^1.45.1"
-    vitest: "npm:^4.1.2"
+    vitest: "npm:^4.1.4"
   peerDependencies:
     "@gamepark/rules-api": ">=7"
-    es-toolkit: ^1.43.0
+    es-toolkit: ^1.45.1
   languageName: unknown
   linkType: soft
 
@@ -817,9 +817,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gamepark/react-game@npm:~7.7.11":
-  version: 7.7.11
-  resolution: "@gamepark/react-game@npm:7.7.11"
+"@gamepark/react-game@npm:~7.7.14":
+  version: 7.7.14
+  resolution: "@gamepark/react-game@npm:7.7.14"
   dependencies:
     "@datadog/browser-logs": "npm:^6.28.1"
     "@dnd-kit/modifiers": "npm:^9.0.0"
@@ -853,7 +853,7 @@ __metadata:
     react-dom: 19.x
     react-i18next: 16.x
     react-redux: 9.x
-  checksum: 10c0/26681e01738f7c88af8cb6192a6bb0a239853c23b323dce0460050375a04b187f4b4b0e5122e7e0dcb1234a97e034a3a2dc9f6773da9d02ce3ee5cff87c8687e
+  checksum: 10c0/cf38dcb66b78daa662ed53277d01d257edadfba10f9089914b0a5231f8ccce18f97e2a358316f6ff9d4d8fc82d1d56252c205320d7f05fed7a980b540baf44e9
   languageName: node
   linkType: hard
 
@@ -2623,7 +2623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^25.5.0":
+"@types/node@npm:^25.6.0":
   version: 25.6.0
   resolution: "@types/node@npm:25.6.0"
   dependencies:
@@ -4256,7 +4256,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^10.1.0":
+"eslint@npm:^10.2.0":
   version: 10.2.0
   resolution: "eslint@npm:10.2.0"
   dependencies:
@@ -4866,10 +4866,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^17.4.0":
-  version: 17.4.0
-  resolution: "globals@npm:17.4.0"
-  checksum: 10c0/2be9e8c2b9035836f13d420b22f0247a328db82967d3bebfc01126d888ed609305f06c05895914e969653af5c6ba35fd7a0920f3e6c869afa60666c810630feb
+"globals@npm:^17.5.0":
+  version: 17.5.0
+  resolution: "globals@npm:17.5.0"
+  checksum: 10c0/92828102ed2f5637907725f0478038bed02fc83e9fc89300bb753639ba7c022b6c02576fc772117302b431b204591db1f2fa909d26f3f0a9852cc856a941df3f
   languageName: node
   linkType: hard
 
@@ -7313,12 +7313,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.8.1":
-  version: 3.8.1
-  resolution: "prettier@npm:3.8.1"
+"prettier@npm:^3.8.2":
+  version: 3.8.3
+  resolution: "prettier@npm:3.8.3"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/33169b594009e48f570471271be7eac7cdcf88a209eed39ac3b8d6d78984039bfa9132f82b7e6ba3b06711f3bfe0222a62a1bfb87c43f50c25a83df1b78a2c42
+  checksum: 10c0/754816fd7593eb80f6376d7476d463e832c38a12f32775a82683adb6e35b772b1f484d65f19401507b983a8c8a7cd5a4a9f12006bd56491e8f35503473f77473
   languageName: node
   linkType: hard
 
@@ -7431,14 +7431,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^19.2.4":
-  version: 19.2.4
-  resolution: "react-dom@npm:19.2.4"
+"react-dom@npm:^19.2.5":
+  version: 19.2.5
+  resolution: "react-dom@npm:19.2.5"
   dependencies:
     scheduler: "npm:^0.27.0"
   peerDependencies:
-    react: ^19.2.4
-  checksum: 10c0/f0c63f1794dedb154136d4d0f59af00b41907f4859571c155940296808f4b94bf9c0c20633db75b5b2112ec13d8d7dd4f9bf57362ed48782f317b11d05a44f35
+    react: ^19.2.5
+  checksum: 10c0/8067606e9f58e4c2e8cb5f09570217dbc71c4843ebcaa20ae2085912d3e3a351f17d8f7c1713313cdda7f272840c8c34ff6c860fcb840862071bceea218e0c63
   languageName: node
   linkType: hard
 
@@ -7530,10 +7530,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^19.2.4":
-  version: 19.2.4
-  resolution: "react@npm:19.2.4"
-  checksum: 10c0/cd2c9ff67a720799cc3b38a516009986f7fc4cb8d3e15716c6211cf098d1357ee3e348ab05ad0600042bbb0fd888530ba92e329198c92eafa0994f5213396596
+"react@npm:^19.2.5":
+  version: 19.2.5
+  resolution: "react@npm:19.2.5"
+  checksum: 10c0/4b5f231dbef92886f602533c9ce3bde04d99f0e71dfb5d794c43e02726efaad0421c08688f75fc98a6d6e1dc017372e1af7abbfecdc86a79968f461675931a7a
   languageName: node
   linkType: hard
 
@@ -7806,15 +7806,15 @@ __metadata:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     "@eslint/js": "npm:^10.0.1"
-    eslint: "npm:^10.1.0"
+    eslint: "npm:^10.2.0"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-prettier: "npm:^5.5.5"
-    globals: "npm:^17.4.0"
+    globals: "npm:^17.5.0"
     lerna: "npm:^9.0.7"
-    prettier: "npm:^3.8.1"
+    prettier: "npm:^3.8.2"
     typescript: "npm:^5.9.3"
-    typescript-eslint: "npm:^8.58.0"
-    vitest: "npm:^4.1.2"
+    typescript-eslint: "npm:^8.58.2"
+    vitest: "npm:^4.1.4"
   languageName: unknown
   linkType: soft
 
@@ -8564,7 +8564,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:^8.58.0":
+"typescript-eslint@npm:^8.58.2":
   version: 8.58.2
   resolution: "typescript-eslint@npm:8.58.2"
   dependencies:
@@ -8770,7 +8770,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.0.0 || ^7.0.0 || ^8.0.0, vite@npm:^8.0.3":
+"vite@npm:^6.0.0 || ^7.0.0 || ^8.0.0, vite@npm:^8.0.8":
   version: 8.0.8
   resolution: "vite@npm:8.0.8"
   dependencies:
@@ -8827,7 +8827,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:^4.1.2":
+"vitest@npm:^4.1.4":
   version: 4.1.4
   resolution: "vitest@npm:4.1.4"
   dependencies:
