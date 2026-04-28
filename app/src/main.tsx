@@ -12,6 +12,7 @@ import { BloodyGroveLogs } from './history/BloodyGroveLogs.ts'
 import { Material } from './material/Material'
 import { ChooseActionRuleHelp } from './material/help/ChooseActionRuleHelp.tsx'
 import { Tutorial } from './tutorial/Tutorial'
+import { theme } from './theme'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')!).render(
       logs={new BloodyGroveLogs()}
       tutorial={new Tutorial()}
       rulesHelp={{ [RuleId.ChooseAction]: ChooseActionRuleHelp }}
+      theme={theme}
     >
       <App />
     </GameProvider>
