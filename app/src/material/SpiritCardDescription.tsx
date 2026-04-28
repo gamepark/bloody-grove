@@ -5,8 +5,9 @@ import { MaterialType } from '@gamepark/bloody-grove/material/MaterialType.ts'
 import { SpiritCard, spiritCardData, SpiritType } from '@gamepark/bloody-grove/material/SpiritCard.ts'
 import { PlayerColor } from '@gamepark/bloody-grove/PlayerColor.ts'
 import { CustomMoveType } from '@gamepark/bloody-grove/rules/CustomMoveType.ts'
-import { CardDescription, ItemContext, ItemMenuButton, pointerCursorCss } from '@gamepark/react-game'
+import { CardDescription, ItemContext, pointerCursorCss } from '@gamepark/react-game'
 import { isCustomMoveType, isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
+import { BloodSealMenuButton } from '../theme/BloodSealMenuButton'
 import { SpiritCardHelp } from './help/SpiritCardHelp'
 import druidBlack from '../images/cards/druids/DruidBlack.jpg'
 import druidGreen from '../images/cards/druids/DruidGreen.jpg'
@@ -208,12 +209,12 @@ export class SpiritCardDescription extends CardDescription {
       return (
         <>
           {takeOnHand && (
-            <ItemMenuButton angle={50} radius={4} x={0} y={-2} move={takeOnHand} label={showLabel ? 'Prendre en main' : undefined} labelPosition="left">
+            <BloodSealMenuButton angle={50} radius={4} x={0} y={-2} move={takeOnHand} label={showLabel ? 'Prendre en main' : undefined} labelPosition="left">
               <FontAwesomeIcon icon={faHand} css={pointerCursorCss} />
-            </ItemMenuButton>
+            </BloodSealMenuButton>
           )}
           {takeOnBottomDeck && (
-            <ItemMenuButton
+            <BloodSealMenuButton
               angle={50}
               radius={4}
               x={0}
@@ -223,12 +224,12 @@ export class SpiritCardDescription extends CardDescription {
               labelPosition={isInHand ? 'right' : 'left'}
             >
               <FontAwesomeIcon icon={faArrowDown} css={pointerCursorCss} />
-            </ItemMenuButton>
+            </BloodSealMenuButton>
           )}
           {takeOnTopDeck && (
-            <ItemMenuButton angle={50} radius={4} x={0} y={3} move={takeOnTopDeck} label={showLabel ? 'Sur votre paquet' : undefined} labelPosition="left">
+            <BloodSealMenuButton angle={50} radius={4} x={0} y={3} move={takeOnTopDeck} label={showLabel ? 'Sur votre paquet' : undefined} labelPosition="left">
               <FontAwesomeIcon icon={faArrowUp} css={pointerCursorCss} />
-            </ItemMenuButton>
+            </BloodSealMenuButton>
           )}
         </>
       )
@@ -236,17 +237,17 @@ export class SpiritCardDescription extends CardDescription {
 
     if (replace) {
       return (
-        <ItemMenuButton angle={50} radius={4} x={-2} y={-3.5} move={replace} label={'Remplacer'} labelPosition="left">
+        <BloodSealMenuButton angle={50} radius={4} x={-2} y={-3.5} move={replace} label={'Remplacer'} labelPosition="left">
           <FontAwesomeIcon icon={faTrash} css={pointerCursorCss} />
-        </ItemMenuButton>
+        </BloodSealMenuButton>
       )
     }
 
     if (takeElder) {
       return (
-        <ItemMenuButton angle={50} radius={4} x={0} y={0} move={takeElder} label={'Choisir'} labelPosition="left">
+        <BloodSealMenuButton angle={50} radius={4} x={0} y={0} move={takeElder} label={'Choisir'} labelPosition="left">
           <FontAwesomeIcon icon={faHand} css={pointerCursorCss} />
-        </ItemMenuButton>
+        </BloodSealMenuButton>
       )
     }
     return undefined

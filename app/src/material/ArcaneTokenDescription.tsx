@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ArcaneToken } from '@gamepark/bloody-grove/material/ArcaneToken.ts'
 import { LocationType } from '@gamepark/bloody-grove/material/LocationType.ts'
 import { MaterialType } from '@gamepark/bloody-grove/material/MaterialType.ts'
-import { ItemContext, ItemMenuButton, pointerCursorCss, TokenDescription } from '@gamepark/react-game'
+import { ItemContext, pointerCursorCss, TokenDescription } from '@gamepark/react-game'
 import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
+import { BloodSealMenuButton } from '../theme/BloodSealMenuButton'
 import arcaneToken2 from '../images/tokens/ArcaneToken2.jpg'
 import arcaneToken3 from '../images/tokens/ArcaneToken3.jpg'
 import arcaneToken4 from '../images/tokens/ArcaneToken4.jpg'
@@ -43,9 +44,9 @@ export class ArcaneTokenDescription extends TokenDescription {
 
     if (replace) {
       return (
-        <ItemMenuButton angle={20} radius={4} x={1.5} y={-1.5} move={replace} label={'Replacer'} labelPosition="right">
+        <BloodSealMenuButton angle={20} radius={4} x={1.5} y={-1.5} move={replace} label={'Replacer'} labelPosition="right">
           <FontAwesomeIcon icon={faArrowRight} css={pointerCursorCss} />
-        </ItemMenuButton>
+        </BloodSealMenuButton>
       )
     }
     return undefined
