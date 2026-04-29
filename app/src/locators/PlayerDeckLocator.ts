@@ -15,7 +15,7 @@ export class PlayerDeckLocator extends DeckLocator {
     if (isItemContext(context)) return coordinates
 
     const count = this.countItems(location, context)
-    if (this.isPlacingOnDeck(context) && location.player === context.player) {
+    if (this.isPlacingInDeck(context) && location.player === context.player) {
       if (location.x === 0) {
         return { ...coordinates, y: coordinates.y - 6, z: 0.01 }
       } else {
@@ -27,11 +27,12 @@ export class PlayerDeckLocator extends DeckLocator {
   }
 
   getLocations(context: MaterialContext) {
-    if (!this.isPlacingOnDeck(context)) return []
-    const player = context.rules.game.rule!.player!
+    if (!this.isPlacingInDeck(context) || context.player === undefined) return []
+    const ruleId = context.rules.game.rule?.id
+    if (ruleId === RuleId.EndOfRoundSpiritCardsUnderDeck) return []
     return [
-      { type: LocationType.PlayerDeck, player, x: 0 },
-      { type: LocationType.PlayerDeck, player }
+      { type: LocationType.PlayerDeck, player: context.player, x: 0 },
+      { type: LocationType.PlayerDeck, player: context.player }
     ]
   }
 
@@ -40,9 +41,16 @@ export class PlayerDeckLocator extends DeckLocator {
     return index === 0 ? 0 : 180
   }
 
-  private isPlacingOnDeck(context: MaterialContext): boolean {
+  private isPlacingInDeck(context: MaterialContext): boolean {
     const ruleId = context.rules.game.rule?.id
-    return (ruleId === RuleId.TakeSpiritCards || ruleId === RuleId.ElderEffectTakeSpirit) && context.rules.game.rule?.player === context.player
+    if (
+      ruleId !== RuleId.TakeSpiritCards &&
+      ruleId !== RuleId.ElderEffectTakeSpirit &&
+      ruleId !== RuleId.EndOfRoundSpiritCardsUnderDeck
+    ) {
+      return false
+    }
+    return context.player !== undefined && context.rules.isTurnToPlay(context.player)
   }
 }
 
