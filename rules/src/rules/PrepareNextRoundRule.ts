@@ -77,7 +77,7 @@ export class PrepareNextRoundRule extends MaterialRulesPart {
 
   majorityCubesReturnToCenter(): MaterialMove[] {
     return this.material(MaterialType.Cube)
-      .location(LocationType.GroveMajority)
+      .location((l) => l.type === LocationType.GroveMajority && l.id !== 0)
       .moveItems(({ location }) => ({ ...location, id: 0 }))
   }
 
