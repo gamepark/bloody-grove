@@ -12,29 +12,20 @@ class RoundPisteLocator extends Locator {
     return context.rules.material(this.parentItemType).getItem()
   }
 
-  getCoordinates(location: Location, context: MaterialContext) {
+  getPositionOnParent(location: Location, context: MaterialContext) {
     const parent = this.getParentItem(location, context)
-    if (!parent) return { x: 30, y: 3 }
-    const baseX = parent.location.x ?? 0
-    const baseY = parent.location.y ?? 0
     const viewer = context.player ?? context.rules.players[0]
-    const firstPlayer = parent.location.rotation ? PlayerColor.Green : PlayerColor.Black
-    const useBackLayout = viewer !== firstPlayer
-    switch (location.id) {
-      case 1:
-        return useBackLayout ? { x: baseX + 2, y: baseY - 3 } : { x: baseX - 2, y: baseY - 3 }
-      case 2:
-        return useBackLayout ? { x: baseX - 2, y: baseY - 3 } : { x: baseX + 2, y: baseY - 3 }
-      case 3:
-        return useBackLayout ? { x: baseX - 2, y: baseY } : { x: baseX + 2, y: baseY }
-      case 4:
-        return useBackLayout ? { x: baseX + 2, y: baseY } : { x: baseX - 2, y: baseY }
-      case 5:
-        return useBackLayout ? { x: baseX + 2, y: baseY + 3 } : { x: baseX - 2, y: baseY + 3 }
-      case 6:
-      default:
-        return useBackLayout ? { x: baseX - 2, y: baseY + 3 } : { x: baseX + 2, y: baseY + 3 }
-    }
+    const firstPlayer = parent?.location.rotation ? PlayerColor.Green : PlayerColor.Black
+    const positions = [
+      { x: 18, y: 18 },
+      { x: 82, y: 18 },
+      { x: 82, y: 50 },
+      { x: 18, y: 50 },
+      { x: 18, y: 82 },
+      { x: 82, y: 82 }
+    ]
+    const pos = positions[(location.id ?? 6) - 1]
+    return viewer === firstPlayer ? pos : { x: 100 - pos.x, y: pos.y }
   }
 
   getPositionDependencies(_location: Location, context: MaterialContext) {
