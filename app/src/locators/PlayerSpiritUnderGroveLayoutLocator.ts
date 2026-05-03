@@ -13,7 +13,7 @@ class PlayerSpiritUnderGroveLayoutLocator extends ListLocator {
   }
 
   getCoordinates(location: Location, context: MaterialContext) {
-    const xFromGrove = isPlayerBlack(getContextPlayer(context)) ? [-5, 5, 15] : [15, 5, -5]
+    const xFromGrove = [-5, 5, 15]
     return {
       x: xFromGrove[location.id ?? 0],
       y: isPlayerBlack(getContextPlayer(context)) ? (isPlayerBlack(location.player) ? 8 : -8) : isPlayerBlack(location.player) ? -8 : 8,

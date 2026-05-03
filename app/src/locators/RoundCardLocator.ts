@@ -1,13 +1,8 @@
-import { Locator, MaterialContext } from '@gamepark/react-game'
-import { Location } from '@gamepark/rules-api'
-import { getContextPlayer, isPlayerBlack } from './utils.ts'
+import { Locator } from '@gamepark/react-game'
 
 export class RoundCardLocator extends Locator {
   coordinates = { x: -17, y: 0 }
-
-  getRotateZ(_location: Location, context: MaterialContext): number {
-    return isPlayerBlack(getContextPlayer(context)) ? -90 : 90
-  }
+  rotateZ = -90
 }
 
 export const roundCardLocator = new RoundCardLocator()
