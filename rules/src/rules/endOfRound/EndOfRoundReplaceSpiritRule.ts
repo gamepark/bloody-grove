@@ -11,6 +11,18 @@ export class EndOfRoundReplaceSpiritRule extends PlayerTurnRule {
   groveToPlaceSpirit?: number
   nextRule?: RuleId
 
+  onRuleStart(): MaterialMove[] {
+    if (this.possibleIndexes().length === 0) {
+      const nextRules = this.remind<RuleId[]>(Memory.NextRules) ?? []
+      if (nextRules.length > 0) {
+        this.memorize(Memory.NextRules, [...nextRules, this.nextRule!])
+        return new NextRuleHelper(this.game).nextRule()
+      }
+      return [this.startRule(this.nextRule!)]
+    }
+    return []
+  }
+
   getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = []
     this.possibleIndexes().forEach((index) => {
