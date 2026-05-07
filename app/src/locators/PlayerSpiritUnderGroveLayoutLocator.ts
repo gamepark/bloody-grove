@@ -9,7 +9,7 @@ class PlayerSpiritUnderGroveLayoutLocator extends ListLocator {
   maxCount = 5
 
   getGap(location: Location<number, number>, context: MaterialContext<number, number, number>): Partial<Coordinates> {
-    return { y: isPlayerBlack(getContextPlayer(context)) ? (isPlayerBlack(location.player) ? 2 : -2) : isPlayerBlack(location.player) ? -2 : 2 }
+    return { y: isPlayerBlack(getContextPlayer(context)) ? (isPlayerBlack(location.player) ? 2.5 : -2.5) : isPlayerBlack(location.player) ? -2.5 : 2.5 }
   }
 
   getCoordinates(location: Location, context: MaterialContext) {

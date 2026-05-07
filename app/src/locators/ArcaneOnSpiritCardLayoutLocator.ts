@@ -9,7 +9,7 @@ class ArcaneOnSpiritCardLayoutLocator extends ListLocator {
   gap = { x: 1.6 }
 
   getPositionOnParent(location: Location): XYCoordinates {
-    return location.x === undefined ? { x: 50, y: 50 } : { x: 20, y: 20 }
+    return location.x === undefined ? { x: 50, y: 50 } : { x: 20, y: 15 }
   }
 
   locationDescription = new DropAreaDescription(spiritCardDescription)
