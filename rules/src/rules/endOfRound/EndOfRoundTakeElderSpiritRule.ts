@@ -11,10 +11,12 @@ export class EndOfRoundTakeElderSpiritRule extends PlayerTurnRule {
   nextRule?: RuleId
 
   getPlayerMoves(): MaterialMove[] {
+    const x = this.material(MaterialType.SpiritCard).location((loc) => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === this.groveToPlaceSpirit).player(this.player).length
     return this.elderSpiritCards.moveItems({
       type: LocationType.PlayerSpiritUnderGroveLayout,
       player: this.player,
-      id: this.groveToPlaceSpirit
+      id: this.groveToPlaceSpirit,
+      x
     })
   }
 

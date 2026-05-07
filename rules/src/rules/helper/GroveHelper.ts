@@ -19,7 +19,7 @@ export class GroveHelper extends MaterialRulesPart {
   getPossiblePlace(): Location {
     const actualTurn = this.remind<number>(Memory.ActualTurn)
     const actualGroveIndex = this.getActualGroveIndex(actualTurn)
-    const x = this.material(MaterialType.SpiritCard).location(LocationType.PlayerSpiritUnderGroveLayout).parent(actualGroveIndex).player(this.player).length
+    const x = this.material(MaterialType.SpiritCard).location((loc) => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === actualGroveIndex).player(this.player).length
     return {
       type: LocationType.PlayerSpiritUnderGroveLayout,
       player: this.player,
@@ -32,10 +32,12 @@ export class GroveHelper extends MaterialRulesPart {
     const locations: Location[] = []
     for (let i = 0; i < 3; i++) {
       if (i !== indexToSkip) {
+        const x = this.material(MaterialType.SpiritCard).location((loc) => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === i).player(this.player).length
         locations.push({
           type: LocationType.PlayerSpiritUnderGroveLayout,
           player: this.player,
-          id: i
+          id: i,
+          x
         })
       }
     }
