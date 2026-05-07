@@ -122,18 +122,18 @@ export class TutorialSetup extends BloodyGroveSetup {
     })
     // Deck: remaining elders
     const riverSet = new Set([...riverElderCards, SpiritCard.ElderSpiritRed1 as SpiritCard])
-    const deckElders = elderSpiritCards.filter((id) => !riverSet.has(id))
-    deckElders.forEach((id, x) => {
-      this.material(MaterialType.SpiritCard).createItem({
-        id: { front: id, back: SpiritType.Elder },
-        location: { type: LocationType.ElderSpiritCardsDeck, x }
-      })
-    })
     const deckRedElders = elderSpiritRedCards.filter((id) => !riverSet.has(id))
     deckRedElders.forEach((id, x) => {
       this.material(MaterialType.SpiritCard).createItem({
         id: { front: id, back: SpiritType.ElderRed },
-        location: { type: LocationType.ElderSpiritCardsDeck, x: deckElders.length + x }
+        location: { type: LocationType.ElderSpiritCardsDeck, x }
+      })
+    })
+    const deckElders = elderSpiritCards.filter((id) => !riverSet.has(id))
+    deckElders.forEach((id, x) => {
+      this.material(MaterialType.SpiritCard).createItem({
+        id: { front: id, back: SpiritType.Elder },
+        location: { type: LocationType.ElderSpiritCardsDeck, x: deckRedElders.length + x }
       })
     })
   }
