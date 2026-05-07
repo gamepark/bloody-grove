@@ -37,7 +37,7 @@ export class PrepareNextRoundRule extends MaterialRulesPart {
 
   discardArcaneTokensInSpiritCard(): MaterialMove[] {
     const moves: MaterialMove[] = []
-    const arcaneTokensInSpiritCard = this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneOnSpiritCardLayout)
+    const arcaneTokensInSpiritCard = this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneOnSpiritCardLayout).rotation(false)
     if (arcaneTokensInSpiritCard.length > 0) {
       moves.push(arcaneTokensInSpiritCard.moveItemsAtOnce({ type: LocationType.ArcaneDiscard }))
     }

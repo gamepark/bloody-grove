@@ -148,7 +148,8 @@ export class SpiritCardDescription extends CardDescription {
   takeElderMove(context: ItemContext, legalMoves: MaterialMove[]): MaterialMove | undefined {
     const id = context.rules.material(MaterialType.SpiritCard).getItem(context.index)?.id.front as SpiritCard
     const isElder = id !== undefined && spiritCardData[id].type === 'elder'
-    if (isElder) {
+    const isInRiver = context.rules.material(MaterialType.SpiritCard).getItem(context.index)?.location.type === LocationType.ElderSpiritCardsRiver
+    if (isElder && isInRiver) {
       return legalMoves.find(
         (move) =>
           isMoveItemType(MaterialType.SpiritCard)(move) &&
