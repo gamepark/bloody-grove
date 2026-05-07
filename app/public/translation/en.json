@@ -79,6 +79,8 @@
   "grove.tie.desc": "In case of a tie, nobody takes control of the Grove. The marker stays neutral.",
   "grove.victory-cond": "Victory Condition",
   "grove.victory-cond.desc": "Controlling all 3 Groves at the end of a round triggers an immediate victory! Otherwise, after 4 rounds, total Domination (<domination />) decides the winner.",
+  "grove.player-force": "Current power",
+  "grove.player-force.line": "{player} : {force}<forceIcon />",
 
   "round-card": "Round Card",
   "round-card.role": "This card indicates the active player. Box 1 faces the first player of the current round. The marker moves along the track and the active player is the player on the same side as the marker. The first player alternates each new round.",

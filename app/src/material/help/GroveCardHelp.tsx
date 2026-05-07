@@ -1,11 +1,17 @@
-import { Trans } from 'react-i18next'
-import { MaterialHelpProps } from '@gamepark/react-game'
+import { Trans, useTranslation } from 'react-i18next'
+import { MaterialHelpProps, Picture, useGame } from '@gamepark/react-game'
+import { MaterialGame } from '@gamepark/rules-api'
 import { GroveCard, getGroveType } from '@gamepark/bloody-grove/material/GroveCard'
-import { components } from './utils.tsx'
+import { GroveHelper } from '@gamepark/bloody-grove/rules/helper/GroveHelper'
+import { components, mini } from './utils.tsx'
+import ForceIcone from '../../images/icons/force.png'
 
-export const GroveCardHelp = ({ item }: MaterialHelpProps) => {
+export const GroveCardHelp = ({ item, itemIndex }: MaterialHelpProps) => {
+  const { t } = useTranslation()
+  const game = useGame<MaterialGame>()
   const groveId = item.id as GroveCard | undefined
   const groveType = groveId !== undefined ? getGroveType(groveId) : undefined
+  const groveHelper = game ? new GroveHelper(game) : null
 
   return (
     <>
@@ -50,6 +56,23 @@ export const GroveCardHelp = ({ item }: MaterialHelpProps) => {
         {' : '}
         <Trans i18nKey="grove.victory-cond.desc" components={components} />
       </p>
+
+      {groveHelper && itemIndex !== undefined && game && game.players.length > 0 && (
+        <>
+          <p>
+            <strong><Trans i18nKey="grove.player-force" /></strong>
+          </p>
+          {(game.players as number[]).map(player => (
+            <p key={player}>
+              <Trans
+                i18nKey="grove.player-force.line"
+                values={{ player: t(`player.${player}`), force: groveHelper.calculatePlayerForceForGrove(player, itemIndex) }}
+                components={{ forceIcon: <Picture src={ForceIcone} css={mini} /> }}
+              />
+            </p>
+          ))}
+        </>
+      )}
     </>
   )
 }

@@ -83,6 +83,8 @@
   "grove.tie.desc": "En cas d'égalité, personne ne prend le contrôle du Bosquet. Le marqueur reste neutre.",
   "grove.victory-cond": "Condition de victoire",
   "grove.victory-cond.desc": "Contrôler les 3 Bosquets à la fin d'une manche déclenche une victoire immédiate ! Sinon, après 4 manches, c'est la Domination (<domination />) totale qui départage les joueurs.",
+  "grove.player-force": "Puissance actuelle",
+  "grove.player-force.line": "{player} : {force}<forceIcon />",
 
   "round-card": "Carte Manche",
   "round-card.role": "Cette carte indique le joueur actif. La case 1 est tournée du côté du premier joueur de la manche en cours. Le marqueur se déplace sur la piste et le joueur actif est le joueur du même côté que le marqueur. Le premier joueur alterne à chaque nouvelle manche.",
