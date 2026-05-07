@@ -23,8 +23,8 @@ export class ElderEffectPlaceCardUnderDeckInGroveRule extends PlayerTurnRule {
       const card = this.material(MaterialType.SpiritCard).getItem(move.itemIndex)
       const data = spiritCardData[(card.id as SpiritCardId).front as SpiritCard]
       const additionalRules: RuleId[] = []
-      for (let i = 0; i < data.arcanes; i++) additionalRules.push(RuleId.PlaceArcane)
       for (let i = 0; i < data.ruses; i++) additionalRules.push(RuleId.MoveSpirit)
+      for (let i = 0; i < data.arcanes; i++) additionalRules.push(RuleId.PlaceArcane)
       if (additionalRules.length > 0) {
         const currentNextRules: RuleId[] = this.remind(Memory.NextRules) ?? []
         this.memorize(Memory.NextRules, [...additionalRules, ...currentNextRules])

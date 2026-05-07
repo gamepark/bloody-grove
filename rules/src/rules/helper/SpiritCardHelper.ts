@@ -18,11 +18,11 @@ export class SpiritCardHelper extends MaterialRulesPart {
     if (!id.front) return []
     const nextRules = []
     const data = spiritCardData[id.front]
-    for (let i = 0; i < data.arcanes; i++) {
-      nextRules.push(RuleId.PlaceArcane)
-    }
     for (let i = 0; i < data.ruses; i++) {
       nextRules.push(RuleId.MoveSpirit)
+    }
+    for (let i = 0; i < data.arcanes; i++) {
+      nextRules.push(RuleId.PlaceArcane)
     }
     this.memorize(Memory.NextRules, nextRules)
     return new NextRuleHelper(this.game).nextRule()
