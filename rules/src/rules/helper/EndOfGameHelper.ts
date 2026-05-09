@@ -44,7 +44,10 @@ export class EndOfGameHelper extends MaterialRulesPart {
       return this.getMajority(playerB) > this.getMajority(playerA) ? 1 : -1
     }
 
-    return this.getScore(playerB) > this.getScore(playerA) ? 1 : this.getScore(playerB) < this.getScore(playerA) ? -1 : 0
+    const scoreA = this.getScore(playerA)
+    const scoreB = this.getScore(playerB)
+    if (scoreB !== scoreA) return scoreB > scoreA ? 1 : -1
+    return this.getPlayerTransformations(playerB) - this.getPlayerTransformations(playerA)
   }
 
   checkIfWinnerIsDeterminateByScore() {
@@ -53,6 +56,6 @@ export class EndOfGameHelper extends MaterialRulesPart {
 
   getPlayerTransformations(player: PlayerColor) {
     const druidTransformations = this.material(MaterialType.SpiritCard).location(LocationType.PlayerDruid).player(player)
-    return druidTransformations.length
+    return druidTransformations.length - 1
   }
 }

@@ -68,7 +68,8 @@ export class PrepareNextRoundRule extends MaterialRulesPart {
     this.game.players.forEach((player) => {
       const cardsInPlayerDeck = this.material(MaterialType.SpiritCard).location(LocationType.PlayerDeck).player(player).getItems()
       cardsInPlayerDeck.sort((a, b) => b.location.x! - a.location.x!)
-      for (let i = 0; i < 4; i++) {
+      const nbCards = cardsInPlayerDeck.length >= 4 ? 4 : cardsInPlayerDeck.length
+      for (let i = 0; i < nbCards; i++) {
         moves.push(this.material(MaterialType.SpiritCard).id(cardsInPlayerDeck[i].id).moveItem({ type: LocationType.PlayerHand, player }))
       }
     })
