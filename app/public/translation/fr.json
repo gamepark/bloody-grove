@@ -114,7 +114,7 @@
   "log.spirit.take-spirit-under-deck": "{player} récupère un <card>esprit {cardType, select, bear{ours} fox{renard} other{hibou}}</card> et le met sous son deck",
 
   "tuto.welcome": "Bienvenue dans <strong>Bloody Grove</strong> ! Dans ce tutoriel, vous affrontez Sylvara, qui joue le Druide vert. Vous jouez le <strong>Druide noir</strong>.",
-  "tuto.goal": "Votre objectif : <strong>contrôler les 3 Bosquets</strong> à la fin d'une manche pour gagner immédiatement, ou accumuler le plus de points de <strong>Domination (<domination />)</strong> en 4 manches.",
+  "tuto.goal": "Vous pouvez gagner de <strong>2 façons</strong> :<br/>• remporter les <strong>3 Bosquets lors d'une même manche</strong> pour une victoire immédiate ;<br/>• ou avoir le plus de points de <strong>Domination (<domination />)</strong> à l'issue des <strong>4 manches</strong>.",
   "tuto.hand": "Voici votre <strong>main</strong> (4 cartes Esprit) et votre <strong>Druide</strong>. Chaque manche, vous avez le choix entre 2 actions : envoyer un Esprit combattre dans le Bosquet actif <strong>ou</strong> utiliser un Esprit pour transformer votre Druide.",
   "tuto.show-arcane": "Avant de jouer, chaque joueur peut <strong>consulter secrètement</strong> un jeton Arcane de la réserve. Cliquez sur un jeton pour le regarder !",
   "tuto.show-arcane-value": "Ce jeton vaut <strong>+4<force /></strong> ! Retenez-le précieusement — il sera votre arme secrète. Replacez-le maintenant dans la réserve.",
@@ -137,7 +137,7 @@
   "tuto.arcane-reveal": "<strong>Bosquet Hibou</strong> : le jeton Arcane se révèle ! Esprit Hibou (Force 1) + bonus Hibou (+1) + <strong>jeton Arcane (+4) = 6</strong>. Vous remportez ce Bosquet !",
   "tuto.take-elder-2": "Choisissez un <strong>Esprit Vénérable</strong> pour ce Bosquet.",
   "tuto.replace-spirit": "En prenant un <strong>Esprit Vénérable</strong>, vous devez <strong>défausser une carte Esprit</strong> (non Vénérable) du même Bosquet. Cliquez sur la carte à défausser.",
-  "tuto.conclusion": "<strong>Félicitations !</strong> Vous maîtrisez les bases de Bloody Grove. Continuez à jouer : découvrez les effets des Esprits Vénérables, maîtrisez les Ruses pour déplacer vos cartes, et remportez les 3 Bosquets pour la victoire !",
+  "tuto.conclusion": "<strong>Félicitations !</strong> Vous maîtrisez les bases de Bloody Grove. Continuez à jouer pour découvrir les effets des Esprits Vénérables et maîtriser les Ruses ! N'oubliez pas les <strong>2 voies vers la victoire</strong> : remporter les <strong>3 Bosquets en une seule manche</strong>, ou accumuler le plus de points de <strong>Domination (<domination />)</strong> en 4 manches.",
 
   "help.rule.title": "Tour de jeu",
   "help.rule.intro": "À votre tour, choisissez entre deux actions :",

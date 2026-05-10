@@ -110,7 +110,7 @@
   "log.spirit.take-spirit-under-deck": "{player} takes a <card>{cardType, select, bear{bear} fox{fox} other{owl}} spirit</card> and puts it under their deck",
 
   "tuto.welcome": "Welcome to <strong>Bloody Grove</strong>! In this tutorial, you face Sylvara, who plays the green druid. You play the <strong>black druid</strong>.",
-  "tuto.goal": "Your objective: <strong>control all 3 Groves</strong> at the end of a round to win immediately, or accumulate the most <strong>Domination (<domination />)</strong> points over 4 rounds.",
+  "tuto.goal": "There are <strong>2 ways to win</strong>:<br/>• capture <strong>all 3 Groves in a single round</strong> for immediate victory;<br/>• or hold the most <strong>Domination (<domination />)</strong> points at the end of the <strong>4 rounds</strong>.",
   "tuto.hand": "Here is your <strong>hand</strong> (4 Spirit cards) and your <strong>Druid</strong>. Each round, you choose between 2 actions: Send a spirit to fight in the active grove <strong>or</strong> use a spirit to transform your Druid.",
   "tuto.show-arcane": "Before playing, each player can <strong>secretly look at</strong> an Arcane token from the reserve. Click on a token to look at it!",
   "tuto.show-arcane-value": "This token is worth <strong>+4<force /></strong>! Remember it carefully — it will be your secret weapon. Now put it back in the reserve.",
@@ -132,7 +132,7 @@
   "tuto.resolve-grove1": "<strong>Fox Grove</strong>: Sylvara wins this Grove. She chooses an Elder Spirit...",
   "tuto.arcane-reveal": "<strong>Owl Grove</strong>: the Arcane token is revealed! Owl spirit (Strength 1) + Owl bonus (+1) + <strong>Arcane token (+4) = 6</strong>. You win this Grove!",
   "tuto.take-elder-2": "Choose an <strong>Elder Spirit</strong> for this Grove.",
-  "tuto.conclusion": "<strong>Congratulations!</strong> You've mastered the basics of Bloody Grove. Keep playing: discover the Elder Spirits' effects, master Tricks to move your cards, and win all 3 Groves for victory!",
+  "tuto.conclusion": "<strong>Congratulations!</strong> You've mastered the basics of Bloody Grove. Keep playing to discover the Elder Spirits' effects and master Tricks! Remember the <strong>2 paths to victory</strong>: capture <strong>all 3 Groves in a single round</strong>, or hold the most <strong>Domination (<domination />)</strong> points after the 4 rounds.",
 
   "help.rule.title": "Game Turn",
   "help.rule.intro": "On your turn, choose between two actions:",

@@ -48,7 +48,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => <Trans i18nKey="tuto.goal" components={components} />,
-        position: { x: 0, y: 18 }
+        position: { x: 10, y: 25 }
       },
       focus: (game: MaterialGame) => ({
         materials: [this.material(game, MaterialType.GroveCard)]
@@ -526,7 +526,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
 
     {
       popup: {
-        text: () => <Trans i18nKey="tuto.conclusion" />
+        text: () => <Trans i18nKey="tuto.conclusion" components={components} />
       }
     }
   ]
