@@ -77,9 +77,11 @@ export class PrepareNextRoundRule extends MaterialRulesPart {
   }
 
   majorityCubesReturnToCenter(): MaterialMove[] {
-    return this.material(MaterialType.Cube)
-      .location((l) => l.type === LocationType.GroveMajority && l.id !== 0)
-      .moveItems(({ location }) => ({ ...location, id: 0 }))
+    const cubes = this.material(MaterialType.Cube)
+      .location(LocationType.GroveMajority)
+      .filter((item) => item.location.id !== 0)
+    if (cubes.length === 0) return []
+    return cubes.moveItems(({ location }) => ({ ...location, id: 0 }))
   }
 
   rotateRoundCardAndResetTurnCube(): MaterialMove[] {
