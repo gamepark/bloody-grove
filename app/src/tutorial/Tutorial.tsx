@@ -314,7 +314,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => <Trans i18nKey="tuto.arcane-place" />,
-        position: { x: 0, y: 15 }
+        position: { x: 0, y: -5 }
       },
       focus: (game: MaterialGame) => ({
         materials: [
@@ -342,7 +342,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => <Trans i18nKey="tuto.arcane-hidden" components={components} />,
-        position: { x: -15, y: 15 }
+        position: { x: 0, y: -5 }
       }
     },
 
