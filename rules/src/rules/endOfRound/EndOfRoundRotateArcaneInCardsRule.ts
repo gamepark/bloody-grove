@@ -34,7 +34,16 @@ export class EndOfRoundRotateArcaneInCardsRule extends MaterialRulesPart {
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
-    if (isMoveItem(move) && move.location.type === LocationType.ArcaneOnSpiritCardLayout) {
+    if (!isMoveItem(move)) return []
+    if (move.location.type === LocationType.ArcaneOnSpiritCardLayout) {
+      const parentIndex = move.location.parent!
+      if (this.material(MaterialType.SpiritCard).index(parentIndex).getItems().length === 0) {
+        const moves: MaterialMove[] = [this.material(MaterialType.ArcaneToken).index(move.itemIndex).moveItem({ type: LocationType.ArcaneDiscard })]
+        if (this.rotateArcanesInSpiritCardsForThisGrove().length === 0) moves.push(this.startRule(this.nextRule!))
+        return moves
+      }
+    }
+    if (move.location.type === LocationType.ArcaneOnSpiritCardLayout || move.location.type === LocationType.ArcaneDiscard) {
       if (this.rotateArcanesInSpiritCardsForThisGrove().length === 0) return [this.startRule(this.nextRule!)]
     }
     return []
@@ -47,7 +56,12 @@ export class EndOfRoundRotateArcaneInCardsRule extends MaterialRulesPart {
       .getIndexes()
     spiritCards.forEach((idx) => {
       const arcanesInCard = this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneOnSpiritCardLayout).rotation(true).parent(idx)
-      moves.push(...arcanesInCard.rotateItems(false))
+      if (arcanesInCard.getItems().some(item => item.id === ArcaneToken.ArcaneTokenDiscard)) {
+        moves.push(...arcanesInCard.moveItems({ type: LocationType.ArcaneDiscard }))
+        moves.push(this.material(MaterialType.SpiritCard).index(idx).deleteItem(1))
+      } else {
+        moves.push(...arcanesInCard.rotateItems(false))
+      }
     })
     return moves
   }

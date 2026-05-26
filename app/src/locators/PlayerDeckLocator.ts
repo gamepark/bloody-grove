@@ -52,6 +52,8 @@ export class PlayerDeckLocator extends DeckLocator {
     }
     return context.player !== undefined && context.rules.isTurnToPlay(context.player)
   }
+
+  navigationSorts = []
 }
 
 export const playerDeckLocator = new PlayerDeckLocator()

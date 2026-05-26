@@ -110,6 +110,7 @@ const ElderSpiritHelp = ({ cardId, cardData }: { cardId: SpiritCard; cardData: S
   const force = cardData.force([])
   const dominations = cardData.dominations([])
   const hasEffects = cardData.effects && cardData.effects.length > 0
+  const effects = cardData.effects ?  [...new Set(cardData.effects)] : []
 
   return (
     <>
@@ -129,6 +130,8 @@ const ElderSpiritHelp = ({ cardId, cardData }: { cardId: SpiritCard; cardData: S
             </strong>
             {': '}
             {force}
+            {' — '}
+            <Trans i18nKey="spirit-card.force.desc" />
           </>
         )}
       </p>
@@ -157,6 +160,8 @@ const ElderSpiritHelp = ({ cardId, cardData }: { cardId: SpiritCard; cardData: S
             </strong>
             {': '}
             {dominations}
+            {' — '}
+            <Trans i18nKey="spirit-card.dominations.desc" />
           </>
         )}
       </p>
@@ -169,7 +174,7 @@ const ElderSpiritHelp = ({ cardId, cardData }: { cardId: SpiritCard; cardData: S
             </strong>
           </p>
           <ul style={{ listStyle: 'none' }}>
-            {cardData.effects!.map((effect, i) => (
+            {effects.map((effect, i) => (
               <li key={i}>
                 {effect === RuleId.ElderEffectShowArcane && <Trans i18nKey="elder.effect.show-arcane" components={components} />}
                 {effect === RuleId.ElderEffectTakeSpirit && <Trans i18nKey="elder.effect.take-spirit" components={components} />}

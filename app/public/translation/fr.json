@@ -45,7 +45,7 @@
   "drop.deck.bottom": "Placer dessous",
   "drop.deck.top": "Placer dessus",
 
-  "help.spirit-card.title": "Carte {cardType, select, druid{Druide} elder{Esprit Vénérable} bear{Esprit Ours} fox{Esprit Renard} other{Esprit Hibou}}",
+  "help.spirit-card.title": "Carte {cardType, select, druid{Druide} elder{Esprit Vénérable} bear{Esprit Ours} fox{Esprit Renard} owl{Esprit Hibou} other{Esprit}}",
   "spirit-card.druid.near.desc": "Quand vous placez une carte Esprit à gauche ou à droite de votre Druide, les symboles Recrutement (<recrutement />) complets vous permettent de recruter immédiatement une carte Élite du type correspondant. La carte jouée est ensuite placée sur le Druide et devient votre transformation ; toutes vos cartes de ce type dans les Bosquets gagnent +1<force /> !",
   "spirit-card.type": "Type : {groveType, select, bear{ours} fox{renard} other{hibou}}",
   "spirit-card.type.bonus.note": " (les cartes du même type que le Bosquet reçoivent +1<force />)",
@@ -116,7 +116,7 @@
   "tuto.welcome": "Bienvenue dans <strong>Bloody Grove</strong> ! Dans ce tutoriel, vous affrontez Sylvara, qui joue le Druide vert. Vous jouez le <strong>Druide noir</strong>.",
   "tuto.goal": "Vous pouvez gagner de <strong>2 façons</strong> :<br/>• remporter les <strong>3 Bosquets lors d'une même manche</strong> pour une victoire immédiate ;<br/>• ou avoir le plus de points de <strong>Domination (<domination />)</strong> à l'issue des <strong>4 manches</strong>.",
   "tuto.hand": "Voici votre <strong>main</strong> (4 cartes Esprit) et votre <strong>Druide</strong>. Chaque manche, vous avez le choix entre 2 actions : envoyer un Esprit combattre dans le Bosquet actif <strong>ou</strong> utiliser un Esprit pour transformer votre Druide.",
-  "tuto.show-arcane": "Avant de jouer, chaque joueur peut <strong>consulter secrètement</strong> un jeton Arcane de la réserve. Cliquez sur un jeton pour le regarder !",
+  "tuto.show-arcane": "Avant de jouer, chaque joueur peut <strong>consulter secrètement</strong> un jeton Arcane de la réserve. Cliquez sur le jeton en surbrillance pour le regarder !",
   "tuto.show-arcane-value": "Ce jeton vaut <strong>+4<force /></strong> ! Retenez-le précieusement — il sera votre arme secrète. Replacez-le maintenant dans la réserve.",
   "tuto.ai-show-arcane": "Sylvara consulte aussi secrètement un jeton Arcane de la réserve...",
   "tuto.turn1": "C'est à vous ! <strong>Bosquet 1 : l'Ours</strong>. Jouez l'Esprit Ours sous ce Bosquet — les cartes Ours y reçoivent <strong>+1<force /></strong> bonus de type !",

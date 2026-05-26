@@ -14,7 +14,7 @@ export class PlayerHandLocator extends HandLocator {
     }
   }
   getHoverTransform(item: MaterialItem<number, number>, context: ItemContext<number, number, number>): string[] {
-    return [...super.getHoverTransform(item, context), 'translateY(-2.5em)']
+    return context.player === item.location.player ? [...super.getHoverTransform(item, context), 'translateY(-2.5em)'] : []
   }
 
   getBaseAngle(location: Location, context: MaterialContext) {
