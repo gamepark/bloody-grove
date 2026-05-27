@@ -1,5 +1,5 @@
-import { HeaderText } from '@gamepark/react-game'
+import { Trans } from 'react-i18next'
 
 export const EndOfRoundResolveGrovesHeader = (props: { grove: number }) => {
-  return <HeaderText code="end-of-round-groves" values={{ grove: props.grove }} />
+  return <Trans i18nKey="header.end-of-round-groves" values={{ grove: props.grove }} />
 }
