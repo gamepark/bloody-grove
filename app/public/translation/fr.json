@@ -38,6 +38,8 @@
   "drop.deck.bottom": "Placer dessous",
   "drop.deck.top": "Placer dessus",
 
+  "help.deck.title": "Paquet de {player}",
+  "help.deck.count": "{count, plural, one{# carte dans le paquet} other{# cartes dans le paquet}}",
   "help.spirit-card.title": "Carte {cardType, select, druid{Druide} elder{Esprit Vénérable} bear{Esprit Ours} fox{Esprit Renard} owl{Esprit Hibou} other{Esprit}}",
   "spirit-card.druid.near.desc": "Quand vous placez une carte Esprit à gauche ou à droite de votre Druide, les symboles Recrutement (<recrutement />) complets vous permettent de recruter immédiatement une carte Élite du type correspondant. La carte jouée est ensuite placée sur le Druide et devient votre Transformation ; toutes vos cartes de ce type dans les Bosquets gagnent +1<force /> !",
   "spirit-card.type": "Type : {groveType, select, bear{ours} fox{renard} other{hibou}}",

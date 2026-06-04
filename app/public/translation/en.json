@@ -38,6 +38,8 @@
   "drop.deck.bottom": "Place under",
   "drop.deck.top": "Place on top",
 
+  "help.deck.title": "{player}'s deck",
+  "help.deck.count": "{count, plural, one{# card in the deck} other{# cards in the deck}}",
   "help.spirit-card.title": "{cardType, select, druid{Druid} elder{Elder Spirit} bear{Bear Spirit} fox{Fox Spirit} other{Owl Spirit}} Card",
   "spirit-card.druid.near.desc": "When you place a Spirit card to the left or right of your Druid, completed recruitment symbols (<recrutement />) allow you to immediately recruit an Elite card of the corresponding type. The played card is then placed on the Druid and becomes your Transformation, all your cards of this type in the Groves gain +1<force />!",
   "spirit-card.type": "Type: {groveType, select, bear{Bear} fox{Fox} other{Owl}}",

@@ -5,14 +5,12 @@ import { MaterialType } from '@gamepark/bloody-grove/material/MaterialType.ts'
 import { SpiritCard, spiritCardData, SpiritType } from '@gamepark/bloody-grove/material/SpiritCard.ts'
 import { PlayerColor } from '@gamepark/bloody-grove/PlayerColor.ts'
 import { CustomMoveType } from '@gamepark/bloody-grove/rules/CustomMoveType.ts'
-import { CardDescription, ItemContext, pointerCursorCss } from '@gamepark/react-game'
-import { isCustomMoveType, isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
-import { BloodSealMenuButton } from '../theme/BloodSealMenuButton'
-import { SpiritCardHelp } from './help/SpiritCardHelp'
-import druidBlack from '../images/cards/druids/DruidBlack.jpg'
-import druidGreen from '../images/cards/druids/DruidGreen.jpg'
+import { CardDescription, ItemContext, MaterialContext, pointerCursorCss } from '@gamepark/react-game'
+import { isCustomMoveType, isMoveItemType, MaterialItem, MaterialMove, MaterialMoveBuilder } from '@gamepark/rules-api'
 import baseSpiritBackBlack from '../images/cards/druids/BaseSpiritBackBlack.jpg'
 import baseSpiritBackGreen from '../images/cards/druids/BaseSpiritBackGreen.jpg'
+import druidBlack from '../images/cards/druids/DruidBlack.jpg'
+import druidGreen from '../images/cards/druids/DruidGreen.jpg'
 import bearBase1 from '../images/cards/spirits/base/BearBase1.jpg'
 import bearBase2 from '../images/cards/spirits/base/BearBase2.jpg'
 import bearBase3 from '../images/cards/spirits/base/BearBase3.jpg'
@@ -37,6 +35,7 @@ import elderSpiritRed1 from '../images/cards/spirits/elder/ElderSpiritRed1.jpg'
 import elderSpiritRed2 from '../images/cards/spirits/elder/ElderSpiritRed2.jpg'
 import elderSpiritRed3 from '../images/cards/spirits/elder/ElderSpiritRed3.jpg'
 import bearElite1 from '../images/cards/spirits/elite/bear/BearElite1.jpg'
+import bearElite10 from '../images/cards/spirits/elite/bear/BearElite10.jpg'
 import bearElite2 from '../images/cards/spirits/elite/bear/BearElite2.jpg'
 import bearElite3 from '../images/cards/spirits/elite/bear/BearElite3.jpg'
 import bearElite4 from '../images/cards/spirits/elite/bear/BearElite4.jpg'
@@ -45,9 +44,9 @@ import bearElite6 from '../images/cards/spirits/elite/bear/BearElite6.jpg'
 import bearElite7 from '../images/cards/spirits/elite/bear/BearElite7.jpg'
 import bearElite8 from '../images/cards/spirits/elite/bear/BearElite8.jpg'
 import bearElite9 from '../images/cards/spirits/elite/bear/BearElite9.jpg'
-import bearElite10 from '../images/cards/spirits/elite/bear/BearElite10.jpg'
 import bearEliteBack from '../images/cards/spirits/elite/bear/BearEliteBack.jpg'
 import foxElite1 from '../images/cards/spirits/elite/fox/FoxElite1.jpg'
+import foxElite10 from '../images/cards/spirits/elite/fox/FoxElite10.jpg'
 import foxElite2 from '../images/cards/spirits/elite/fox/FoxElite2.jpg'
 import foxElite3 from '../images/cards/spirits/elite/fox/FoxElite3.jpg'
 import foxElite4 from '../images/cards/spirits/elite/fox/FoxElite4.jpg'
@@ -56,9 +55,9 @@ import foxElite6 from '../images/cards/spirits/elite/fox/FoxElite6.jpg'
 import foxElite7 from '../images/cards/spirits/elite/fox/FoxElite7.jpg'
 import foxElite8 from '../images/cards/spirits/elite/fox/FoxElite8.jpg'
 import foxElite9 from '../images/cards/spirits/elite/fox/FoxElite9.jpg'
-import foxElite10 from '../images/cards/spirits/elite/fox/FoxElite10.jpg'
 import foxEliteBack from '../images/cards/spirits/elite/fox/FoxEliteBack.jpg'
 import owlElite1 from '../images/cards/spirits/elite/owl/OwlElite1.jpg'
+import owlElite10 from '../images/cards/spirits/elite/owl/OwlElite10.jpg'
 import owlElite2 from '../images/cards/spirits/elite/owl/OwlElite2.jpg'
 import owlElite3 from '../images/cards/spirits/elite/owl/OwlElite3.jpg'
 import owlElite4 from '../images/cards/spirits/elite/owl/OwlElite4.jpg'
@@ -67,8 +66,9 @@ import owlElite6 from '../images/cards/spirits/elite/owl/OwlElite6.jpg'
 import owlElite7 from '../images/cards/spirits/elite/owl/OwlElite7.jpg'
 import owlElite8 from '../images/cards/spirits/elite/owl/OwlElite8.jpg'
 import owlElite9 from '../images/cards/spirits/elite/owl/OwlElite9.jpg'
-import owlElite10 from '../images/cards/spirits/elite/owl/OwlElite10.jpg'
 import owlEliteBack from '../images/cards/spirits/elite/owl/OwnEliteBack.jpg'
+import { BloodSealMenuButton } from '../theme/BloodSealMenuButton'
+import { SpiritCardHelp } from './help/SpiritCardHelp'
 
 export class SpiritCardDescription extends CardDescription {
   width = 6.3
@@ -78,6 +78,15 @@ export class SpiritCardDescription extends CardDescription {
   menuAlwaysVisible = true
 
   help = SpiritCardHelp
+
+  // Clicking a face-down card in a player's deck opens the deck overview (count + all card backs)
+  // instead of that single card's help. See PlayerDeckDescription.help.
+  displayHelp(item: MaterialItem, context: ItemContext): MaterialMove | undefined {
+    if (item.location.type === LocationType.PlayerDeck) {
+      return MaterialMoveBuilder.displayLocationHelp(item.location)
+    }
+    return super.displayHelp(item, context)
+  }
 
   images = {
     [SpiritCard.DruidBlack]: druidBlack,
@@ -211,7 +220,7 @@ export class SpiritCardDescription extends CardDescription {
         <>
           {takeOnHand && (
             <BloodSealMenuButton angle={50} radius={4} x={0} y={-2} move={takeOnHand} label={showLabel ? 'Prendre en main' : undefined} labelPosition="left">
-              <FontAwesomeIcon icon={faHand} css={pointerCursorCss} />
+              <FontAwesomeIcon icon={faHand} css={pointerCursorCss}/>
             </BloodSealMenuButton>
           )}
           {takeOnBottomDeck && (
@@ -224,12 +233,12 @@ export class SpiritCardDescription extends CardDescription {
               label={showLabel ? 'Sous votre paquet' : isInHand ? 'Mettre sous le paquet' : undefined}
               labelPosition={isInHand ? 'right' : 'left'}
             >
-              <FontAwesomeIcon icon={faArrowDown} css={pointerCursorCss} />
+              <FontAwesomeIcon icon={faArrowDown} css={pointerCursorCss}/>
             </BloodSealMenuButton>
           )}
           {takeOnTopDeck && (
             <BloodSealMenuButton angle={50} radius={4} x={0} y={3} move={takeOnTopDeck} label={showLabel ? 'Sur votre paquet' : undefined} labelPosition="left">
-              <FontAwesomeIcon icon={faArrowUp} css={pointerCursorCss} />
+              <FontAwesomeIcon icon={faArrowUp} css={pointerCursorCss}/>
             </BloodSealMenuButton>
           )}
         </>
@@ -239,7 +248,7 @@ export class SpiritCardDescription extends CardDescription {
     if (replace) {
       return (
         <BloodSealMenuButton angle={50} radius={4} x={-2} y={-3.5} move={replace} label={'Remplacer'} labelPosition="left">
-          <FontAwesomeIcon icon={faTrash} css={pointerCursorCss} />
+          <FontAwesomeIcon icon={faTrash} css={pointerCursorCss}/>
         </BloodSealMenuButton>
       )
     }
@@ -247,11 +256,15 @@ export class SpiritCardDescription extends CardDescription {
     if (takeElder) {
       return (
         <BloodSealMenuButton angle={50} radius={4} x={0} y={0} move={takeElder} label={'Choisir'} labelPosition="left">
-          <FontAwesomeIcon icon={faHand} css={pointerCursorCss} />
+          <FontAwesomeIcon icon={faHand} css={pointerCursorCss}/>
         </BloodSealMenuButton>
       )
     }
     return undefined
+  }
+
+  isFlipped(item: Partial<MaterialItem>, context: MaterialContext): boolean {
+    return item.location.type === LocationType.PlayerDeck || super.isFlipped(item, context)
   }
 }
 
