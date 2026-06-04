@@ -5,9 +5,14 @@ import {
   hideFrontToOthers,
   hideItemId,
   hideItemIdToOthers,
+  isMoveItemType,
+  isMoveItemTypeAtOnce,
+  ItemMove,
+  Location,
   MaterialGame,
   MaterialItem,
   MaterialMove,
+  PlayMoveContext,
   PositiveSequenceStrategy,
   SecretMaterialRules,
   TimeLimit
@@ -20,6 +25,9 @@ import { ElderEffectPlaceCardUnderDeckInGroveRule } from './rules/endOfRound/eld
 import { ElderEffectShowArcaneRule } from './rules/endOfRound/elderEffect/ElderEffectShowArcaneRule'
 import { ElderEffectTakeSpiritRule } from './rules/endOfRound/elderEffect/ElderEffectTakeSpiritRule'
 import { EndOfRoundSpiritCardsUnderDeckRule } from './rules/endOfRound/EndOfRoundSpiritCardsUnderDeckRule'
+import { EndOfRoundReplaceSpirit0Rule } from './rules/endOfRound/replaceSpiritRule/EndOfRoundReplaceSpirit0Rule'
+import { EndOfRoundReplaceSpirit1Rule } from './rules/endOfRound/replaceSpiritRule/EndOfRoundReplaceSpirit1Rule'
+import { EndOfRoundReplaceSpirit2Rule } from './rules/endOfRound/replaceSpiritRule/EndOfRoundReplaceSpirit2Rule'
 import { EndOfRoundResolveGrove0Rule } from './rules/endOfRound/resolveGroveRule/EndOfRoundResolveGrove0Rule'
 import { EndOfRoundResolveGrove1Rule } from './rules/endOfRound/resolveGroveRule/EndOfRoundResolveGrove1Rule'
 import { EndOfRoundResolveGrove2Rule } from './rules/endOfRound/resolveGroveRule/EndOfRoundResolveGrove2Rule'
@@ -29,9 +37,7 @@ import { EndOfRoundRotateArcaneInCards2Rule } from './rules/endOfRound/rotateArc
 import { EndOfRoundTakeElderSpirit0Rule } from './rules/endOfRound/takeElderSpiritRule/EndOfRoundTakeElderSpirit0Rule'
 import { EndOfRoundTakeElderSpirit1Rule } from './rules/endOfRound/takeElderSpiritRule/EndOfRoundTakeElderSpirit1Rule'
 import { EndOfRoundTakeElderSpirit2Rule } from './rules/endOfRound/takeElderSpiritRule/EndOfRoundTakeElderSpirit2Rule'
-import { EndOfRoundReplaceSpirit0Rule } from './rules/endOfRound/replaceSpiritRule/EndOfRoundReplaceSpirit0Rule'
-import { EndOfRoundReplaceSpirit1Rule } from './rules/endOfRound/replaceSpiritRule/EndOfRoundReplaceSpirit1Rule'
-import { EndOfRoundReplaceSpirit2Rule } from './rules/endOfRound/replaceSpiritRule/EndOfRoundReplaceSpirit2Rule'
+import { ArcaneViewedHelper } from './rules/helper/ArcaneViewedHelper'
 import { EndOfGameHelper } from './rules/helper/EndOfGameHelper'
 import { MoveSpiritRule } from './rules/MoveSpiritRule'
 import { PlaceArcaneRule } from './rules/PlaceArcaneRule'
@@ -46,8 +52,7 @@ import { TakeSpiritCardsRule } from './rules/TakeSpiritCardsRule'
  */
 export class BloodyGroveRules
   extends SecretMaterialRules<PlayerColor, MaterialType, LocationType>
-  implements TimeLimit<MaterialGame, MaterialMove, PlayerColor>, CompetitiveRank<MaterialGame, MaterialMove, PlayerColor>
-{
+  implements TimeLimit<MaterialGame, MaterialMove, PlayerColor>, CompetitiveRank<MaterialGame, MaterialMove, PlayerColor> {
   endOfGameHelper = new EndOfGameHelper(this.game)
   rules = {
     [RuleId.ShowArcaneSimultaneous]: ShowArcaneSimultaneousRule,
@@ -133,5 +138,37 @@ export class BloodyGroveRules
     }
     return undefined
   }
+
+  /**
+   * Globally keep the per-player "Arcane tokens viewed" memory up to date, whatever rule triggered the move:
+   * an index is remembered when a player secretly looks at a token, and forgotten for everyone once the token
+   * is revealed to all (rotated face-up on a Spirit card or sent to the discard). See {@link ArcaneViewedHelper}.
+   */
+  protected afterItemMove(move: ItemMove<PlayerColor, MaterialType, LocationType>, context?: PlayMoveContext): MaterialMove[] {
+    this.trackArcaneTokensViewed(move)
+    return super.afterItemMove(move, context)
+  }
+
+  private trackArcaneTokensViewed(move: ItemMove<PlayerColor, MaterialType, LocationType>): void {
+    let indexes: number[]
+    let location: Partial<Location<PlayerColor, LocationType>>
+    if (isMoveItemType(MaterialType.ArcaneToken)(move)) {
+      indexes = [move.itemIndex]
+      location = move.location
+    } else if (isMoveItemTypeAtOnce(MaterialType.ArcaneToken)(move)) {
+      indexes = move.indexes
+      location = move.location
+    } else {
+      return
+    }
+    const arcaneViewed = new ArcaneViewedHelper(this.game)
+    if (location.type === LocationType.ArcaneShowLayout && location.player !== undefined) {
+      const player = location.player
+      indexes.forEach((index) => arcaneViewed.addViewed(player, index))
+    } else if (location.type === LocationType.ArcaneDiscard) {
+      indexes.forEach((index) => arcaneViewed.forgetForAll(index))
+    }
+  }
 }
+
 const hideIdIfRotated = (item: MaterialItem) => (!item.location.rotation ? [] : ['id'])

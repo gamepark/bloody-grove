@@ -2,6 +2,7 @@ import { isMoveItemType, ItemMove, MaterialMove, SimultaneousRule } from '@gamep
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { PlayerColor } from '../PlayerColor'
+import { ArcaneViewedHelper } from './helper/ArcaneViewedHelper'
 import { RuleId } from './RuleId'
 
 export class ShowArcaneSimultaneousRule extends SimultaneousRule {
@@ -14,7 +15,12 @@ export class ShowArcaneSimultaneousRule extends SimultaneousRule {
         player
       }))
     }
-    return this.arcaneTokens.moveItems(({ location }) => ({
+    // The rule requires each player to look at a token different from their opponent's: exclude any
+    // token the opponent has already consulted (it stays "viewed" even once back in the reserve).
+    const opponent = player === PlayerColor.Black ? PlayerColor.Green : PlayerColor.Black
+    const viewedByOpponent = new ArcaneViewedHelper(this.game).getViewed(opponent)
+    const availableTokens = this.arcaneTokens.index((index) => !viewedByOpponent.includes(index))
+    return availableTokens.moveItems(({ location }) => ({
       ...location,
       type: LocationType.ArcaneShowLayout,
       player
