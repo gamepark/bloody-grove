@@ -9,11 +9,12 @@ export class EndOfRoundRotateArcaneInCardsRule extends MaterialRulesPart {
   nextRule?: RuleId
 
   onRuleStart(): MaterialMove[] {
-    const rotateArcanesInSpiritCards = this.rotateArcanesInSpiritCardsForThisGrove()
-    if (rotateArcanesInSpiritCards.length > 0) {
-      return rotateArcanesInSpiritCards
-    }
-    return [this.startRule(this.nextRule!)]
+    // nextRule (which grove to resolve) is static and does not depend on the rotation
+    // consequences, so we queue it at the very end of the batch. The engine plays each
+    // move and unshifts its consequences to the front of the queue, so every rotation,
+    // arcane discard and spirit card deletion (and their consequences) is applied before
+    // the startRule is reached. The resolution therefore always sees the final state.
+    return [...this.rotateArcanesInSpiritCardsForThisGrove(), this.startRule(this.nextRule!)]
   }
 
   beforeItemMove(move: ItemMove): MaterialMove[] {
@@ -33,22 +34,6 @@ export class EndOfRoundRotateArcaneInCardsRule extends MaterialRulesPart {
     return moves
   }
 
-  afterItemMove(move: ItemMove): MaterialMove[] {
-    if (!isMoveItem(move)) return []
-    if (move.location.type === LocationType.ArcaneOnSpiritCardLayout) {
-      const parentIndex = move.location.parent!
-      if (this.material(MaterialType.SpiritCard).index(parentIndex).getItems().length === 0) {
-        const moves: MaterialMove[] = [this.material(MaterialType.ArcaneToken).index(move.itemIndex).moveItem({ type: LocationType.ArcaneDiscard })]
-        if (this.rotateArcanesInSpiritCardsForThisGrove().length === 0) moves.push(this.startRule(this.nextRule!))
-        return moves
-      }
-    }
-    if (move.location.type === LocationType.ArcaneOnSpiritCardLayout || move.location.type === LocationType.ArcaneDiscard) {
-      if (this.rotateArcanesInSpiritCardsForThisGrove().length === 0) return [this.startRule(this.nextRule!)]
-    }
-    return []
-  }
-
   rotateArcanesInSpiritCardsForThisGrove(): MaterialMove[] {
     const moves: MaterialMove[] = []
     const spiritCards = this.material(MaterialType.SpiritCard)
@@ -57,6 +42,7 @@ export class EndOfRoundRotateArcaneInCardsRule extends MaterialRulesPart {
     spiritCards.forEach((idx) => {
       const arcanesInCard = this.material(MaterialType.ArcaneToken).location(LocationType.ArcaneOnSpiritCardLayout).rotation(true).parent(idx)
       if (arcanesInCard.getItems().some(item => item.id === ArcaneToken.ArcaneTokenDiscard)) {
+        // Discard the whole spirit card: send its arcane tokens to the discard and remove the card.
         moves.push(...arcanesInCard.moveItems({ type: LocationType.ArcaneDiscard }))
         moves.push(this.material(MaterialType.SpiritCard).index(idx).deleteItem(1))
       } else {
