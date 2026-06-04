@@ -264,7 +264,7 @@ export class SpiritCardDescription extends CardDescription {
   }
 
   isFlipped(item: Partial<MaterialItem>, context: MaterialContext): boolean {
-    return item.location.type === LocationType.PlayerDeck || super.isFlipped(item, context)
+    return item.location?.type === LocationType.PlayerDeck || super.isFlipped(item, context)
   }
 }
 
