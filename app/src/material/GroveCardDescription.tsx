@@ -1,5 +1,6 @@
 import { GroveCard } from '@gamepark/bloody-grove/material/GroveCard.ts'
-import { CardDescription } from '@gamepark/react-game'
+import { CardDescription, MaterialContentProps } from '@gamepark/react-game'
+import { GroveCardForces } from './GroveCardForces'
 import { GroveCardHelp } from './help/GroveCardHelp'
 import groveBear from '../images/cards/grove/GroveBear.jpg'
 import groveFox from '../images/cards/grove/GroveFox.jpg'
@@ -17,6 +18,9 @@ export class GroveCardDescription extends CardDescription {
     [GroveCard.GroveFox]: groveFox,
     [GroveCard.GroveOwl]: groveOwl
   }
+
+  content = (props: MaterialContentProps<GroveCard>) =>
+    this.contentWithBackChildren({ ...props, children: <GroveCardForces itemIndex={props.itemIndex} /> })
 }
 
 export const groveCardDescription = new GroveCardDescription()
