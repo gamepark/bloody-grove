@@ -30,8 +30,8 @@ export class GroveHelper extends MaterialRulesPart {
 
   getPossiblePlacesForMove(indexToSkip: number): Location[] {
     const locations: Location[] = []
-    for (let i = 0; i < 3; i++) {
-      if (i !== indexToSkip) {
+    for (const i of [indexToSkip - 1, indexToSkip + 1]) {
+      if (i >= 0 && i < 3) {
         const x = this.material(MaterialType.SpiritCard).location((loc) => loc.type === LocationType.PlayerSpiritUnderGroveLayout && loc.id === i).player(this.player).length
         locations.push({
           type: LocationType.PlayerSpiritUnderGroveLayout,
