@@ -9,9 +9,13 @@ function translationHmrPlugin(): PluginOption {
     name: 'translation-hmr',
     configureServer(server) {
       const translationDir = path.resolve(__dirname, 'public/translation')
+      let timeout: ReturnType<typeof setTimeout>
       server.watcher.on('change', (file) => {
         if (file.startsWith(translationDir) && file.endsWith('.json')) {
-          server.ws.send({ type: 'custom', event: 'translation-update' })
+          clearTimeout(timeout)
+          timeout = setTimeout(() => {
+            server.ws.send({ type: 'custom', event: 'translation-update' })
+          }, 100)
         }
       })
     }
