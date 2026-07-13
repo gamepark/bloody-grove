@@ -73,7 +73,7 @@
   "grove.type": "Type : {groveType, select, bear{ours} fox{renard} other{hibou}}",
   "grove.type.bonus": "Toutes vos cartes Esprit {groveType, select, bear{ours} fox{renard} other{hibou}} gagnent +1<force /> Force lors de la résolution de ce Bosquet.",
   "grove.force-calc": "Calcul de la Force",
-  "grove.force-calc.desc": "Force de chaque carte + bonus de type Bosquet (+1<force />) + transformation du Druide (+1<force /> si même type) + jetons Arcanes révélés.",
+  "grove.force-calc.desc": "Pour chacune de vos cartes Esprit sous ce Bosquet, additionnez : sa Force imprimée, +1<force /> si son type correspond au type du Bosquet, +1<force /> supplémentaire si son type correspond à la Transformation actuelle de votre Druide, et la valeur des jetons Arcanes révélés qu'elle porte.",
   "grove.tie": "Égalité",
   "grove.tie.desc": "En cas d'égalité, personne ne prend le contrôle du Bosquet. Le marqueur reste neutre.",
   "grove.victory-cond": "Condition de victoire",

@@ -73,7 +73,7 @@
   "grove.type": "Type: {groveType, select, bear{Bear} fox{Fox} other{Owl}}",
   "grove.type.bonus": "All your {groveType, select, bear{Bear} fox{Fox} other{Owl}} Spirit cards gain +1<force /> Strength during this Grove's resolution.",
   "grove.force-calc": "Strength Calculation",
-  "grove.force-calc.desc": "Each card's Strength + Grove type bonus (+1<force />) + Druid transformation (+1<force /> if same type) + revealed Arcane tokens.",
+  "grove.force-calc.desc": "For each of your Spirit cards under this Grove, add: its printed Strength, +1<force /> if its type matches the Grove's type, +1<force /> more if its type matches your Druid's current Transformation, and the value of any revealed Arcane tokens on it.",
   "grove.tie": "Tie",
   "grove.tie.desc": "In case of a tie, nobody takes control of the Grove. The marker stays neutral.",
   "grove.victory-cond": "Victory Condition",
