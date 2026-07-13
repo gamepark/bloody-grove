@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import { defaultTheme, GameTheme } from '@gamepark/react-game'
+import background from '../images/background.jpg'
 import { colors } from './colors'
 import { fontBody, fontDisplay } from './typography'
 
@@ -171,7 +172,11 @@ export const theme: GameTheme = {
   ...defaultTheme,
   root: {
     ...defaultTheme.root,
-    fontFamily: fontBody
+    fontFamily: fontBody,
+    background: {
+      image: background,
+      overlay: 'rgba(0, 0, 0, 0.7)'
+    }
   },
   palette: {
     primary: colors.blood,
