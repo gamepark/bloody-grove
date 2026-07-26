@@ -3,6 +3,7 @@ import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { DruidTransformationHelper } from './helper/DruidTransformationHelper'
 import { GroveHelper } from './helper/GroveHelper'
+import { NextRuleHelper } from './helper/NextRuleHelper'
 import { SpiritCardHelper } from './helper/SpiritCardHelper'
 import { Memory } from './Memory'
 
@@ -13,12 +14,16 @@ export class ChooseActionRule extends PlayerTurnRule {
 
   onRuleStart(): MaterialMove[] {
     const actualTurn = this.memorize(Memory.ActualTurn, (lastValue) => lastValue + 1)
+    const moves: MaterialMove[] = []
     const cube = this.material(MaterialType.Cube).location(LocationType.RoundPiste)
     if (cube.getItem()!.location.id !== actualTurn) {
-      return [cube.moveItem(({ location }) => ({ ...location, id: this.remind(Memory.ActualTurn) }))]
-    } else {
-      return []
+      moves.push(cube.moveItem(({ location }) => ({ ...location, id: this.remind(Memory.ActualTurn) })))
     }
+    if (this.playerHand.length === 0) {
+      // Plus aucun esprit à jouer : le joueur passe son coup automatiquement
+      moves.push(...new NextRuleHelper(this.game).nextRule())
+    }
+    return moves
   }
 
   getPlayerMoves(): MaterialMove[] {
