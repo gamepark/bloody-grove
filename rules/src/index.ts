@@ -1,3 +1,3 @@
 export { BloodyGroveRules } from './BloodyGroveRules'
-export { BloodyGroveOptionsSpec } from './BloodyGroveOptions'
+export { BloodyGroveOptionsSpecV2 } from './BloodyGroveOptions'
 export { BloodyGroveSetup } from './BloodyGroveSetup'

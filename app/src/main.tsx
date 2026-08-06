@@ -1,4 +1,4 @@
-import { BloodyGroveOptionsSpec } from '@gamepark/bloody-grove/BloodyGroveOptions'
+import { BloodyGroveOptionsSpecV2 } from '@gamepark/bloody-grove/BloodyGroveOptions'
 import { BloodyGroveRules } from '@gamepark/bloody-grove/BloodyGroveRules'
 import { BloodyGroveSetup } from '@gamepark/bloody-grove/BloodyGroveSetup'
 import { GameProvider } from '@gamepark/react-game'
@@ -20,7 +20,7 @@ createRoot(document.getElementById('root')!).render(
     <GameProvider
       game="bloody-grove"
       Rules={BloodyGroveRules}
-      optionsSpec={BloodyGroveOptionsSpec}
+      optionsSpec={BloodyGroveOptionsSpecV2}
       GameSetup={BloodyGroveSetup}
       material={Material}
       locators={Locators}
